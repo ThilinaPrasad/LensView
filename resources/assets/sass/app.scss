@@ -1,7 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css");
+
 
 // Variables
 @import "variables";
@@ -51,6 +51,10 @@
   
 }
 
+.footer_nav{
+  position: absolute;
+  bottom: 0;
+}
 //***************************************
 
 // Bootstrap

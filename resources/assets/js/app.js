@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('./custom/smoothScroll/smoothScroll');
-require("./custom/welcome/welcome");
+
 
 window.Vue = require('vue');
 

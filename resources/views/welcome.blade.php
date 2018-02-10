@@ -1,5 +1,8 @@
 @extends('layouts.app') 
-@section('slider')
+@section('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet">
+@stop
+@section('content')
   @include('inc.slider')
 <!-- Section 2 -->
 <div class="jumbotron text-center">
@@ -111,4 +114,8 @@
 </div>
 <!-- Section 6 end-->
 
+@stop
+
+@section('scripts')
+<script src="{{ asset('js/welcome/welcome.js') }}"></script>
 @stop

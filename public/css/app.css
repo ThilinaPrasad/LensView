@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css);.carousel-fade .carousel-item {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.carousel-fade .carousel-item {
   display: block;
   position: absolute;
   opacity: 0;
@@ -182,6 +182,11 @@ body,
   opacity: 1;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
+}
+
+.footer_nav {
+  position: absolute;
+  bottom: 0;
 }
 
 /*!
