@@ -169,7 +169,7 @@ body,
   border-bottom: 3px solid #1976d2;
 }
 
-#footer_top_btn {
+.hover_effect {
   opacity: 0.6;
   -webkit-transition: opacity 0.2s ease-in, -webkit-transform 0.2s ease-in;
   transition: opacity 0.2s ease-in, -webkit-transform 0.2s ease-in;
@@ -177,7 +177,7 @@ body,
   transition: opacity 0.2s ease-in, transform 0.2s ease-in, -webkit-transform 0.2s ease-in;
 }
 
-#footer_top_btn:hover {
+.hover_effect:hover {
   cursor: pointer;
   opacity: 1;
   -webkit-transform: scale(1.05);

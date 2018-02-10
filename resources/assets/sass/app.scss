@@ -39,12 +39,12 @@
 
 //*****************footer**********************
 
-#footer_top_btn{
+.hover_effect{
   opacity: 0.6;
   transition: opacity 0.2s ease-in, transform 0.2s ease-in;
 }
 
-#footer_top_btn:hover{
+.hover_effect:hover{
   cursor: pointer;
   opacity: 1;
   transform: scale(1.05);

@@ -5,7 +5,7 @@
             <li><a class="nav-link text-center" href="#">Policy</a></li>
             <li><a class="nav-link text-center" href="#">Terms</a></li>
         </ul>
-        <div class="navbar-brand mx-auto" id="footer_top_btn" title="Goto Top">
+        <div class="navbar-brand mx-auto  hover_effect" id="footer_top_btn" title="Goto Top">
             <font size="6">
                 <i class="fas fa-chevron-circle-up"></i>
             </font>
