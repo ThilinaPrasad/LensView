@@ -15,5 +15,5 @@
             </div>
         </div>
     </div>
-</div>asa
+</div>
 @endsection
