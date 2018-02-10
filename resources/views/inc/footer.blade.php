@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-toggleable-xl navbar-light" style="postion:absolute;bottom:0;">
+<nav class="navbar navbar-expand-md navbar-toggleable-xl navbar-light navbar-laravel" style="postion:absolute;bottom:0;">
     <div class="container">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">

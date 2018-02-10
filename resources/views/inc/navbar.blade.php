@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top sticky-top">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/static/navbarlogo.png') }}" class="image-fluid">
