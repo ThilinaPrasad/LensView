@@ -1,0 +1,158 @@
+// ***********Slider*************************
+.carousel-fade {
+	.carousel-item {
+		display: block;
+		position: absolute;
+		opacity: 0;
+		transition: opacity .75s ease-in-out;
+
+		&.active {
+			opacity: 1;
+		}
+	}
+}
+
+
+ // Custom styles for this pen
+html, 
+body, 
+.carousel,
+.carousel-inner,
+.carousel-item {
+  height: 650px;
+}
+
+.carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#welcome-slider .carousel-item img{
+    width:100%;
+    height: 100%;
+}
+
+//************************************
+
+//***********Section 2****************
+
+.jumbotron h1{
+	
+	font-size: 60px;
+	opacity: 0.9;
+}
+
+.jumbotron h1:hover{
+	opacity: 1;
+	cursor: pointer;
+}
+
+.jumbotron p{
+	margin-top: -5px;
+	font-weight: 900;
+	opacity: 0.9;
+}
+
+.marketing .row .col-lg-4 .rounded-circle{
+	margin-bottom: 15px;
+}
+//**********************Section 2 ************************
+
+//**********************Body paralax Image ************************
+.parallax {
+	
+
+	min-height: 550px; 
+	margin: -35px;
+
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+background-size:cover;
+}
+
+//**********************Body paralax Image ************************
+
+//**************************Section 3 ***************
+.section_4{
+	margin-top:100px;
+	padding-top:20px;
+	margin-bottom:100px; 
+	padding-bottom:20px;
+}
+.desc-image img {width:100%;}
+.desc-title h2 {font-weight:600;}
+.desc-title h4 {font-weight:600;}
+
+//******************************* Section 3 end **********
+
+//******************************* Section 4 ****************
+.counter,{
+	color:white;
+	font-size: 80px;
+	font-weight: 800;
+}
+
+.counter_icon{
+	color:white;
+	font-size: 100px;
+	font-weight: 800;
+}
+
+.count_up{
+	z-index: 9999;
+//padding :20% 50px;
+}
+
+.counter_name{
+	color: white;
+	font-weight: 400;
+}
+
+.counter_header{
+	color: #fff;
+	margin-bottom: 50px;
+	font-size: 60px;
+}
+
+.counter_wrapper{
+	padding :10% 50px 10% 50px;
+}
+
+/////////////// Section 6 /////////////////////
+
+#testimonial-slider{
+padding-top:2%;
+padding-bottom:0%;
+max-height:350px;
+margin: 0;
+}
+
+.jumbotron , .section_6{
+	margin-bottom: 0;
+}
+
+#testimonial-slider .testimonial-img{
+	height: 200px;
+	width: 200px;
+}
+
+.win_icon{
+	padding-top:2%;
+	padding-bottom: 2%;
+}
+
+.win_text{
+	padding:4%;
+	font-size:15px;
+}
+
+#testimonial-slider .carousel-inner, 
+#testimonial-slider .active{
+	max-height: 100%;
+}
+
+#testimonial-slider .carousel-item{
+	height:50px;
+}
