@@ -4,6 +4,7 @@
         <ul class="navbar-nav mr-auto">
             <li><a class="nav-link text-center" href="#">Policy</a></li>
             <li><a class="nav-link text-center" href="#">Terms</a></li>
+            <li><a class="nav-link text-center" href="#">Others</a></li>
         </ul>
         <div class="navbar-brand mx-auto  hover_effect" id="footer_top_btn" title="Goto Top">
             <font size="6">
