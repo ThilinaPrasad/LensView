@@ -2,7 +2,6 @@
 @section('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet">
 @stop
-
 @section('content')
   @include('inc.slider')
 <!-- Section 2 -->

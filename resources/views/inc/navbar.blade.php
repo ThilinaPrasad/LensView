@@ -10,17 +10,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li><a class="nav-link text-center" href="#">Photo Contests</a></li>
-                <li><a class="nav-link text-center" href="#">Photos</a></li>
-                <li><a class="nav-link text-center" href="#">Vote</a></li>
-                <li class="navbar-active"><a class="nav-link text-center" href="#">About Us</a></li>
+                <li class="{{ Request::segment(1) === 'contests' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="#">Photo Contests</a></li>
+                <li class="{{ Request::segment(1) === 'photos' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="#">Photos</a></li>
+                <li class="{{ Request::segment(1) === 'vote' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="#">Vote</a></li>
+                <li class="{{ Request::segment(1) === 'about' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="#">About Us</a></li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                <li><a class="nav-link text-center" href="{{ route('login') }}">Login</a></li>
-                <li class="navbar-active"><a class="nav-link text-center" href="{{ route('register') }}">Register</a></li>
+                <li class="{{ Request::segment(1) === 'login' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="{{ route('login') }}">LogIn</a></li>
+                <li class="{{ Request::segment(1) === 'register' ? 'navbar-active' : null }}"><a class="nav-link text-center" href="{{ route('register') }}">Register</a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
