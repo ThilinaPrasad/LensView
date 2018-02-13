@@ -137,6 +137,20 @@ body,
   height: 50px;
 }
 
+.nav .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+
+.navbar-thumb {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar-thumb-drop {
+  width: 50px;
+  height: 50px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   padding: 0;
@@ -149,11 +163,8 @@ body,
   margin: auto 10px;
 }
 
-.navbar ul li:hover {
-  border-bottom: 3px solid #0091EA;
-}
-
-.ml-auto li:hover {
+.navigation:hover,
+.navigation:hover {
   border-bottom: 3px solid #0091EA;
 }
 
@@ -10188,5 +10199,12 @@ a.text-dark:focus {
 
 .font_02 {
   font-family: 'Nova Flat', cursive;
+}
+
+.form-icon {
+  z-index: 150;
+  font-size: 25px;
+  opacity: 0.8;
+  vertical-align: text-top;
 }
 

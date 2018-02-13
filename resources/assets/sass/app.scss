@@ -10,6 +10,16 @@
 //***********************************
 
 //****************Nav Bar***************
+
+.navbar-thumb{
+  width:32px;
+  height:32px;
+}
+
+.navbar-thumb-drop{
+  width:50px;
+  height:50px;
+}
 .navbar-laravel {
   background-color: #fff;
 	padding: 0;
@@ -21,14 +31,11 @@
   margin :auto 10px ;
 }
 
-.navbar ul li:hover{
+.navigation:hover,.navigation:hover{
  // margin-bottom: -3px;
   border-bottom: 3px solid #0091EA;
 }
 
-.ml-auto li:hover{
-	border-bottom: 3px solid #0091EA;
-}
 .navbar-active{
   margin-bottom: -3px;
   border-bottom: 3px solid #1976d2;
@@ -61,6 +68,7 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
 @import "~bootstrap/scss/bootstrap";
 
+
 //welcomepage_custom
 .jumbotron{
   margin-bottom: 0;
@@ -73,4 +81,11 @@
 
 .font_02{
   font-family: 'Nova Flat', cursive;
+}
+
+.form-icon{
+  z-index:150;
+  font-size: 25px;
+  opacity: 0.8;
+  vertical-align: text-top;
 }
