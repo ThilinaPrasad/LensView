@@ -13808,11 +13808,30 @@ window.Vue = __webpack_require__(37);
 Vue.component('example-component', __webpack_require__(40));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
 
+//Protected images 
+$(document).ready(function () {
+    $("img").on("contextmenu", function (e) {
+        $('#protected_alert').css({
+            left: e.pageX + 10,
+            top: e.pageY + 10
+        });
+        $(document).bind('mousemove', function (e) {
+            $('#protected_alert').css({
+                left: e.pageX + 10,
+                top: e.pageY + 10
+            });
+        });
+        $('#protected_alert').fadeIn('fast').delay(500).fadeOut('slow');
+        return false;
+    });
+});
+
+//Footer Top Nav btn
 $("#footer_top_btn").click(function () {
-  TweenLite.to(window, 3, { scrollTo: 0 });
+    TweenLite.to(window, 3, { scrollTo: 0 });
 });
 
 /***/ }),
@@ -35808,7 +35827,7 @@ $(function () {
 	var $window = $(window); //Window object
 
 	var scrollTime = 0.5; //Scroll time
-	var scrollDistance = 150; //Distance. Use smaller value for shorter scroll and greater value for longer scroll
+	var scrollDistance = 200; //Distance. Use smaller value for shorter scroll and greater value for longer scroll
 
 	$window.on("mousewheel DOMMouseScroll", function (event) {
 

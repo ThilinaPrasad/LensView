@@ -19,6 +19,10 @@ Route::get('/test', function () {
     return view('tests');
 });
 
+Route::get('/photos', function () {
+    return view('photos.photos');
+});
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

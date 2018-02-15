@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+@section('title')
+Register
+@stop
 @section('content')
 <div class="container reg-form">
     <div class="row">
@@ -112,6 +115,7 @@
         margin-right: -22.1%;
         padding: 15% 0 3% 0;
         opacity: 0.8;
+        height:100vh;
     }
     .left-container {
         margin-top: 30%;

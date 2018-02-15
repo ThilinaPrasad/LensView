@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="{{ Request::segment(1) === 'contests' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">Photo Contests</a></li>
-                <li class="{{ Request::segment(1) === 'photos' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">Photos</a></li>
+                <li class="{{ Request::segment(1) === 'photos' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="/photos">Photos</a></li>
                 <li class="{{ Request::segment(1) === 'vote' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">Vote</a></li>
                 <li class="{{ Request::segment(1) === 'about' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">About Us</a></li>
             </ul>

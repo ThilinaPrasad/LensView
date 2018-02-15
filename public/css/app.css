@@ -10189,6 +10189,13 @@ a.text-dark:focus {
   }
 }
 
+#protected_alert {
+  z-index: 9999;
+  position: absolute;
+  float: left;
+  display: none;
+}
+
 .jumbotron {
   margin-bottom: 0;
 }

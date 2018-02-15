@@ -23,6 +23,27 @@ const app = new Vue({
     el: '#app'
 });
 
+//Protected images 
+$(document).ready(function() {
+    $("img").on("contextmenu",function(e){
+        $('#protected_alert').css({
+            left : e.pageX+10,
+         top : e.pageY+10,
+        });
+    $(document).bind('mousemove', function(e){
+     $('#protected_alert').css({
+       	left : e.pageX+10,
+        top : e.pageY+10,
+       });
+       
+    });
+    $('#protected_alert').fadeIn('fast').delay(500).fadeOut('slow');
+       return false;
+    }); 
+}); 
+
+//Footer Top Nav btn
 $("#footer_top_btn").click(function () {
     TweenLite.to(window, 3, { scrollTo: 0 });
 });
+

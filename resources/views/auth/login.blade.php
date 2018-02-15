@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+Login
+@stop
 @section('content')
 <div class="container reg-form">
     <div class="row">

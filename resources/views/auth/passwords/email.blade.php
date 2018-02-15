@@ -1,13 +1,23 @@
 @extends('layouts.app')
-
+@section('title')
+Forgot Password
+@stop
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6 left-sec">
+                <div class="left-container">
+                        <img src="{{ asset('img/static/animation_3.gif') }}" class="animation">
+                        <div class="text-center">
+                            <h1 class="font_01 left_text">LensView</h1>
+                            <h4 class="font_02 left_text">Use Your Camera As A Weapon</h4>
+                        </div>
+                    </div>
+        </div>
+        <div class="col-md-6">
             <div class="card card-default">
-                <div class="card-header">Reset Password</div>
-
                 <div class="card-body">
+                        <h2 class="font_01 mb-4 header" align="center">Forgot Password</h2>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -39,9 +49,55 @@
                             </div>
                         </div>
                     </form>
+                <br>
+                    <div class="col-md-6  offset-md-4">
+                    <a href="/login">Goto Login</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@stop
+@section('styles')
+<style>
+    body {
+        background:url('{{ asset("img/static/login_back.png") }}') no-repeat center center fixed;
+    }
+    .card {
+        border: none;
+        border-radius: 0;
+        margin-right: -22.1%;
+        padding: 40% 0 4% 0;
+        opacity: 0.8;
+        height:100vh;
+    }
+
+    .left-container {
+        margin-top: 30%;
+    }
+    .animation {
+        border-radius: 30%;
+        opacity: 0.8;
+        transform: rotate(-20deg);
+        box-shadow: 5px 10px 8px #000;
+    }
+    .left_text {
+        color: white;
+        text-shadow: 4px 4px 4px #000000;
+        z-index: 500;
+    }
+    @media only screen and (max-width: 768px) {
+        .left-sec {
+            display: none;
+        }
+        .card {
+            margin-right: auto;
+        }
+        .header {
+            margin-top: 5%;
+        }
+    }
+</style>
+@stop
+
