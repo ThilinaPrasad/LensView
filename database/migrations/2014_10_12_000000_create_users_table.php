@@ -19,10 +19,15 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('address','500');
             $table->string('telephone','10');
+            $table->integer('role_id')->unsigned()->default(1);
             $table->mediumText('profile_pic');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('role_id')
+            ->references('id')->on('roles')
+            ->onUpdate('cascade');
         });
     }
 

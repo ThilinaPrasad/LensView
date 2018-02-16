@@ -26,6 +26,7 @@ Route::get('/photos', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::resource('contests','ContestsController');
 
 Auth::routes();
 

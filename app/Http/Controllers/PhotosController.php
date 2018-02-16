@@ -4,7 +4,7 @@ namespace Laravel\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ContestsController extends Controller
+class PhotosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        return view('contests.index');
+        //
     }
 
     /**

@@ -64,6 +64,30 @@ Register
                                     </span> @endif
                             </div>
                         </div>
+
+                        <!--User Type Field-->
+                        <div class="form-group row">
+                            <label for="telephone" class="col-md-4 col-form-label text-md-right">User Type</label>
+                            <div class="col-md-8">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="role1" name="role" class="custom-control-input" value="1" checked>
+                            <label class="custom-control-label align-bottom" for="role1">Voter</label>
+                          </div>
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="role2" name="role" class="custom-control-input" value="2">
+                            <label class="custom-control-label" for="role2">Photographer</label>
+                          </div>
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="role3" name="role" class="custom-control-input" value="3">
+                            <label class="custom-control-label" for="role3">Contest Organizer</label>
+                          </div>
+                          @if ($errors->has('role'))
+                                <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span> @endif
+                        </div>
+                    </div>
+
                         <!-- Password Field -->
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
@@ -115,8 +139,9 @@ Register
         margin-right: -22.1%;
         padding: 15% 0 3% 0;
         opacity: 0.8;
-        height:100vh;
+        height:105vh;
     }
+
     .left-container {
         margin-top: 30%;
     }
