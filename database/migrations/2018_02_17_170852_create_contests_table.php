@@ -21,7 +21,10 @@ class CreateContestsTable extends Migration
             $table->mediumText('cover_img');
             $table->date('sub_start_at');
             $table->date('sub_end_at');
-            $table->date('colosed_at');
+            $table->date('closed_at');
+            $table->string('prize');
+            $table->longText('prize_description');
+            $table->mediumText('prize_image');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

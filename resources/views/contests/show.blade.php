@@ -1,1 +1,1 @@
-show view
+This {{ $contest->title }} contest have {{ count($sponsors) }} sopnsers. :)
