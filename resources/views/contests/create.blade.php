@@ -7,7 +7,7 @@
         <div class="card card-default">
             <div class="card-body">
                 <h2 class="font_01 mb-4 header" align="center">Create Photography Contest</h2>
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('contests.store') }}" enctype="multipart/form-data">
                     @csrf
                     <!--Section 1-->
                     <div id="sec_01">
@@ -15,7 +15,7 @@
                         <hr>
                         <!-- title Field -->
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">Contest title</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}"
                                     autofocus> @if ($errors->has('title'))
@@ -60,28 +60,28 @@
                         <div class="form-group row">
                             <label for="colosed_at" class="col-md-4 col-form-label text-md-right">Compettion Closing Date</label>
                             <div class="col-md-6">
-                                <input id="colosed_at" type="date" class="form-control{{ $errors->has('colosed_at') ? ' is-invalid' : '' }}" name="colosed_at"
-                                    value="{{ old('colosed_at') }}"> @if ($errors->has('colosed_at'))
+                                <input id="closed_at" type="date" class="form-control{{ $errors->has('closed_at') ? ' is-invalid' : '' }}" name="closed_at"
+                                    value="{{ old('closed_at') }}"> @if ($errors->has('closed_at'))
                                 <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('colosed_at') }}</strong>
+                                            <strong>{{ $errors->first('closed_at') }}</strong>
                                         </span> @endif
                             </div>
                         </div>
                         <!-- cover image Field -->
+                        <!-- logo Field -->
                         <div class="form-group row">
-                            <label for="colosed_at" class="col-md-4 col-form-label text-md-right">Select Cover Image</label>
-                            <div class="input-group col-md-6 mb-3">
-                                <span class="input-group-prepend">
-                                    <button class="btn btn-default btn-file">
-                                        Select File<input type="file" id="imgInp" class="form-control{{ $errors->has('cover_img') ? ' is-invalid' : '' }}" name="cover_img" value="{{ old('cover_img') }}">
-                                        <img id='img-upload'class="mx-auto d-block" src="{{ asset('img/static/template.svg') }}">
-                                    </button>
-                                </span> @if ($errors->has('cover_img'))
-                                <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('cover_img') }}</strong>
-                                        </span> @endif
+                                <label for="cover_img" class="col-md-4 col-form-label text-md-right">Official Logo</label>
+                                <div class="col-md-6">
+                                    <input type='file' id='cover_img' type="text" class="form-control {{ $errors->has('cover_img') ? ' is-invalid' : '' }}"
+                                        name="cover_img" value="{{ old('cover_img') }}"> @if ($errors->has('cover_img'))
+                                    <span class="invalid-feedback">
+                                                        <strong>{{ $errors->first('cover_img') }}</strong>
+                                                    </span> @else
+                                    <pre class="small">(*image diamensions 1920x1080)</pre> @endif
+                                </div>
                             </div>
-                        </div>
+
+                       
                         <!-- Next_1 Button Field -->
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -280,69 +280,13 @@
         $('#prev_3').click(function(){
             $('#sec_03').hide();
             $('#sec_02').show();
-            $('.card').css('height','100vh');
+            $('.card').css('height','105vh');
         });
     });
-        $(document).ready( function() {
-            $(document).on('change', '.btn-file :file', function() {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-            });
-    
-            $('.btn-file :file').on('fileselect', function(event, label) {
-                                
-                if( input.length ) {
-                    input.val(log);
-                } else {
-                    if( log ) alert(log);
-                }
-            
-            });
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    
-                    reader.onload = function (e) {
-                        $('#img-upload').attr('src', e.target.result);
-                    }
-                    
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-    
-            $("#imgInp").change(function(){
-                readURL(this);
-            }); 	
-        });
+
 </script>
 @stop 
 @section('styles')
-<style>
-    .btn-file {
-        position: relative;
-        overflow: hidden;
-    }
-    .btn-file input[type=file] {
-        position: absolute;
-        top: 0;
-        right: 0;
-        min-width: 100%;
-        min-height: 100%;
-        font-size: 100px;
-        text-align: right;
-        filter: alpha(opacity=0);
-        opacity: 0;
-        outline: none;
-        background: white;
-        cursor: inherit;
-        display: block;
-    }
-    #img-upload {
-        width: 100%;
-        height: 100%;
-    }
-</style>
 <style>
     body {
         background:url('{{ asset("img/static/reg_back.png") }}') no-repeat center center fixed;

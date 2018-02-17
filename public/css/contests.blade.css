@@ -3,14 +3,16 @@
     margin: 0;
 }
 
-.contest-item:hover{
-    opacity: 0.8;
+.contest-item:hover,{
     cursor: pointer;
+    
 }
 
-.first-item{
-    height: 300px;
+.card-img-overlay:hover{
+    background-color:rgba(0,0,0,0.5);
 }
+
+
 
 .card-img{
     border-radius:0;

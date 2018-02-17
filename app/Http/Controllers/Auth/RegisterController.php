@@ -3,6 +3,7 @@
 namespace Laravel\Http\Controllers\Auth;
 
 use Laravel\User;
+use Laravel\Models\Role;
 use Laravel\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,6 +67,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(count(Role::all())==0){
+            Role::create([
+                'id'=>'1',
+                'name' =>'voter'
+            ]);
+            Role::create([
+                'id'=>'2',
+                'name' =>'photographer'
+            ]);
+            Role::create([
+                'id'=>'3',
+                'name' =>'admin'
+            ]);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
