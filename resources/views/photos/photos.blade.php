@@ -17,18 +17,16 @@
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
-                             
                                 <div class="card card-inverse">
-                                        <img class="card-img" src="{{ asset('img/static/reg_back.png') }}" alt="Card image">
-                                        <div class="card-img-overlay text-left">
-                                            <div class="img-inner rounded">
-                                                <!--h3 class="card-title">Card title</h3-->
-                                                <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
-                                            </div>
+                                    <img class="card-img" src="{{ asset('img/static/reg_back.png') }}" alt="Card image">
+                                    <div class="card-img-overlay text-left">
+                                        <div class="img-inner rounded">
+                                            <!--h3 class="card-title">Card title</h3-->
+                                            <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
                                         </div>
                                     </div>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -44,17 +42,16 @@
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
-                                    <div class="card card-inverse">
-                                            <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/2.jpg" alt="Card image">
-                                            <div class="card-img-overlay text-left">
-                                                <div class="img-inner rounded">
-                                                    <!--h3 class="card-title">Card title</h3-->
-                                                    <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
-                                                </div>
-                                            </div>
+                                <div class="card card-inverse">
+                                    <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/2.jpg" alt="Card image">
+                                    <div class="card-img-overlay text-left">
+                                        <div class="img-inner rounded">
+                                            <!--h3 class="card-title">Card title</h3-->
+                                            <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
                                         </div>
+                                    </div>
+                                </div>
                             </div>
-                         
                         </div>
                     </div>
                 </div>
@@ -72,17 +69,16 @@
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
-                                    <div class="card card-inverse">
-                                            <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/3.jpg" alt="Card image">
-                                            <div class="card-img-overlay text-left">
-                                                <div class="img-inner rounded">
-                                                    <!--h3 class="card-title">Card title</h3-->
-                                                    <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
-                                                </div>
-                                            </div>
+                                <div class="card card-inverse">
+                                    <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/3.jpg" alt="Card image">
+                                    <div class="card-img-overlay text-left">
+                                        <div class="img-inner rounded">
+                                            <!--h3 class="card-title">Card title</h3-->
+                                            <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
                                         </div>
+                                    </div>
+                                </div>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
@@ -98,17 +94,16 @@
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
-                                    <div class="card card-inverse">
-                                            <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/4.jpg" alt="Card image">
-                                            <div class="card-img-overlay text-left">
-                                                <div class="img-inner rounded">
-                                                    <!--h3 class="card-title">Card title</h3-->
-                                                    <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
-                                                </div>
-                                            </div>
+                                <div class="card card-inverse">
+                                    <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/4.jpg" alt="Card image">
+                                    <div class="card-img-overlay text-left">
+                                        <div class="img-inner rounded">
+                                            <!--h3 class="card-title">Card title</h3-->
+                                            <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
                                         </div>
+                                    </div>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -124,17 +119,16 @@
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
-                                                            <div class="card card-inverse">
-                                        <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/5.jpg" alt="Card image">
-                                        <div class="card-img-overlay text-left">
-                                            <div class="img-inner rounded">
-                                                <!--h3 class="card-title">Card title</h3-->
-                                                <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
-                                            </div>
+                                <div class="card card-inverse">
+                                    <img class="card-img" src="http://nabeel.co.in/files/bootsnipp/gallery/5.jpg" alt="Card image">
+                                    <div class="card-img-overlay text-left">
+                                        <div class="img-inner rounded">
+                                            <!--h3 class="card-title">Card title</h3-->
+                                            <p class="card-text badge badge-pill badge-dark">Uploaded by: Thilina Prasad for 123 Contest</p>
                                         </div>
                                     </div>
+                                </div>
                             </div>
-                           
                         </div>
                     </div>
                 </div>

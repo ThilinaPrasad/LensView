@@ -1,0 +1,28 @@
+.contest-item{
+    padding: 0;
+    margin: 0;
+}
+
+.contest-item:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.first-item{
+    height: 300px;
+}
+
+.card-img{
+    border-radius:0;
+}
+
+.contests-container{
+    padding-top :68px;
+    padding-bottom: 3px;
+}
+
+.card-img-overlay{
+font-family: "Times New Roman", Times, serif;
+padding-top:20%;
+color: white;
+}
