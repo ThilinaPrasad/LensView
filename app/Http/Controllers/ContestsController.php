@@ -3,7 +3,7 @@
 namespace Laravel\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class ContestsController extends Controller
 {
     /**
@@ -23,7 +23,17 @@ class ContestsController extends Controller
      */
     public function create()
     {
-        //
+        /*if(Auth::check()){
+        if(Auth::user()->role_id == 3){
+        return view('contests.create');
+        }else{
+            return "<h1 align='center'>Unautherized Action!<h1>";
+            //Consider about this warning messages
+        }
+    }else{
+        return view('auth.login');
+    }*/
+    return view('contests.create');
     }
 
     /**
@@ -45,7 +55,7 @@ class ContestsController extends Controller
      */
     public function show($id)
     {
-        //
+      //
     }
 
     /**
