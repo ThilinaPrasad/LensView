@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css);.carousel-fade .carousel-item {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://fonts.googleapis.com/css?family=Noto+Serif);@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css);.carousel-fade .carousel-item {
   display: block;
   position: absolute;
   opacity: 0;
@@ -163,7 +163,6 @@ body,
   margin: auto 10px;
 }
 
-.navigation:hover,
 .navigation:hover {
   border-bottom: 3px solid #0091EA;
 }
@@ -186,6 +185,18 @@ body,
   opacity: 1;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
+}
+
+.hover-effect-2 {
+  -webkit-transition: -webkit-transform 0.25s ease-in;
+  transition: -webkit-transform 0.25s ease-in;
+  transition: transform 0.25s ease-in;
+  transition: transform 0.25s ease-in, -webkit-transform 0.25s ease-in;
+}
+
+.hover-effect-2:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .footer_nav {
@@ -10206,6 +10217,10 @@ a.text-dark:focus {
 
 .font_02 {
   font-family: 'Nova Flat', cursive;
+}
+
+.font_03 {
+  font-family: 'Noto Serif', serif;
 }
 
 .form-icon {

@@ -22,6 +22,9 @@
                 <li class="{{ Request::segment(1) === 'login' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="{{ route('login') }}">LogIn</a></li>
                 <li class="{{ Request::segment(1) === 'register' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="{{ route('register') }}">Register</a></li>
                 @else
+                @if(Auth::user()->role_id == 3)
+                <li class="{{ Request::segment(1) === 'contests' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="{{ route('contests.create') }}">Create Contest</a></li>
+                @endif
                 <li class="nav-item dropdown user-dropdown">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="/storage/profile_pics/{{ Auth::user()->profile_pic }}" class="navbar-thumb rounded-circle">  <span class="caret"></span>
@@ -47,6 +50,15 @@
                             <i class="fas fa-cog"></i>&nbsp;&nbsp;
                            Edit Account
            </a>
+           @if(Auth::user()->role_id == 3)
+           <div class="dropdown-divider"></div>
+           <a class="dropdown-item " href="{{ route('contests.create') }}">
+                <i class="fas fa-images"></i>
+
+&nbsp;&nbsp;
+               Create Contest
+</a>
+@endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

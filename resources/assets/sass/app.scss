@@ -1,8 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
 // Variables
 @import "variables";
 @import "welcomepage";
@@ -31,7 +30,7 @@
   margin :auto 10px ;
 }
 
-.navigation:hover,.navigation:hover{
+.navigation:hover{
  // margin-bottom: -3px;
   border-bottom: 3px solid #0091EA;
 }
@@ -41,6 +40,7 @@
   border-bottom: 3px solid #1976d2;
 
 }
+
 
 //***************************************
 
@@ -56,6 +56,13 @@
   opacity: 1;
   transform: scale(1.05);
   
+}
+
+.hover-effect-2{
+  transition: transform 0.25s ease-in; 
+}
+.hover-effect-2:hover{
+  transform: scale(1.2);
 }
 
 .footer_nav{
@@ -90,9 +97,14 @@
   font-family: 'Nova Flat', cursive;
 }
 
+.font_03{
+  font-family: 'Noto Serif', serif;
+}
+
 .form-icon{
   z-index:150;
   font-size: 25px;
   opacity: 0.8;
   vertical-align: text-top;
 }
+
