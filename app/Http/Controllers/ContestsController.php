@@ -7,6 +7,7 @@ use Laravel\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Laravel\Models\Contest;
+use Laravel\User;
 use Laravel\Models\Sponsor;
 class ContestsController extends Controller
 {
@@ -125,9 +126,22 @@ class ContestsController extends Controller
      */
     public function show($id)
     {
+       
         $contest = Contest::find($id);
         $sponsors = Sponsor::all()->where('contest_id',$id);
-      return view('contests.show')->with(['contest'=>$contest,'sponsors'=>$sponsors]);
+        $owner = User::where('id',$contest->user_id)->get()->first();
+        $today = Carbon::today();
+      
+        $days_left = date_diff(date_create($contest->sub_end_at),date_create($today))->format('%a');
+        $period = date_diff(date_create($contest->sub_end_at),date_create($contest->sub_start_at))->format('%a');
+        $days_presentage = round(100 *((int)$days_left) /(int)$period);
+
+        if($days_presentage!=100){
+            $days_presentage = (string)$days_presentage;
+            $days_presentage = substr($days_presentage,0,1)."0";
+        }
+//dd($owner->name);
+      return view('contests.show')->with(['contest'=>$contest,'sponsors'=>$sponsors,'days_left'=>$days_left,'days_presentage'=>$days_presentage,'owner'=>$owner]);
     }
 
     /**
