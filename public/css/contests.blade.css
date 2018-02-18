@@ -8,6 +8,7 @@
     
 }
 
+
 .card-img-overlay:hover{
     background-color:rgba(0,0,0,0.5);
 }
@@ -27,4 +28,79 @@
 font-family: "Times New Roman", Times, serif;
 padding-top:20%;
 color: white;
+}
+
+
+
+.btn-light{
+    opacity: 0.8;
+    text-decoration: none;
+    color:black;
+    font-size: 20px;
+
+    border-radius: 50px;
+    font-weight: 500;
+    padding: auto 50px;
+}
+
+.prize{
+    margin-bottom: 30px;
+}
+
+.show-about{
+    margin-bottom: -20px;
+}
+
+.show-row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.prize-section{
+    padding-top: -100px;
+}
+
+.prize-head{
+    margin-bottom: 30px;
+}
+
+.prize_img{
+    width : 250px;
+    height:250px;
+}
+
+.show-partner{
+    margin-top: -80px;
+}
+
+.owner-sec{
+    margin: 15px auto;
+}
+
+.organizer{
+    width:auto; 
+    height:auto;
+    
+}
+
+.organizer:hover{
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .show-overlay{
+        transform: scale(0.5);
+    }
+     
+    .prize{
+        margin-bottom: 5px;
+    }
+
+    .card-img{
+        height:50vh;
+    }
+
+    .show-partner{
+        margin-top: -40px;
+    }
 }

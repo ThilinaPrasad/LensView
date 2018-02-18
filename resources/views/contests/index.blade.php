@@ -13,7 +13,7 @@
             <div class="card card-inverse">
                 <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contests->first()->cover_img }}" alt="Card image">
                 <div class="card-img-overlay text-center">
-                    <h5 class="card-text">{{ $contests->first()->prize }}</h5>
+                    <h5 class="card-text">Win amazing {{ $contests->first()->prize }}</h5>
                     <h1 class="card-title">{{ $contests->first()->title }}</h1>
                     <p class="card-text"><small>Publisd at : {{ $contests->first()->created_at }}</small></p>
                 </div>

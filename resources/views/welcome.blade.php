@@ -1,10 +1,9 @@
-@extends('layouts.app')
-@section('title')
-Home
-@stop
+@extends('layouts.app') 
+@section('title') Home 
+@stop 
 @section('styles')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet">
-@stop
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet"> 
+@stop 
 @section('content')
   @include('inc.slider')
 <!-- Section 2 -->
@@ -40,7 +39,7 @@ Home
 </div>
 <!-- Section 2 end -->
 <!-- Section 3 -->
-<div class="parallax container-fluid" style="background-image: url('{{ asset("img/1.jpg") }}'); ">
+<div class="parallax container-fluid" style="background-image: url('{{ asset(" img/1.jpg ") }}'); ">
 </div>
 <!-- Section 3 end-->
 <!-- Section 4-->
@@ -77,7 +76,7 @@ Home
 </div>
 <!-- Section 4 end-->
 <!-- Section 5-->
-<div class="parallax container-fluid" style="background-image: url('{{ asset("img/3.jpg") }}');" id="counter-viewport">
+<div class="parallax container-fluid" style="background-image: url('{{ asset(" img/3.jpg ") }}');" id="counter-viewport">
   <div class="counter_wrapper">
     <h2 class="font_01 counter_header text-center">LensView User Intraction</h2>
     <div class="row text-center count_up">
@@ -117,8 +116,7 @@ Home
 </div>
 <!-- Section 6 end-->
 
-@stop
-
+@stop 
 @section('scripts')
 <script src="{{ asset('js/welcome/welcome.js') }}"></script>
 @stop
