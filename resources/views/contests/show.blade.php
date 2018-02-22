@@ -10,7 +10,7 @@
 <div class="row show-row">
     <div class="col-md-12 contest-item">
         <div class="card card-inverse">
-            <img class="card-img img-fluid" src="{{ asset('img/1.jpg') }}" alt="Card image">
+            <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
             <div class="card-img-overlay show-overlay text-center">
                 <!--Circular Progress-->
                 <div class="col-sm-1 mx-auto d-block">
@@ -24,21 +24,29 @@
                         <div class="progress-value">
                             <div>
                                 {{$days_left}}<br>
-                                <span>days left</span>
+                                <span>
+                                    @if($days_left!=1)
+                                    {{ "days" }}
+                                    @else
+                                    {{ "day" }}
+                                    @endif left</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--Circular Progress-->
                 <h1 class="card-title display-3">{{ $contest->title }}</h1>
-                <h3 class="prize">Try With Your Creativity & Win<p> <strong class="h1">{{ $contest->prize }} </strong></h3>
+                <h3 class="prize">Try With Your Creativity & Win
+                    <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
                 <a href="#" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>
+                @if(Auth::user()->id == $contest->user_id)    
+                <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
+                @endif
             </div>
         </div>
     </div>
 </div>
 <!--cover Section-->
-
 <!--about section-->
 <div class="jumbotron jumbotron-fluid text-center show-about">
     <div class="container">
@@ -57,7 +65,7 @@
 <!--prizes section-->
 <!--Partners Section-->
 <div class="jumbotron marketing text-center show-partner">
-        <p class="h1 font_01"><i class="fas fa-handshake"></i> Partnesr with us <i class="fas fa-handshake"></i></p>
+    <p class="h1 font_01"><i class="fas fa-handshake"></i> Partnesr with us <i class="fas fa-handshake"></i></p>
     <div class="row">
         @foreach($sponsors as $sponsor)
         <div class="col-lg-4">
@@ -65,20 +73,19 @@
                 width="140" height="140">
             <h3>{{ $sponsor->name }}</h3>
         </div>
-@endforeach
-        </div>
+        @endforeach
     </div>
 </div>
+</div>
 <!--Partners Section-->
-
 <!--Owner Info-->
 <div class="container-fluid owner-sec">
     <div class="text-center">
         <strong>Organized by</strong>
-    <a href="#" class="organizer">
+        <a href="#" class="organizer">
         <img src="/storage/profile_pics/{{ $owner->profile_pic}}" class="rounded-circle mx-auto d-block" width="80" height="80" title="View Profile">
         <strong>{{ $owner->name}}</strong>
     </a>
-</div>
+    </div>
 </div>
 @stop

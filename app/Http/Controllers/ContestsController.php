@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Laravel\Models\Contest;
 use Laravel\User;
 use Laravel\Models\Sponsor;
+use Illuminate\Support\Facades\Validator;
+use DB;
 class ContestsController extends Controller
 {
 
@@ -24,8 +26,11 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        $today = Carbon::today();
-       $contests = Contest::where('sub_start_at','<',$today)->orderBy('created_at','desc')->get();
+        $day = Carbon::yesterday();
+      // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
+      $contests = DB::select("Select * FROM contests where sub_start_at<'".$day."' and sub_end_at>'".$day."'");
+      // print_r($contests);
+      //dd(count($contests));
         return view('contests.index')->with('contests',$contests);
     }
 
@@ -55,14 +60,16 @@ class ContestsController extends Controller
      */
     public function store(Request $request)
     {
-        $today = Carbon::today();
+        $sub_s  = Carbon::yesterday();
+        $sub_e = (new Carbon($request->input('sub_start_at')))->addDays(5);
+        $closed = (new Carbon($request->input('sub_end_at')))->addDays(5);
 
         $this->validate($request,[
             'title'=>'required',
             'description' => 'required',
-            'sub_start_at'=> 'required|date|after:'.$today,
-            'sub_end_at'=> 'required|date|after:'.$today,
-            'closed_at'=> 'required|date|after:'.$today,
+            'sub_start_at'=> 'required|date|after:'.$sub_s,
+            'sub_end_at'=> 'required|date|after:'.$sub_e,
+            'closed_at'=> 'required|date|after:'.$closed,
             'cover_img' => 'required|image|max:2999|dimensions:width=1920,height=1080',         ///Section 1 finished
             'winner' => 'required',
             'winner_info' => 'required',
@@ -152,7 +159,16 @@ class ContestsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contest = Contest::find($id);
+        $sponsors = Sponsor::orderBy('type','desc')->where('contest_id',$id)->get();
+        //print_r($sponsors);
+        //dd(count($sponsors));
+        if(Auth::user()->id == $contest->user_id){
+            return view('contests.edit')->with(['contest'=>$contest,'sponsors'=>$sponsors]);
+            }else{
+                return "<h1 align='center'>Unautherized Action!<h1>";
+                //Consider about this warning messages
+            }
     }
 
     /**
@@ -164,7 +180,45 @@ class ContestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contest = Contest::find($id);
+        $sub_s  = Carbon::parse($contest->sub_start_at)->addDays(-1);
+        $sub_e = Carbon::parse($contest->sub_end_at)->addDays(-1);
+        $closed = Carbon::parse($contest->closed_at)->addDays(-1);
+        $this->validate($request,[
+            'title'=>'required',
+            'description' => 'required',
+            'sub_start_at'=> 'required|date|after:'.$sub_s,
+            'sub_end_at'=> 'required|date|after:'.$sub_e,
+            'closed_at'=> 'required|date|after:'.$closed,
+            'cover_img' => 'image|max:2999|dimensions:width=1920,height=1080',         ///Section 1 finished
+            'winner' => 'required',
+            'winner_info' => 'required',
+            'winner_img' => 'image|max:1999|dimensions:ratio=1', ///Section 2 finished
+            'p_name' => 'required',
+            'p_logo' => 'image|max:1999|dimensions:ratio=1',
+            'g_name' => 'required',
+            'g_logo' => 'image|max:1999|dimensions:ratio=1',
+            'b_name' => 'required',
+            'b_logo' => 'image|max:1999|dimensions:ratio=1',
+        ]);
+
+        $contest->title = $request->input('title');
+        $contest->description = $request->input('description');
+        $contest->cover_img = FilesController::upload($request,'cover_img','contests_covers',$contest->cover_img);
+        $contest->sub_start_at = $request->input('sub_start_at');
+        $contest->sub_end_at = $request->input('sub_end_at');
+        $contest->closed_at = $request->input('closed_at');
+        $contest->prize = $request->input('winner');
+        $contest->prize_description = $request->input('winner_info');
+        $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes',$contest->prize_image);
+        $contest->save();
+        
+
+        if($contest /*&& $platinum && $gold && $bronze*/){
+            return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Post Successfully Created!");
+            }else{
+                return view('contests.create')->with('error',"Error Happend Creating Post! Please Try Again!");
+            }
     }
 
     /**
