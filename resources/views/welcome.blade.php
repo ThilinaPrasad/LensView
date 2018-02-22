@@ -39,7 +39,7 @@
 </div>
 <!-- Section 2 end -->
 <!-- Section 3 -->
-<div class="parallax container-fluid" style="background-image: url('{{ asset(" img/1.jpg ") }}'); ">
+<div class="parallax container-fluid" style='background-image: url("{{ asset('img/1.jpg') }}");'>
 </div>
 <!-- Section 3 end-->
 <!-- Section 4-->
@@ -76,7 +76,7 @@
 </div>
 <!-- Section 4 end-->
 <!-- Section 5-->
-<div class="parallax container-fluid" style="background-image: url('{{ asset(" img/3.jpg ") }}');" id="counter-viewport">
+<div class="parallax container-fluid" style='background-image: url("{{ asset('img/3.jpg') }}");' id="counter-viewport">
   <div class="counter_wrapper">
     <h2 class="font_01 counter_header text-center">LensView User Intraction</h2>
     <div class="row text-center count_up">

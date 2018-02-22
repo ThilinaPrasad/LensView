@@ -89,7 +89,7 @@ color: white;
 
 @media (max-width: 768px) {
     .show-overlay{
-        transform: scale(0.5);
+        transform: scale(0.45);
     }
      
     .prize{

@@ -1,14 +1,15 @@
 @extends('layouts.app') 
-@section('title') Create Contest 
+@section('title') Edit Contest
 @stop 
 @section('content')
 <div class="container reg-form">
     <div class="col-md-6 offset-md-2">
         <div class="card card-default">
             <div class="card-body">
-                <h2 class="font_01 mb-4 header" align="center">Create Photography Contest</h2>
-                <form method="POST" action="{{ route('contests.store') }}" enctype="multipart/form-data">
-                    @csrf
+                <h2 class="font_01 mb-4 header" align="center">Edit {{ $contest->title }} Contest Data</h2>
+                <form method="POST" action="/contests/{{$contest->id}}" enctype="multipart/form-data">
+                    {{ csrf_field() }} 
+                    <input type="hidden" name="_method" value="put">
                     <!--Section 1-->
                     <div id="sec_01">
                         <h4 align="center" class="font_02">~General~</h4>
@@ -17,7 +18,7 @@
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">Contest title</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}"
+                                <input id="name" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ $contest->title }}"
                                     autofocus> @if ($errors->has('title'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -28,7 +29,7 @@
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
                             <div class="col-md-6">
-                                <textarea id='description' type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description">{{ old('description') }}</textarea>                                @if ($errors->has('description'))
+                                <textarea id='description' type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description">{{ $contest->description }}</textarea>                                @if ($errors->has('description'))
                                 <span class="invalid-feedback">
                                                 <strong>{{ $errors->first('description') }}</strong>
                                             </span> @endif
@@ -38,8 +39,8 @@
                         <div class="form-group row">
                             <label for="sub_start_at" class="col-md-4 col-form-label text-md-right">Submission Starting Date</label>
                             <div class="col-md-6">
-                                <input id="sub_start_at" type="date" min="{{ date("Y-m-d") }}" class="form-control{{ $errors->has('sub_start_at') ? ' is-invalid' : '' }}" name="sub_start_at"
-                                    value="{{ old('sub_start_at') }}"> @if ($errors->has('sub_start_at'))
+                                <input id="sub_start_at" type="text" min="{{ date("Y-m-d") }}" class="form-control{{ $errors->has('sub_start_at') ? ' is-invalid' : '' }}" name="sub_start_at"
+                                    value="{{ $contest->sub_start_at }}" required="null"> @if ($errors->has('sub_start_at'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('sub_start_at') }}</strong>
                                     </span> @endif
@@ -49,8 +50,8 @@
                         <div class="form-group row">
                             <label for="sub_end_at" class="col-md-4 col-form-label text-md-right">Submission Closing Date</label>
                             <div class="col-md-6">
-                                <input id="sub_end_at" type="date" class="form-control{{ $errors->has('sub_end_at') ? ' is-invalid' : '' }}" name="sub_end_at"
-                                    value="{{ old('sub_end_at') }}"> @if ($errors->has('sub_end_at'))
+                                <input id="sub_end_at" type="text" class="form-control{{ $errors->has('sub_end_at') ? ' is-invalid' : '' }}" name="sub_end_at"
+                                    value="{{ $contest->sub_end_at }}"> @if ($errors->has('sub_end_at'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('sub_end_at') }}</strong>
                                         </span> @else
@@ -61,8 +62,8 @@
                         <div class="form-group row">
                             <label for="colosed_at" class="col-md-4 col-form-label text-md-right">Compettion Closing Date</label>
                             <div class="col-md-6">
-                                <input id="closed_at" type="date" class="form-control{{ $errors->has('closed_at') ? ' is-invalid' : '' }}" name="closed_at"
-                                    value="{{ old('closed_at') }}"> @if ($errors->has('closed_at'))
+                                <input id="closed_at" type="text" class="form-control{{ $errors->has('closed_at') ? ' is-invalid' : '' }}" name="closed_at"
+                                    value="{{ $contest->closed_at }}"> @if ($errors->has('closed_at'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('closed_at') }}</strong>
                                         </span> @else
@@ -73,6 +74,7 @@
                         <div class="form-group row">
                                 <label for="cover_img" class="col-md-4 col-form-label text-md-right">Cover Image</label>
                                 <div class="col-md-6">
+                                        <img src="/storage/contests_covers/{{$contest->cover_img}}" class="img-fluid">
                                     <input type='file' id='cover_img' type="text" class="form-control {{ $errors->has('cover_img') ? ' is-invalid' : '' }}"
                                         name="cover_img" value="{{ old('cover_img') }}" accept="image/*"> @if ($errors->has('cover_img'))
                                     <span class="invalid-feedback">
@@ -102,7 +104,7 @@
                         <div class="form-group row">
                             <label for="winner" class="col-md-4 col-form-label text-md-right">Prize</label>
                             <div class="col-md-6">
-                                <input id="winner" type="text" class="form-control{{ $errors->has('winner') ? ' is-invalid' : '' }}" name="winner" value="{{ old('winner') }}"
+                                <input id="winner" type="text" class="form-control{{ $errors->has('winner') ? ' is-invalid' : '' }}" name="winner" value="{{ $contest->prize }}"
                                     autofocus> @if ($errors->has('winner'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('winner') }}</strong>
@@ -114,7 +116,7 @@
                         <div class="form-group row">
                                 <label for="winner_info" class="col-md-4 col-form-label text-md-right">Prize Info</label>
                                 <div class="col-md-6">
-                                    <textarea id='winner_info' type="text" class="form-control{{ $errors->has('winner_info') ? ' is-invalid' : '' }}" name="winner_info">{{ old('winner_info') }}</textarea>                                
+                                    <textarea id='winner_info' type="text" class="form-control{{ $errors->has('winner_info') ? ' is-invalid' : '' }}" name="winner_info">{{ $contest->prize_description }}</textarea>                                
                                     @if ($errors->has('winner_info'))
                                     <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('winner_info') }}</strong>
@@ -126,6 +128,7 @@
                         <div class="form-group row">
                             <label for="winner_img" class="col-md-4 col-form-label text-md-right">Prize Image</label>
                             <div class="col-md-6">
+                                    <img src="/storage/contests_prizes/{{$contest->prize_image}}" class="img-fluid" style="width:120px;height:120px;">
                                 <input type='file' id='winner_img' type="text" class="form-control {{ $errors->has('winner_img') ? ' is-invalid' : '' }}"
                                     name="winner_img" value="{{ old('winner_img') }}" accept="image/*"> @if ($errors->has('winner_img'))
                                 <span class="invalid-feedback">
@@ -159,7 +162,7 @@
                         <div class="form-group row">
                             <label for="p_name" class="col-md-4 col-form-label text-md-right">Company/Owner Name:</label>
                             <div class="col-md-6">
-                                <input id="p_name" type="text" class="form-control{{ $errors->has('p_name') ? ' is-invalid' : '' }}" name="p_name" value="{{ old('p_name') }}"
+                                <input id="p_name" type="text" class="form-control{{ $errors->has('p_name') ? ' is-invalid' : '' }}" name="p_name" value="{{ $sponsors[0]->name }}"
                                     autofocus> @if ($errors->has('p_name'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('p_name') }}</strong>
@@ -171,6 +174,7 @@
                         <div class="form-group row">
                             <label for="p_logo" class="col-md-4 col-form-label text-md-right">Official Logo</label>
                             <div class="col-md-6">
+                                    <img src="/storage/contests_sponsors/{{$sponsors[0]->logo}}" class="img-fluid" style="width:100px;height:100px;">
                                 <input type='file' id='p_logo' type="text" class="form-control {{ $errors->has('p_logo') ? ' is-invalid' : '' }}"
                                     name="p_logo" value="{{ old('p_logo') }}" accept="image/*"> @if ($errors->has('p_logo'))
                                 <span class="invalid-feedback">
@@ -189,7 +193,7 @@
                          <div class="form-group row">
                              <label for="g_name" class="col-md-4 col-form-label text-md-right">Company/Owner Name:</label>
                              <div class="col-md-6">
-                                 <input id="g_name" type="text" class="form-control{{ $errors->has('g_name') ? ' is-invalid' : '' }}" name="g_name" value="{{ old('g_name') }}"
+                                 <input id="g_name" type="text" class="form-control{{ $errors->has('g_name') ? ' is-invalid' : '' }}" name="g_name" value="{{ $sponsors[1]->name }}"
                                      autofocus> @if ($errors->has('g_name'))
                                  <span class="invalid-feedback">
                                              <strong>{{ $errors->first('g_name') }}</strong>
@@ -201,6 +205,7 @@
                          <div class="form-group row">
                              <label for="g_logo" class="col-md-4 col-form-label text-md-right">Official Logo</label>
                              <div class="col-md-6">
+                                    <img src="/storage/contests_sponsors/{{$sponsors[1]->logo}}" class="img-fluid" style="width:100px;height:100px;">
                                  <input type='file' id='g_logo' type="text" class="form-control {{ $errors->has('g_logo') ? ' is-invalid' : '' }}"
                                      name="g_logo" value="{{ old('g_logo') }}" accept="image/*"> @if ($errors->has('g_logo'))
                                  <span class="invalid-feedback">
@@ -219,7 +224,7 @@
                          <div class="form-group row">
                              <label for="b_name" class="col-md-4 col-form-label text-md-right">Company/Owner Name:</label>
                              <div class="col-md-6">
-                                 <input id="b_name" type="text" class="form-control{{ $errors->has('b_name') ? ' is-invalid' : '' }}" name="b_name" value="{{ old('b_name') }}"
+                                 <input id="b_name" type="text" class="form-control{{ $errors->has('b_name') ? ' is-invalid' : '' }}" name="b_name" value="{{ $sponsors[2]->name }}"
                                      autofocus> @if ($errors->has('b_name'))
                                  <span class="invalid-feedback">
                                              <strong>{{ $errors->first('b_name') }}</strong>
@@ -231,6 +236,7 @@
                          <div class="form-group row">
                              <label for="b_logo" class="col-md-4 col-form-label text-md-right">Official Logo</label>
                              <div class="col-md-6">
+                                    <img src="/storage/contests_sponsors/{{$sponsors[2]->logo}}" class="img-fluid" style="width:100px;height:100px;">
                                  <input type='file' id='b_logo' type="text" class="form-control {{ $errors->has('b_logo') ? ' is-invalid' : '' }}"
                                      name="b_logo" value="{{ old('b_logo') }}" accept="image/*"> @if ($errors->has('b_logo'))
                                  <span class="invalid-feedback">
@@ -261,27 +267,35 @@
 @stop 
 @section('scripts')
 <script>
+
+    jQuery(function ($) {
+  $(document).on('nested:fieldRemoved', function (event) {
+    $('[required]', event.field).removeAttr('required');
+  });
+});
+
     $(document).ready(function(){
+
         $('#next_1').click(function(){
             $('#sec_01').hide();
             $('#sec_02').show();
-            $('.card').css('height','105vh');
+           // $('.card').css('height','auto');
         });
        
         $('#next_2').click(function(){
             $('#sec_02').hide();
             $('#sec_03').show();
-            $('.card').css('height','auto');
+            //$('.card').css('height','auto');
         });
         $('#prev_2').click(function(){
             $('#sec_02').hide();
             $('#sec_01').show();
-            $('.card').css('height','auto');
+           // $('.card').css('height','auto');
         });
         $('#prev_3').click(function(){
             $('#sec_03').hide();
             $('#sec_02').show();
-            $('.card').css('height','105vh');
+           // $('.card').css('height','105vh');
         });
     });
 
