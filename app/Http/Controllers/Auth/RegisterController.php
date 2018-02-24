@@ -7,7 +7,8 @@ use Laravel\Models\Role;
 use Laravel\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Laravel\Http\Controllers\FilesController;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -81,6 +82,7 @@ class RegisterController extends Controller
                 'name' =>'admin'
             ]);
         }
+
 
         return User::create([
             'name' => $data['name'],

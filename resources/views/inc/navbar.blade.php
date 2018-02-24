@@ -10,10 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="{{ Request::segment(1) === 'contests' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="/contests">Photo Contests</a></li>
-                <li class="{{ Request::segment(1) === 'photos' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="/photos">Photos</a></li>
-                <li class="{{ Request::segment(1) === 'vote' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">Vote</a></li>
-                <li class="{{ Request::segment(1) === 'about' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="#">About Us</a></li>
+                <li class="@yield('contests') navigation"><a class="nav-link text-center" href="/contests">Photo Contests</a></li>
+                <li class="@yield('photos') navigation"><a class="nav-link text-center" href="/photos">Photos</a></li>
+                <li class=" @yield('vote') navigation"><a class="nav-link text-center" href="/votes/contests">Vote</a></li>
+                <li class="@yield('about') navigation"><a class="nav-link text-center" href="#">About Us</a></li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -23,7 +23,7 @@
                 <li class="{{ Request::segment(1) === 'register' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="{{ route('register') }}">Register</a></li>
                 @else
                 @if(Auth::user()->role_id == 3)
-                <li class="{{ Request::segment(1) === 'contests' ? 'navbar-active' : null }} navigation"><a class="nav-link text-center" href="{{ route('contests.create') }}">Create Contest</a></li>
+                <li class="@yield('createcontests') navigation"><a class="nav-link text-center" href="{{ route('contests.create') }}">Create Contest</a></li>
                 @endif
                 <li class="nav-item dropdown user-dropdown">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

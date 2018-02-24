@@ -3,17 +3,31 @@
     margin: 0;
 }
 
+.vote-btn{
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+}
 .contest-item:hover,{
     cursor: pointer;
-    
 }
 
+.vote-now{
+    border:3px solid white;
+    width:200px;
+    padding: 5px;
+    border-radius: 50px;
+    transform: scale(1.2);
+  
+}
+
+.card-img-overlay{
+    transition: background-color 0.4s ease-in;
+}
 
 .card-img-overlay:hover{
+    opacity: 1;
     background-color:rgba(0,0,0,0.5);
 }
-
-
 
 .card-img{
     border-radius:0;
@@ -30,7 +44,11 @@ padding-top:20%;
 color: white;
 }
 
+.vote-btn{
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
 
+}
 
 .btn-light{
     opacity: 0.8;
@@ -89,7 +107,8 @@ color: white;
 
 @media (max-width: 768px) {
     .show-overlay{
-        transform: scale(0.45);
+        margin-top: -80px;
+        transform: scale(0.44);
     }
      
     .prize{
@@ -102,5 +121,9 @@ color: white;
 
     .show-partner{
         margin-top: -40px;
+    }
+
+    .overlay-element{
+        transform: scale(0.7);
     }
 }

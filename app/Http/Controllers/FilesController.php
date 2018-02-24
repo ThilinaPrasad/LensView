@@ -53,10 +53,10 @@ class FilesController extends Controller
 //File Uploading Function    
     public static function upload($request,$name,$folderName,$defaultName){
         //file handelling
+       
         if($request->hasFile($name)){
             // Get File name with the extention
             
-
             $filenameWithExt = $request->file($name)->getClientOriginalName();
             //get file name
             $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
@@ -74,5 +74,7 @@ class FilesController extends Controller
         }
         return $fileNametoStore;
     }
+
+
 
 }

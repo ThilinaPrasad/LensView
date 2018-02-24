@@ -11,4 +11,15 @@ class Contest extends Model
         'prize','prize_description','prize_img'
     ];
     
+    public function images(){
+        return $this->hasMany('App\Models\Image');
+    }
+
+    public function sponsors(){
+        return $this->hasMany('App\Models\Sponsor');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
