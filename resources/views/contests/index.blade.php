@@ -1,6 +1,8 @@
 @extends('layouts.app') 
 @section('title') Photo Contests 
 @stop 
+@section('contests') navbar-active
+@stop 
 @section('styles')
 <link href="{{ asset('css/contests.blade.css') }}" rel="stylesheet"> 
 @stop 
@@ -13,7 +15,7 @@
                 <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contests[0]->cover_img }}" alt="Card image">
                 <div class="card-img-overlay text-center">
                     <h5 class="card-text">Win amazing {{ $contests[0]->prize }}</h5>
-                    <h1 class="card-title">{{ $contests[0]->title }}</h1>
+                    <h1 class="card-title display-3">{{ $contests[0]->title }}</h1>
                     <p class="card-text"><small>Publisd at : {{ $contests[0]->created_at }}</small></p>
                 </div>
             </div>
@@ -26,7 +28,7 @@
                     <img class="card-img" src="/storage/contests_covers/{{ $contests[$i]->cover_img }}" alt="Card image">
                     <div class="card-img-overlay text-center">
                         <h5 class="card-text">Win amazing {{ $contests[$i]->prize }}</h5>
-                        <h1 class="card-title">{{ $contests[$i]->title }}</h1>
+                        <h1 class="card-title display-3">{{ $contests[$i]->title }}</h1>
                         <p class="card-text"><small>Publisd at : {{ $contests[$i]->created_at}}</small></p>
                     </div>
                 </div>

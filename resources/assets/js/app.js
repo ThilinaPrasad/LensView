@@ -23,6 +23,8 @@ const app = new Vue({
     el: '#app'
 });
 
+
+
 //Protected images 
 $(document).ready(function() {
     $("img").on("contextmenu",function(e){

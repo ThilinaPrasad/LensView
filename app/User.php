@@ -30,4 +30,12 @@ class User extends Authenticatable
     public function role(){
         return $this->hasOne('App\Models\Role');
     }
+
+    public function images(){
+        return $this->hasMany('App\Models\Image');
+    }
+
+    public function contests(){
+        return $this->hasMany('App\Models\Contest');
+    }
 }

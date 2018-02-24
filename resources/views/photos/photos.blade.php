@@ -4,6 +4,8 @@
 @stop 
 @section('title') Photos 
 @stop 
+@section('photos') navbar-active
+@stop 
 @section('content')
 <div class="container-fluid gal-container">
     <div class="row">

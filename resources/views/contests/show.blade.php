@@ -11,40 +11,41 @@
     <div class="col-md-12 contest-item">
         <div class="card card-inverse">
             <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
-            <div class="card-img-overlay show-overlay text-center">
+            <div class="card-img-overlay  text-center">
                 <!--Circular Progress-->
-                <div class="col-sm-1 mx-auto d-block">
-                    <div class="progress" data-percentage="{{ $days_presentage }}">
-                        <span class="progress-left">
+                <div class="show-overlay">
+                    <div class="col-sm-1 mx-auto d-block">
+                        <div class="progress" data-percentage="{{ $days_presentage }}">
+                            <span class="progress-left">
                                         <span class="progress-bar"></span>
-                        </span>
-                        <span class="progress-right">
+                            </span>
+                            <span class="progress-right">
                                         <span class="progress-bar"></span>
-                        </span>
-                        <div class="progress-value">
-                            <div>
-                                {{$days_left}}<br>
-                                <span>
+                            </span>
+                            <div class="progress-value">
+                                <div>
+                                    {{$days_left}}<br>
+                                    <span>
                                     @if($days_left!=1)
                                     {{ "days" }}
                                     @else
                                     {{ "day" }}
                                     @endif left</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!--Circular Progress-->
+                    <h1 class="card-title display-3">{{ $contest->title }}</h1>
+                    <h3 class="prize">Try With Your Creativity & Win
+                        <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
+                    <a href="/photographs/upload/{{$contest->id}}" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>                    @if(Auth::check() && (Auth::user()->id == $contest->user_id))
+                    <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>                    @endif
                 </div>
-                <!--Circular Progress-->
-                <h1 class="card-title display-3">{{ $contest->title }}</h1>
-                <h3 class="prize">Try With Your Creativity & Win
-                    <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
-                <a href="#" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>
-                @if(Auth::user()->id == $contest->user_id)    
-                <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
-                @endif
             </div>
         </div>
     </div>
+</div>
 </div>
 <!--cover Section-->
 <!--about section-->

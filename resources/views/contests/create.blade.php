@@ -1,6 +1,8 @@
 @extends('layouts.app') 
 @section('title') Create Contest 
 @stop 
+@section('createcontests') navbar-active
+@stop 
 @section('content')
 <div class="container reg-form">
     <div class="col-md-6 offset-md-2">
@@ -38,7 +40,7 @@
                         <div class="form-group row">
                             <label for="sub_start_at" class="col-md-4 col-form-label text-md-right">Submission Starting Date</label>
                             <div class="col-md-6">
-                                <input id="sub_start_at" type="date" min="{{ date("Y-m-d") }}" class="form-control{{ $errors->has('sub_start_at') ? ' is-invalid' : '' }}" name="sub_start_at"
+                                <input id="sub_start_at" type="date" min="{{ $date }}" class="form-control{{ $errors->has('sub_start_at') ? ' is-invalid' : '' }}" name="sub_start_at"
                                     value="{{ old('sub_start_at') }}"> @if ($errors->has('sub_start_at'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('sub_start_at') }}</strong>
@@ -49,7 +51,7 @@
                         <div class="form-group row">
                             <label for="sub_end_at" class="col-md-4 col-form-label text-md-right">Submission Closing Date</label>
                             <div class="col-md-6">
-                                <input id="sub_end_at" type="date" class="form-control{{ $errors->has('sub_end_at') ? ' is-invalid' : '' }}" name="sub_end_at"
+                                <input id="sub_end_at" type="date" min="{{ $date }}"  class="form-control{{ $errors->has('sub_end_at') ? ' is-invalid' : '' }}" name="sub_end_at"
                                     value="{{ old('sub_end_at') }}"> @if ($errors->has('sub_end_at'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('sub_end_at') }}</strong>
@@ -61,7 +63,7 @@
                         <div class="form-group row">
                             <label for="colosed_at" class="col-md-4 col-form-label text-md-right">Compettion Closing Date</label>
                             <div class="col-md-6">
-                                <input id="closed_at" type="date" class="form-control{{ $errors->has('closed_at') ? ' is-invalid' : '' }}" name="closed_at"
+                                <input id="closed_at" type="date" min="{{ $date }}" class="form-control{{ $errors->has('closed_at') ? ' is-invalid' : '' }}" name="closed_at"
                                     value="{{ old('closed_at') }}"> @if ($errors->has('closed_at'))
                                 <span class="invalid-feedback">
                                             <strong>{{ $errors->first('closed_at') }}</strong>

@@ -16,7 +16,7 @@ class ContestsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index','show']]);
+        $this->middleware('auth',['except'=>['index','show','vote']]);
         
     }
     /**
@@ -26,12 +26,22 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        $day = Carbon::yesterday();
+        $e_day = Carbon::today();
+        $s_day = $e_day->addDays(1);
       // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
-      $contests = DB::select("Select * FROM contests where sub_start_at<'".$day."' and sub_end_at>'".$day."'");
+      $contests = DB::select("Select * FROM contests where sub_start_at < '".$s_day."' and sub_end_at > '".$e_day."' ORDER By sub_start_at");
       // print_r($contests);
+      //dd($day);
       //dd(count($contests));
         return view('contests.index')->with('contests',$contests);
+    }
+
+    public function vote(){
+        $e_day = Carbon::today();
+        $s_day = $e_day->addDays(1);
+      // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
+      $contests = DB::select("Select * FROM contests where sub_end_at < '".$s_day."' and closed_at > '".$e_day."' ORDER By sub_end_at");
+        return view('contests.voteAvailable')->with('contests',$contests);
     }
 
     /**
@@ -43,9 +53,9 @@ class ContestsController extends Controller
     {
        
         if(Auth::user()->role_id == 3){
-        return view('contests.create');
+        return view('contests.create')->with('date',date('Y-m-d'));
         }else{
-            return "<h1 align='center'>Unautherized Action!<h1>";
+            return view('unautherised');
             //Consider about this warning messages
         }
     
@@ -147,7 +157,7 @@ class ContestsController extends Controller
             $days_presentage = (string)$days_presentage;
             $days_presentage = substr($days_presentage,0,1)."0";
         }
-//dd($owner->name);
+
       return view('contests.show')->with(['contest'=>$contest,'sponsors'=>$sponsors,'days_left'=>$days_left,'days_presentage'=>$days_presentage,'owner'=>$owner]);
     }
 
@@ -181,6 +191,11 @@ class ContestsController extends Controller
     public function update(Request $request, $id)
     {
         $contest = Contest::find($id);
+        $sponsors = Sponsor::orderBy('type','desc')->where('contest_id',$id)->get();
+        $platinum = $sponsors[0];
+        $gold = $sponsors[1];
+        $bronze = $sponsors[2];
+
         $sub_s  = Carbon::parse($contest->sub_start_at)->addDays(-1);
         $sub_e = Carbon::parse($contest->sub_end_at)->addDays(-1);
         $closed = Carbon::parse($contest->closed_at)->addDays(-1);
@@ -211,8 +226,20 @@ class ContestsController extends Controller
         $contest->prize = $request->input('winner');
         $contest->prize_description = $request->input('winner_info');
         $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes',$contest->prize_image);
-        $contest->save();
         
+        $platinum->name = $request->input('p_name');
+        $platinum->logo = FilesController::upload($request,'p_logo','contests_sponsors',$platinum->logo);
+
+        $gold->name = $request->input('g_name');
+        $gold->logo = FilesController::upload($request,'g_logo','contests_sponsors',$platinum->logo);
+
+        $bronze->name = $request->input('b_name');
+        $bronze->logo = FilesController::upload($request,'b_logo','contests_sponsors',$platinum->logo);
+
+        $contest->save();
+        $platinum->save();
+        $gold->save();
+        $bronze->save();
 
         if($contest /*&& $platinum && $gold && $bronze*/){
             return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Post Successfully Created!");
@@ -231,4 +258,6 @@ class ContestsController extends Controller
     {
         //
     }
+
+    
 }
