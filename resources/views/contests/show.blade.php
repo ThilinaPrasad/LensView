@@ -35,6 +35,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     <!--Circular Progress-->
                     <h1 class="card-title display-3">{{ $contest->title }}</h1>
                     <h3 class="prize">Try With Your Creativity & Win

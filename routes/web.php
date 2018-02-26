@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/test', function () {
-    return view('tests');
+    return view('photos.vote');
 });
 
 Route::get('/unautherised', function () {
