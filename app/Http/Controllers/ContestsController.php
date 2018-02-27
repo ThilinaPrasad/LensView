@@ -26,7 +26,7 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        $today = Carbon::today();
+        $today = Carbon::now();
       // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
       $contests = DB::select("Select * FROM contests where sub_start_at < '".$today."' and sub_end_at > '".$today."' ORDER By sub_start_at");
       //dd($day);
