@@ -4,6 +4,8 @@ namespace Laravel\Http\Controllers;
 use Laravel\Models\Category;
 use Laravel\Models\Image;
 use Illuminate\Http\Request;
+use Laravel\Models\Contest;
+use Laravel\User;
 use Illuminate\Support\Facades\Auth;
 class PhotosController extends Controller
 {
@@ -70,7 +72,20 @@ class PhotosController extends Controller
             'downloadable'=>$request->input('downloadable'),
         ]);
 
+        if($photo){
+            return redirect('votes/photographs/'.$request->input("contest_id"))->with('success',"Post Successfully Created!");
+            }else{
+                return view('photos.upload')->with('error',"Error Happend Creating Post! Please Try Again!");
+            }
 
+    }
+
+    public function showVoting($id=null){
+        $contest = Contest::find($id);
+        $user = User::find($contest->user_id);
+        $images = Image::all()->where('contest_id',$id);
+        //dd($images);
+        return view('photos.vote')->with(['contest'=>$contest,'images'=>$images,'user'=>$user]);
     }
 
     /**

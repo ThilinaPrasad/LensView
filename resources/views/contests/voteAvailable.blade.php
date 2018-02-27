@@ -34,7 +34,7 @@
         }
         ?>
     <div class="row ">
-        <a href="#" class="col-md-12 contest-item">
+    <a href="photographs/{{ $contest->id }}" class="col-md-12 contest-item">
             <div class="card card-inverse">
                 <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
                 <div class="card-img-overlay text-center">

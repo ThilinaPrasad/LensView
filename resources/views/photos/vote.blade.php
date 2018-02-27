@@ -1,13 +1,13 @@
 @extends('layouts.app') 
-@section('title') Vote Images
+@section('title') Vote Images 
 @stop 
-@section('styles') 
+@section('styles')
 <style type="text/css">
-    .elem, .elem * {
+    .elem,
+    .elem * {
         box-sizing: border-box;
-        margin: 0 !important;	
+        margin: 0 !important;
     }
-    
     .elem {
         display: inline-block;
         font-size: 0;
@@ -18,46 +18,100 @@
         height: auto;
         background-clip: padding-box;
     }
-    .elem > span {
+    .elem>span {
         display: block;
         cursor: pointer;
         height: 0;
-        padding-bottom:	70%;
-        background-size: cover;	
+        padding-bottom: 70%;
+        background-size: cover;
         background-position: center center;
     }
-
-    .contest-wrapper{
-        margin-top: 100px;
+    .contest-wrapper {
+        margin-top: 60px;
+        margin-bottom:20px;
+        height:auto;
     }
-    </style>
-    <link rel="stylesheet" href="{{ asset('css/vote_img/lc_lightbox.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vote_img/minimal.css') }}" />
+
+    .cover {
+    background-image: url("/storage/contests_covers/{{ $contest->cover_img }}");
+    height: 350px; 
+    width:100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.heading{
+    padding-top: 10%;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    width:100%;
+    height: 100%;
+}
+
+#go_images{
+    opacity: 1;
+}
+
+#go_images:hover{
+    color:white;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .heading{
+        padding-top:30%; 
+    }
+
+    .row{
+        margin-bottom:1px;
+    }
+}
+</style>
+<link rel="stylesheet" href="{{ asset('css/vote_img/lc_lightbox.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/vote_img/minimal.css') }}" /> 
 @stop 
 @section('content')
 <div class="contest-wrapper">
-<!--h1 align="center" class="font_01">Contest Name Here</h1-->
-<div class="mx-auto d-block">
-    <div class="row">
-        <a class="elem col-md-4" href="/storage/contests_covers/ce1ae24b6ddcee7e2bbb21585885c814e34b6537_1519496935.jpg" title="image 1" data-lcl-txt="lorem ipsum dolor sit amet" data-lcl-author="Test" data-lcl-thumb="/storage/contests_covers/ce1ae24b6ddcee7e2bbb21585885c814e34b6537_1519496935.jpg">
-         <span style="background-image: url(/storage/contests_covers/ce1ae24b6ddcee7e2bbb21585885c814e34b6537_1519496935.jpg);"></span>
-     </a>
-     <a class="elem col-md-4" href="/storage/contests_covers/fd9240e54c001dcb26f37c0ba6989ddd8dfe91cd_1519496993.jpg" title="image 2" data-lcl-txt="lorem ipsum dolor sit amet" data-lcl-author="someone" data-lcl-thumb="/storage/contests_covers/fd9240e54c001dcb26f37c0ba6989ddd8dfe91cd_1519496993.jpg">
-         <span style="background-image: url(/storage/contests_covers/fd9240e54c001dcb26f37c0ba6989ddd8dfe91cd_1519496993.jpg);"></span>
-     </a>
-     
-     <a class="elem col-md-4" href="https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?dpr=1&auto=format&fit=crop&w=2000&q=80&cs=tinysrgb" title="image 3" data-lcl-txt="lorem ipsum dolor sit amet" data-lcl-author="someone" data-lcl-thumb="https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?dpr=1&auto=format&fit=crop&w=150&q=80&cs=tinysrgb">
-         <span style="background-image: url(https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?dpr=1&auto=format&fit=crop&w=400&q=80&cs=tinysrgb);"></span>
-     </a>
+    <div class="cover">
+        <div class="heading text-center">
+    <h1 align="center" class="font_01 display-4">{{ $contest->title }}</h1>
+    <h2 align="center" class="font_01">Add Your Votes <i class="far fa-heart"></i></h2>
+    <h1  id="go_images"><i class="fas fa-chevron-circle-down"></i></h1>
+        </div>
     </div>
+    @if(count($images)!=0)
+    <div class="mx-auto d-block" >
+        <div class="row" style="margin-left: 0;margin-right: 0;" >
+            @foreach($images as $image)
+        <a class="elem col-md-4" href="/storage/contest_images/{{ $image->image }}" title="{{ $image->title }}"
+        data-lcl-txt="<button class='btn btn-secondary'><i class='far fa-heart'>&nbsp;&nbsp;</i>AddVote</button>&nbsp;&nbsp;<a href='/storage/contest_images/{{ $image->image }}' class='btn btn-success' download='' {{ $image->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a>" data-lcl-author="{{ $user->name }}" data-lcl-thumb="/storage/contest_images/{{ $image->image }}">
+                <span style="background-image: url(/storage/contest_images/{{ $image->image }});"></span>
+                </a>    
+            @endforeach
     </div>
+    
 </div>
-    @stop
-    @section('scripts') 
-    <script src="{{ asset('js/vote_img/lc_lightbox.lite.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/vote_img/alloy_finger.min.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function(e) {
+@else
+<div style="height:100vh;padding-top:25vh;">
+    <img src="{{ asset('img/static/animation_4.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
+    <h1 align="center" class="font_01">No Photographs for Voting</h1>
+</div>
+@endif
+</div>
+@stop 
+
+@section('scripts')
+<script src="{{ asset('js/vote_img/lc_lightbox.lite.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/vote_img/alloy_finger.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $("#go_images").click(function () {
+    TweenLite.to(window, 1, { scrollTo: 350 });
+});
+
+    $(document).ready(function(e) {
            
             // live handler
             lc_lightbox('.elem', {
@@ -72,5 +126,5 @@
             });	
         
         });
-        </script>
-    @stop
+</script>
+@stop
