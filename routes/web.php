@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/test', function () {
-    return view('tests');
+    return view('photos.vote');
 });
 
 Route::get('/unautherised', function () {
@@ -34,7 +36,7 @@ Route::resource('contests','ContestsController');
 Route::get('/votes/contests', 'ContestsController@vote');
 Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');
-
+Route::get('votes/photographs/{id?}', 'PhotosController@showVoting');
 
 Auth::routes();
 

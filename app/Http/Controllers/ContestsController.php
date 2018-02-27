@@ -26,22 +26,17 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        $e_day = Carbon::today();
-        $s_day = $e_day->addDays(1);
+        $today = Carbon::today();
       // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
-      $contests = DB::select("Select * FROM contests where sub_start_at < '".$s_day."' and sub_end_at > '".$e_day."' ORDER By sub_start_at");
-      // print_r($contests);
+      $contests = DB::select("Select * FROM contests where sub_start_at < '".$today."' and sub_end_at > '".$today."' ORDER By sub_start_at");
       //dd($day);
       //dd(count($contests));
         return view('contests.index')->with('contests',$contests);
     }
-
     public function vote(){
-        $e_day = Carbon::today();
-        $s_day = $e_day->addDays(1);
-      // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
-      $contests = DB::select("Select * FROM contests where sub_end_at < '".$s_day."' and closed_at > '".$e_day."' ORDER By sub_end_at");
-        return view('contests.voteAvailable')->with('contests',$contests);
+        $today = Carbon::today();
+      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at > '".$today."' ORDER By sub_end_at");
+        return view('contests.voteAvailable')->with(['contests'=>$contests]);
     }
 
     /**
