@@ -38,4 +38,8 @@ class User extends Authenticatable
     public function contests(){
         return $this->hasMany('App\Models\Contest');
     }
+
+    public function votes(){
+        return $this->hasMany('App\Models\Vote');
+    }
 }
