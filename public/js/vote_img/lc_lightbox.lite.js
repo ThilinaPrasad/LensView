@@ -2583,7 +2583,7 @@
 				},
 				doubleTap: function (e) {
 					e.preventDefault();
-					zoom(true);
+					//zoom(true);
 				},
 				pinch: function(e) {
 					e.preventDefault();

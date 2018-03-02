@@ -38,5 +38,9 @@ Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');
 Route::get('votes/photographs/{id?}', 'PhotosController@showVoting');
 
+//Vote Functions
+Route::get('/addvote/{id?}', 'VotesController@addVote');
+Route::get('/removevote/{id?}', 'VotesController@removeVote');
+
 Auth::routes();
 

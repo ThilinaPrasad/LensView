@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Laravel\Models\Contest;
 use Laravel\User;
 use Illuminate\Support\Facades\Auth;
+use DB;
+use Laravel\Http\Controllers\VotesController;
 class PhotosController extends Controller
 {
 
@@ -84,7 +86,8 @@ class PhotosController extends Controller
         $contest = Contest::find($id);
         $user = User::find($contest->user_id);
         $images = Image::all()->where('contest_id',$id);
-        //dd($images);
+        //votes = VotesController::show();
+        //$images = DB::select("select * from");
         return view('photos.vote')->with(['contest'=>$contest,'images'=>$images,'user'=>$user]);
     }
 
