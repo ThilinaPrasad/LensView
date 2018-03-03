@@ -20,7 +20,7 @@ class CreateSponsorsTable extends Migration
             $table->string('name');
             $table->mediumText('logo');
             $table->timestamps();
-            $table->foreign('contest_id')->references('id')->on('contests');
+            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
         });
     }
 

@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'LensView') }} | @yield('title')</title>
     <!-- Styles -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
     <!-- Fonts -->
@@ -27,6 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
     @yield('scripts')
 </body>
 </html>

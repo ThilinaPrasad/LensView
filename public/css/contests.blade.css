@@ -105,6 +105,10 @@ color: white;
     text-decoration: none;
 }
 
+.delete-btn:hover{
+    color: #c62828;
+}
+
 @media (max-width: 768px) {
     .show-overlay{
         margin-top: -80px;

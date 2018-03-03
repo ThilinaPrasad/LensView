@@ -19,8 +19,14 @@ class VotesController extends Controller
     }
 
     public static function show(){
-        $votes = Vote::all()->where('voter_id',Auth::user()->id);
-        return $votes;
+        //$votes = Vote::all()->where('voter_id',Auth::user()->id);
+        $returnArray = [];
+        $votes = DB::select("SELECT distinct image_id FROM votes WHERE voter_id='".Auth::user()->id."'");
+        foreach($votes as $img){
+            array_push($returnArray,$img->image_id);
+        }
+        //dd(in_array('10',$returnArray));
+        return $returnArray;
     }
 
     

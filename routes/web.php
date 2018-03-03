@@ -33,6 +33,7 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('contests','ContestsController');
+
 Route::get('/votes/contests', 'ContestsController@vote');
 Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');
@@ -42,5 +43,8 @@ Route::get('votes/photographs/{id?}', 'PhotosController@showVoting');
 Route::get('/addvote/{id?}', 'VotesController@addVote');
 Route::get('/removevote/{id?}', 'VotesController@removeVote');
 
+//User functions
+Route::resource('users','UsersController');
+Route::get('/deleteuser/{id?}/{password?}', 'UsersController@delete');
 Auth::routes();
 

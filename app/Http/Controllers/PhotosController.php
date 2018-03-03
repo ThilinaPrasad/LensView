@@ -85,10 +85,10 @@ class PhotosController extends Controller
     public function showVoting($id=null){
         $contest = Contest::find($id);
         $user = User::find($contest->user_id);
-        $images = Image::all()->where('contest_id',$id);
-        //votes = VotesController::show();
-        //$images = DB::select("select * from");
-        return view('photos.vote')->with(['contest'=>$contest,'images'=>$images,'user'=>$user]);
+        //$images = Image::all()->where('contest_id',$id);
+        $votes = VotesController::show();
+        $images = DB::select("SELECT * FROM images LEFT JOIN votes_count ON images.id = votes_count.image_id WHERE images.contest_id = '".$id."'");
+        return view('photos.vote')->with(['contest'=>$contest,'images'=>$images,'user'=>$user,'votes'=>$votes]);
     }
 
     /**

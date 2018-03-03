@@ -36,7 +36,7 @@
                             <div class="row ">
                                 <lable class="mx-auto d-block">{{ Auth::user()->name }}</lable>
                             </div>
-                            <small class="row "><a href="#" class="mx-auto d-block">View Profile</a></small>
+                        <small class="row "><a href="/users/{{ Auth::user()->id }}" class="mx-auto d-block">View Profile</a></small>
                         </div>
                         <div class="dropdown-divider"></div>
                         <!-- Account Setings Section -->
