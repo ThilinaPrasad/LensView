@@ -35,7 +35,7 @@ class ContestsController extends Controller
     }
     public function vote(){
         $today = Carbon::today();
-      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at > '".$today."' ORDER By sub_end_at");
+      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at > '".$today."' ORDER BY sub_end_at desc");
         return view('contests.voteAvailable')->with(['contests'=>$contests]);
     }
 
@@ -251,8 +251,11 @@ class ContestsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contest = Contest::find($id);
+        if($contest->delete()){
+            return redirect()->route('contests.index')->with('success','Company deleted sucessfully;');
+        }
+        return back()-withInput()->with('error','Error happened while deleting !');
     }
-
-    
+        
 }

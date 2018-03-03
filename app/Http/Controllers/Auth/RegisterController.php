@@ -71,15 +71,15 @@ class RegisterController extends Controller
         if(count(Role::all())==0){
             Role::create([
                 'id'=>'1',
-                'name' =>'voter'
+                'name' =>'Voter'
             ]);
             Role::create([
                 'id'=>'2',
-                'name' =>'photographer'
+                'name' =>'Photographer'
             ]);
             Role::create([
                 'id'=>'3',
-                'name' =>'admin'
+                'name' =>'Contest Organizer'
             ]);
         }
 

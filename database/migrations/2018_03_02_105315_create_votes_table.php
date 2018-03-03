@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use Illuminate\Support\Facades\DB;
 class CreateVotesTable extends Migration
 {
     /**
@@ -27,6 +27,9 @@ class CreateVotesTable extends Migration
             ->references('id')->on('images')
             ->onDelete('cascade');
         });
+
+        DB::statement( "CREATE VIEW  votes_count(image_id,vote_count) AS SELECT image_id,COUNT(*) FROM votes GROUP BY image_id" );
+
     }
 
     /**

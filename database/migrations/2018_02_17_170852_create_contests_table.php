@@ -26,7 +26,7 @@ class CreateContestsTable extends Migration
             $table->longText('prize_description');
             $table->mediumText('prize_image');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

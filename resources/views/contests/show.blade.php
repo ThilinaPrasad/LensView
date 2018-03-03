@@ -40,8 +40,16 @@
                     <h1 class="card-title display-3">{{ $contest->title }}</h1>
                     <h3 class="prize">Try With Your Creativity & Win
                         <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
-                    <a href="/photographs/upload/{{$contest->id}}" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>                    @if(Auth::check() && (Auth::user()->id == $contest->user_id))
-                    <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>                    @endif
+                    <a href="/photographs/upload/{{$contest->id}}" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>                    
+                    @if(Auth::check() && (Auth::user()->id == $contest->user_id))
+                    <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>    
+                    <a href="#" class="btn btn-light font_3 delete-btn" id="deleteButton"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</a>               
+                    <form method="post" action="{{ route('contests.destroy',[$contest->id]) }}" id="delete-contest" style="display:none;">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="delete ">
+                        </form>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -84,10 +92,44 @@
 <div class="container-fluid owner-sec">
     <div class="text-center">
         <strong>Organized by</strong>
-        <a href="#" class="organizer">
+    <a href="/users/{{ $owner->id }}" class="organizer">
         <img src="/storage/profile_pics/{{ $owner->profile_pic}}" class="rounded-circle mx-auto d-block" width="80" height="80" title="View Profile">
         <strong>{{ $owner->name}}</strong>
     </a>
     </div>
 </div>
+@stop
+@section('scripts')
+<script>
+    $(document).ready(function(){
+    $('#deleteButton').click(function(){
+        $.confirm({
+                        theme: 'modern',
+                        icon: 'far fa-trash-alt',
+                        title: 'Delete Contest!',
+                        content: 'Do you want to delete this contest ?',
+                        autoClose: 'cancel|10000',
+                        closeIcon: true,
+                        draggable: true,
+                        animationBounce: 2.5,
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            Delete: {
+                            text: 'Delete',
+                            btnClass: 'btn-red',
+                            action : function () {
+                                event.preventDefault();
+                                $('#delete-contest').submit();
+                            }
+                        },
+                            cancel: function () {
+                                
+                            }
+                            
+                        }
+                    });
+    });
+});
+</script>
 @stop

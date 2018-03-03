@@ -54,6 +54,19 @@
         opacity: 0.8;
         cursor: pointer;
     }
+    .display-4{
+        margin-top: -50px;
+    }
+
+a{
+    
+    color:white;
+}
+a:hover{
+    text-decoration: none;
+    opacity: 0.7;
+    color:white;
+}
     @media (max-width: 768px) {
         .heading {
             padding-top: 30%;
@@ -72,6 +85,7 @@
         <div class="heading text-center">
             <h1 align="center" class="font_01 display-4">{{ $contest->title }}</h1>
             <h2 align="center" class="font_01">Add Your Votes <i class="far fa-heart"></i></h2>
+            <h5 align="center">Created by : <a href="#userProfileLinkHere" title="View Profile">{{ $user->name }}</a></h5>
             <h1 id="go_images"><i class="fas fa-chevron-circle-down"></i></h1>
         </div>
     </div>
@@ -81,10 +95,11 @@
             @foreach($images as $image)
             
             <a class="elem col-md-4" href="/storage/contest_images/{{ $image->image }}" title="{{ $image->title }}" 
-                data-lcl-txt="<button class='{{ ($image->voter_id ==Auth::user()->id && $image->image_id == $image->id)? "btn btn-info" : "btn btn-secondary" }}' value='{{ $image->id }}' onClick='vote(this);'>{{($image->voter_id !=Auth::user()->id)? "<i class='far fa-heart'></i>&nbsp;&nbsp;+Vote" : "<i class='fas fa-heart'></i>&nbsp;&nbsp;-Vote" }}</button>&nbsp;&nbsp;<a href='/storage/contest_images/{{ $image->image }}' class='btn btn-success' download='' {{ $image->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a>"
+            data-lcl-txt="<div class='row badge badge-pill badge-info'><i class='fas fa-heart'></i>&nbsp;&nbsp<strong id='vote_count{{ $image->id }}'>{{ ($image->vote_count == null)? 0:$image->vote_count  }}</strong></div><div class='row'><button class='{{ (in_array($image->id,$votes))? "btn btn-info" : "btn btn-secondary" }}' value='{{ $image->id }}' onClick='vote(this);'>{{(in_array($image->id,$votes))? "<i class='fas fa-heart'></i>&nbsp;&nbsp;-Vote" : "<i class='far fa-heart'></i>&nbsp;&nbsp;+Vote"  }}</button>&nbsp;&nbsp;<a href='/storage/contest_images/{{ $image->image }}' class='btn btn-success' download='' {{ $image->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a></div>"
             data-lcl-author="{{ $user->name }}" data-lcl-thumb="/storage/contest_images/{{ $image->image }}">
             <span style="background-image: url(/storage/contest_images/{{ $image->image }});"></span>
             </a>
+            
             @endforeach
         </div>
     </div>
@@ -129,6 +144,8 @@ var xhttp = new XMLHttpRequest();
         //vote_btn.removeClass('btn-secondary');
         $(vote_btn).attr("class" , "btn btn-info");
         $(vote_btn).html('<i class="fas fa-heart"></i>&nbsp;&nbsp;-Vote');
+        var temp = $("#vote_count"+img_id);
+        temp.text((parseInt(temp.text())+1).toString());
     }
   };
   xhttp.open("get", "/addvote/"+img_id, true);
@@ -139,6 +156,8 @@ var xhttp = new XMLHttpRequest();
         //vote_btn.removeClass('btn-secondary');
         $(vote_btn).attr("class" , "btn btn-secondary");
         $(vote_btn).html('<i class="far fa-heart"></i>&nbsp;&nbsp;+Vote');
+        var temp = $("#vote_count"+img_id);
+        temp.text((parseInt(temp.text())-1).toString());
     }
   };
   xhttp.open("get", "/removevote/"+img_id, true);

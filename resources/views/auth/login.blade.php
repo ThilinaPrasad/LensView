@@ -49,15 +49,6 @@ Login
                             </div>
                         </div>
 
-                        <!--div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me</label>
-                                </div>
-                            </div>
-                        </div-->
-
                         <div class="custom-control custom-checkbox form-group row">
                                 <div class="col-md-6 offset-md-4">
                                 <input type="checkbox" class="custom-control-input {{ $errors->has('condition') ? ' is-invalid' : '' }}" id="customControlInline" name='condition' {{ old('remember') ? 'checked' : '' }}>
