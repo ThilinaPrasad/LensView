@@ -46,7 +46,7 @@
                                     <i class="fas fa-chart-line"></i>&nbsp;&nbsp;
                                    Dashboard
                    </a>
-                        <a class="dropdown-item " href="#">
+                        <a class="dropdown-item " href="/users/{{ Auth::user()->id }}/edit">
                             <i class="fas fa-cog"></i>&nbsp;&nbsp;
                            Edit Account
            </a>

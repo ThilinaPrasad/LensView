@@ -7,8 +7,19 @@ use Laravel\User;
 use Laravel\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Http\Controllers\FilesController;
+use Illuminate\Support\Facades\Storage;
+use Validator;
+
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['show']]);
+        
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +72,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('user.edit')->with('user',$user);
     }
 
     /**
@@ -73,7 +85,24 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $this->validate($request,['name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'address'=>'required',
+            'telephone'=>'required|size:10',
+            'password' => 'required|string',
+        ]);
+
+        if(Auth::attempt(array('id'=>$id,'password'=>$request->input('password')))){
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->address = $request->input('address');
+            $user->telephone = $request->input('telephone');
+            $user->save();
+            return redirect()->route('users.show',['user'=>$user->id]);
+        }else{
+            return redirect()->route('users.edit',['user'=>$user->id])->withErrors(['password'=>'Password mismatched ! Add new data again']);
+        }
     }
 
     /**
@@ -84,15 +113,46 @@ class UsersController extends Controller
      */
     public function delete($id,$password)
     {
+        $password = trim($password);
         $user = User::find($id);
-        $password = trim($password," ");
-        $temp = bcrypt($password);
-        if($temp==$user->password){
+        if(Auth::attempt(array('id'=>$id,'password'=>$password))){
             $user->delete();
-            dd("success");
+            return "success";
         }else{
-            dd($id);
+            return "error";
         }
         
+    }
+
+    public function picture($id){
+        $user = User::find($id);
+        return view('user.profilepic')->with('user',$user);
+    }
+
+    public function picupdate(Request $request)
+    {
+        $this->validate($request,[
+            'upload_img' => 'required|image|max:1999|dimensions:ratio=1'
+        ]);
+
+        $id = $request->input('id');
+        $user = User::find($id);
+
+        //delete old file
+        if($user->profile_pic != 'default_cover.jpg'){
+            Storage::delete('public/profile_pics/'.$user->profile_pic);
+            }
+
+        $user->profile_pic = FilesController::upload($request,'upload_img','profile_pics','default_user_image.jpg');
+        $user->save();
+        return redirect()->route('users.show',['id'=>$user->id]);
+    }
+
+    public function changepassview(){
+        return view('user.changepass');
+    }
+
+    public function updatepass(Request $request){
+        return "Success";
     }
 }

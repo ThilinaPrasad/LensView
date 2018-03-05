@@ -46,5 +46,12 @@ Route::get('/removevote/{id?}', 'VotesController@removeVote');
 //User functions
 Route::resource('users','UsersController');
 Route::get('/deleteuser/{id?}/{password?}', 'UsersController@delete');
+Route::get('/profilepic/{id?}', 'UsersController@picture');
+Route::put('/prfilepicupdate', 
+          array('uses'=>'UsersController@picupdate',
+                 'as' => 'profilepic.update'));
+
+Route::get('/changepass', 'UsersController@changepassview');
+
 Auth::routes();
 
