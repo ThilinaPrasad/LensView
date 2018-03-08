@@ -2,9 +2,11 @@
 @section('title') Profile Picture
 @stop 
 @section('styles')
-<link href="{{ asset('css/profilepic.css') }}" rel="stylesheet">
 <style>
-   
+  body {
+        background:url('{{ asset("img/static/profilepic_back.png") }}') no-repeat center center fixed;
+    } 
+
 .btn-file {
   position: relative;
   overflow: hidden;
@@ -38,6 +40,7 @@
 .img-cont{
     height: 100vh;
   padding-top:100px;
+  background-color: rgba(255,255,255,0.5);
 }
 
 
@@ -74,10 +77,10 @@
         </div>
     </div>
 
-    <div class="form-group row mb-0">
-            <div class="col-md-6 offset-md-5 offset-sm-1">
+    <div class="form-group">
+            <div class="col-md-6">
                 <button type="submit" class="btn btn-success">
-                    Update Profile
+                    Update Profile Picture
                 </button>
             </div>
         </div>

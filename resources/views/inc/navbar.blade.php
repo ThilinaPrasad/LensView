@@ -55,8 +55,7 @@
            <a class="dropdown-item " href="{{ route('contests.create') }}">
                 <i class="fas fa-images"></i>
 
-&nbsp;&nbsp;
-               Create Contest
+&nbsp;&nbsp;Create Contest
 </a>
 @endif
                         <div class="dropdown-divider"></div>

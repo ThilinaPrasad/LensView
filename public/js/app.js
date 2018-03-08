@@ -13831,7 +13831,7 @@ $(document).ready(function () {
 
 //Footer Top Nav btn
 $("#footer_top_btn").click(function () {
-    TweenLite.to(window, 3, { scrollTo: 0 });
+    TweenLite.to(window, 1, { scrollTo: 0 });
 });
 
 /***/ }),
