@@ -4,16 +4,16 @@
 @section('content')
 <div class="container reg-form">
     <div class="row">
-        <div class="col-md-6 left-sec">
+        <div class="col-md-5 left-sec">
             <div class="left-container">
-                <img src="{{ asset('img/static/animation_05.gif') }}" class="animation">
+                <img src="{{ asset('img/static/animation_5.gif') }}" class="animation">
                 <div class="text-center">
                     <h1 class="font_01 left_text">LensView</h1>
                     <h4 class="font_02 left_text">Capture Your Passion</h4>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="card card-default">
                 <div class="card-body">
                     <h2 class="font_01 mb-4 header" align="center">Edit Profile</h2>
@@ -106,9 +106,9 @@
                             <div class="col-md-6 offset-md-4">
                                 
                                 <button type="submit" class="btn btn-success">
-                                    Update Profile
+                                    <i class="fas fa-save"></i>&nbsp;&nbsp;Update Profile
                                 </button>
-                            <a href="/changepass" class="btn btn-danger">Change Password</a>
+                            <a href="/changepass" class="btn btn-danger"><i class="fas fa-key"></i>&nbsp;&nbsp;Change Password</a>
                             </div>
                         </div>
                 </div>

@@ -75,7 +75,7 @@ class PhotosController extends Controller
         ]);
 
         if($photo){
-            return redirect('votes/photographs/'.$request->input("contest_id"))->with('success',"Post Successfully Created!");
+            return redirect('contests/'.$request->input("contest_id"))->with('success',"Post Successfully Created!");
             }else{
                 return view('photos.upload')->with('error',"Error Happend Creating Post! Please Try Again!");
             }

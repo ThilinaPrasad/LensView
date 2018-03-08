@@ -51,7 +51,11 @@ Route::put('/prfilepicupdate',
           array('uses'=>'UsersController@picupdate',
                  'as' => 'profilepic.update'));
 
-Route::get('/changepass', 'UsersController@changepassview');
-
+Route::get('/changepass',
+array('uses'=>'UsersController@changepassview',
+                 'as' => 'changepass'));
+Route::put('/updatepassword', 
+          array('uses'=>'UsersController@updatepassword',
+                 'as' => 'changepass.updatepassword'));
 Auth::routes();
 

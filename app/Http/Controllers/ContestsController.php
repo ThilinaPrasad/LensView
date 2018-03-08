@@ -7,6 +7,7 @@ use Laravel\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Laravel\Models\Contest;
+use Laravel\Models\Image;
 use Laravel\User;
 use Laravel\Models\Sponsor;
 use Illuminate\Support\Facades\Validator;
@@ -138,8 +139,8 @@ class ContestsController extends Controller
      */
     public function show($id)
     {
-       
         $contest = Contest::find($id);
+        $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id'));
         $sponsors = Sponsor::all()->where('contest_id',$id);
         $owner = User::where('id',$contest->user_id)->get()->first();
         $today = Carbon::today();
@@ -153,7 +154,7 @@ class ContestsController extends Controller
             $days_presentage = substr($days_presentage,0,1)."0";
         }
 
-      return view('contests.show')->with(['contest'=>$contest,'sponsors'=>$sponsors,'days_left'=>$days_left,'days_presentage'=>$days_presentage,'owner'=>$owner]);
+      return view('contests.show')->with(['contest'=>$contest,'sponsors'=>$sponsors,'days_left'=>$days_left,'days_presentage'=>$days_presentage,'owner'=>$owner,'photos'=>$photographs]);
     }
 
     /**

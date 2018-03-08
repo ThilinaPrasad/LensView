@@ -90,7 +90,12 @@
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">                                @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span> @endif
+                                    </span> 
+                                    @else
+                                                    <span class="text-muted">
+                                                            (*must contain atleast 8 charactors)
+                                                        </span>
+                                    @endif
                             </div>
                         </div>
                         <!-- Confirm Password Field -->

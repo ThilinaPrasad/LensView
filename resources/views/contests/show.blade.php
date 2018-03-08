@@ -4,6 +4,25 @@
 @section('styles')
 <link href="{{ asset('css/contests.blade.css') }}" rel="stylesheet">
 <link href="{{ asset('css/cricular.progress.css') }}" rel="stylesheet"> 
+<style>
+    
+.d-flex picture {
+  width:300px;
+  flex: auto;
+}
+
+.show-img{
+    max-height:500px;
+    overflow-y: scroll;
+}
+
+@media (min-width: 992px) { 
+  .w-lg-50 {width:50%!important;}
+}
+
+
+
+</style>
 @stop 
 @section('content')
 <!--cover Section-->
@@ -40,7 +59,9 @@
                     <h1 class="card-title display-3">{{ $contest->title }}</h1>
                     <h3 class="prize">Try With Your Creativity & Win
                         <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
+                            @if(Auth::check() && (Auth::user()->role_id != '1'))
                     <a href="/photographs/upload/{{$contest->id}}" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>                    
+                    @endif
                     @if(Auth::check() && (Auth::user()->id == $contest->user_id))
                     <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>    
                     <a href="#" class="btn btn-light font_3 delete-btn" id="deleteButton"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</a>               
@@ -49,7 +70,6 @@
                         <input type="hidden" name="_method" value="delete ">
                         </form>
                     @endif
-
                 </div>
             </div>
         </div>
@@ -62,6 +82,7 @@
     <div class="container">
         <p class="h1 font_01">About {{ $contest->title }} Contest</p>
         <p class="lead">{{ $contest->description }}</p>
+        <p class="badge badge-pill badge-info">Submission available in {{ $contest->sub_start_at }}&nbsp; to &nbsp;{{ $contest->sub_end_at }}</p>
     </div>
 </div>
 <!--about section-->
@@ -88,6 +109,23 @@
 </div>
 </div>
 <!--Partners Section-->
+<!--Currently uploaded Images-->
+@if(count($photos)!=0)
+<div class="jumbotron text-center">
+        <p class="font_01 h1 prize-head"><i class="fas fa-images"></i> Uploaded Photographs <i class="fas fa-images"></i></p>
+<div class="container show-img">
+    <div class="d-flex flex-row flex-wrap">
+        @foreach($photos as $photo)
+   <picture>
+   <img src="/storage/contest_images/{{ $photo->image }}" alt="placeholder image"  class="img-fluid" title="Uploaded by {{$photo->name}}">
+  </picture>
+      @endforeach
+     
+    </div>
+</div>
+</div>
+@endif
+<!--Currently uploaded Images-->
 <!--Owner Info-->
 <div class="container-fluid owner-sec">
     <div class="text-center">

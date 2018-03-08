@@ -10,7 +10,7 @@
             <div class="col-md-3">
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
-                <a href="/profilepic/{{ $user->id }}" class="profile-userpic" title="Change profile picture">
+                <a href="{{(Auth::check() && Auth::user()->id==$user->id) ? '/profilepic/'.$user->id : '#'}}" class="profile-userpic" title="Change profile picture">
                         <img src="/storage/profile_pics/{{ $user->profile_pic }}" class="img-responsive mx-auto d-block" alt="">
                     </a>
                     <!-- END SIDEBAR USERPIC -->
@@ -59,6 +59,7 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+
     $('#deleteButton').click(function(){
         var alerted = false;
         $.confirm({

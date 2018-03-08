@@ -16,7 +16,7 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['show']]);
+        $this->middleware('auth');
         
     }
 
@@ -152,7 +152,19 @@ class UsersController extends Controller
         return view('user.changepass');
     }
 
-    public function updatepass(Request $request){
-        return "Success";
+    public function updatepassword(Request $request){
+        $oldpass = $request->input('old-password');
+        $user = User::find(Auth::user()->id);
+        $this->validate($request,['old-password' => 'required|string',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if(Auth::attempt(array('id'=>$user->id,'password'=>$oldpass))){
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+            return redirect()->route('users.show',['user'=>$user->id]);
+        }else{
+            return redirect()->route('changepass')->withErrors(['old-password'=>'User password mismatched. Please try again !']);
+        }
     }
 }
