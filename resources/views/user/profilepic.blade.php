@@ -43,11 +43,16 @@
   background-color: rgba(255,255,255,0.5);
 }
 
-
+.container,.row, .input-group{
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
 </style>
 @stop 
 @section('content')
-<div class="container img-cont">
+<div class="container img-cont mx-auto d-block">
 <h2 align="center" class="font_01">Update Profile Picture</h2>
 <br>
 <h6 align="center" class="font_03">(Click on image to select new one)</h6>
@@ -57,9 +62,9 @@
         <input type="hidden" name="_method" value="put">
         <input type="hidden" name="id" value="{{ $user->id }}">
 <div class="form-group row">
-        <div class="input-group col-md-6 offset-md-4">
-            <span class="input-group-btn">
-                            <span class="btn btn-default btn-file ">
+        <div class="input-group col-md-6 offset-md-4 mx-auto d-block">
+            <span class="input-group-btn mx-auto d-block">
+                            <span class="btn btn-default btn-file mx-auto d-block">
                             <img id='img-upload' src="/storage/profile_pics/{{ $user->profile_pic }}" class="rounded-circle"><input type="file" id="imgInp" name="upload_img" title="Click on image to select new one" accept="image/*" class="form-control">
                                 @if ($errors->has('upload_img'))
                                 <br>
@@ -72,18 +77,19 @@
                                                             (*Image must be in 1:1 ratio)
                                                         </span>
                                                     @endif
-            </span>
+                                                    </span>
             </span>
         </div>
     </div>
-
-    <div class="form-group">
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-success">
+<!--Button -->
+    <div class="form-group row" >
+            <div class="col-md-6 mx-auto d-block">
+                <button type="submit" class="btn btn-success mx-auto d-block">
                     Update Profile Picture
                 </button>
             </div>
         </div>
+  <!--Button -->
 </form>
 </div>
 @stop
