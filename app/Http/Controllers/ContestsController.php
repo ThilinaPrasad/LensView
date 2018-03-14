@@ -123,9 +123,9 @@ class ContestsController extends Controller
         ]);
 
         if($contest && $platinum && $gold && $bronze){
-        return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Post Successfully Created!");
+        return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
         }else{
-            return view('contests.create')->with('error',"Error Happend Creating Post! Please Try Again!");
+            return view('contests.create')->with('error',"Error Happend Creating Contest! Please Try Again!");
         }
 
         
@@ -140,7 +140,7 @@ class ContestsController extends Controller
     public function show($id)
     {
         $contest = Contest::find($id);
-        $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id'));
+        $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id WHERE images.contest_id = "'.$id.'"'));
         $sponsors = Sponsor::all()->where('contest_id',$id);
         $owner = User::where('id',$contest->user_id)->get()->first();
         $today = Carbon::today();
@@ -238,9 +238,9 @@ class ContestsController extends Controller
         $bronze->save();
 
         if($contest /*&& $platinum && $gold && $bronze*/){
-            return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Post Successfully Created!");
+            return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Updated!");
             }else{
-                return view('contests.create')->with('error',"Error Happend Creating Post! Please Try Again!");
+                return view('contests.create')->with('error',"Error Happend Updating Contest! Please Try Again!");
             }
     }
 
@@ -254,9 +254,9 @@ class ContestsController extends Controller
     {
         $contest = Contest::find($id);
         if($contest->delete()){
-            return redirect()->route('contests.index')->with('success','Company deleted sucessfully;');
+            return redirect()->route('contests.index')->with('success','Contest deleted sucessfully;');
         }
-        return back()-withInput()->with('error','Error happened while deleting !');
+        return back()-withInput()->with('error','Error happened while contest deleting ! Please try again.');
     }
         
 }

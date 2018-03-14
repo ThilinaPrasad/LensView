@@ -62,6 +62,45 @@ a{
     
     color:white;
 }
+
+.head{
+    margin:30px auto;
+}
+
+.below-section{
+    background-color: white;
+    margin:auto 20px;
+    border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+
+.figure{
+    transition: transform 0.5s ease;
+}
+
+.figure:hover{
+    transform: scale(1.1);
+}
+
+.vote-btn-2:hover{
+    cursor: pointer;
+}
+
+.share-btn{
+    color:black;
+    opacity: 0.4;
+}
+
+.social-media{
+    margin-right: 0;
+    margin-left:auto;
+}
+
+.share-btn:hover{
+    color:black;
+    opacity: 0.6;
+}
+
 a:hover{
     text-decoration: none;
     opacity: 0.7;
@@ -74,6 +113,9 @@ a:hover{
         .row {
             margin-bottom: 1px;
         }
+        .m-text-center{
+            text-align: center!important;
+        }
     }
 </style>
 <link rel="stylesheet" href="{{ asset('css/vote_img/lc_lightbox.css') }}" />
@@ -85,21 +127,42 @@ a:hover{
         <div class="heading text-center">
             <h1 align="center" class="font_01 display-4">{{ $contest->title }}</h1>
             <h2 align="center" class="font_01">Add Your Votes <i class="far fa-heart"></i></h2>
-            <h5 align="center">Created by : <a href="#userProfileLinkHere" title="View Profile">{{ $user->name }}</a></h5>
+            <h5 align="center">Organized by : <a href="/users/{{ $user->id }}" title="View Profile">{{ $user->name }}</a></h5>
+        <h5 class="text-warning" align="center" >Voting is available from {{ $contest->sub_end_at }}  to {{ $contest->closed_at }}</h6>
             <h1 id="go_images"><i class="fas fa-chevron-circle-down"></i></h1>
         </div>
     </div>
+    <h2 align="center" class="font_01 head">All images available for voting</h2>
     @if(count($images)!=0)
     <div class="mx-auto d-block">
         <div class="row" style="margin-left: 0;margin-right: 0;">
             @foreach($images as $image)
-            
-            <a class="elem col-md-4" href="/storage/contest_images/{{ $image->image }}" title="{{ $image->title }}" 
-            data-lcl-txt="<div class='row badge badge-pill badge-info'><i class='fas fa-heart'></i>&nbsp;&nbsp<strong id='vote_count{{ $image->id }}'>{{ ($image->vote_count == null)? 0:$image->vote_count  }}</strong></div><div class='row'><button class='{{ (in_array($image->id,$votes))? "btn btn-info" : "btn btn-secondary" }}' value='{{ $image->id }}' onClick='vote(this);'>{{(in_array($image->id,$votes))? "<i class='fas fa-heart'></i>&nbsp;&nbsp;-Vote" : "<i class='far fa-heart'></i>&nbsp;&nbsp;+Vote"  }}</button>&nbsp;&nbsp;<a href='/storage/contest_images/{{ $image->image }}' class='btn btn-success' download='' {{ $image->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a></div>"
-            data-lcl-author="{{ $user->name }}" data-lcl-thumb="/storage/contest_images/{{ $image->image }}">
-            <span style="background-image: url(/storage/contest_images/{{ $image->image }});"></span>
-            </a>
-            
+            <figure class="figure col-md-4" >
+                    <a class="elem" href="/storage/contest_images/{{ $image->image }}" title="{{ $image->title }}" 
+                        data-lcl-txt="<div class='h4'><a href='https://www.facebook.com/sharer/sharer.php?u={{ URL::asset("/storage/contest_images/".$image->image) }}' target='_blank' class='vote-btn-2 share-btn' title='Share on Facebook'><i class='fab fa-facebook-square'></i></a>
+                            <a href='https://twitter.com/intent/tweet?text={{ $image->title.'image from www.lensview.com' }}&amp;url={{ URL::asset("/storage/contest_images/".$image->image) }}' target='_blank' class='vote-btn-2 share-btn' title='Share on Twitter'><i class='fab fa-twitter-square'></i></a>
+                            <a href='http://www.linkedin.com/shareArticle?mini=true&amp;url={{ URL::asset("/storage/contest_images/".$image->image) }}' target='_blank' class='vote-btn-2 share-btn' title='Share on LinkedIn'><i class='fab fa-linkedin'></i></a>  
+                            <a href='https://plus.google.com/share?url={{ URL::asset("/storage/contest_images/".$image->image) }}' target='_blank' class='vote-btn-2 share-btn' title='Share on Google+'><i class='fab fa-google-plus-square'></i></a></div>
+                            <div class='row badge badge-pill badge-info'><i class='fas fa-heart'></i>&nbsp;&nbsp<strong id='vote_count{{ $image->id }}'>{{ ($image->vote_count == null)? 0:$image->vote_count  }}</strong></div><div class='row'><button class='{{ (in_array($image->id,$votes))? "btn btn-info" : "btn btn-secondary" }}' value='{{ $image->id }}' onClick='vote(this);'>{{(in_array($image->id,$votes))? "<i class='fas fa-heart'></i>&nbsp;&nbsp;-Vote" : "<i class='far fa-heart'></i>&nbsp;&nbsp;+Vote"  }}</button>&nbsp;&nbsp;<a href='/storage/contest_images/{{ $image->image }}' class='btn btn-success' download='' {{ $image->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a></div>
+                        "
+                        data-lcl-author='<a href="/users/{{ $image->user_id }}" title="View profile">{{ Laravel\User::find($image->user_id)->name }}</a>' data-lcl-thumb="/storage/contest_images/{{ $image->image }}">
+                        <img src="/storage/contest_images/{{ $image->image }}" class="figure-img img-fluid">
+                            </a>
+                            <figcaption class="figure-caption below-section row" style="font-size:20px;">      
+                                <strong id="vote-btn-2" class="vote-btn-2 text-left col-md-6 m-text-center" title="Add vote" data-id="{{ $image->id }}" data-lcl-txt="{{ ($image->vote_count == null)? 0:$image->vote_count  }}" onClick="voteImg(this);">
+                                        <i class="{{ (in_array($image->id,$votes))? 'fas fa-heart' : 'far fa-heart' }}"></i>&nbsp;{{ ($image->vote_count == null)? '0': $image->vote_count  }}
+                                    </strong>
+                                       <div class="col-md-6 text-right m-text-center">
+                                       <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::asset('/storage/contest_images/'.$image->image) }}" target="_blank" class="vote-btn-2 share-btn" title="Share on Facebook"><i class="fab fa-facebook-square"></i></a>
+                            <a href="https://twitter.com/intent/tweet?text={{ $image->title." image from www.lensview.com" }}&amp;url={{ URL::asset('/storage/contest_images/'.$image->image) }}" target="_blank" class="vote-btn-2 share-btn" title="Share on Twitter"><i class="fab fa-twitter-square"></i></a>
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ URL::asset('/storage/contest_images/'.$image->image) }}" target="_blank" class="vote-btn-2 share-btn" title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>  
+                            <a href="https://plus.google.com/share?url={{ URL::asset('/storage/contest_images/'.$image->image) }}" target="_blank" class="vote-btn-2 share-btn" title="Share on Google+"><i class="fab fa-google-plus-square"></i></a>               
+                        </div> 
+                        
+                        <small style="font-size:10px;" class="col-md-6 text-left">{{ $image->title }}</small>
+                        <small style="font-size:10px;" class="col-md-6 text-right">Uploaded by: <a style="color:black;" href="/users/{{ $image->user_id }}" title="View profile">{{ Laravel\User::find($image->user_id)->name }}</a></small>
+                    </figcaption>
+                        </figure>            
             @endforeach
         </div>
     </div>
@@ -131,10 +194,9 @@ a:hover{
                 padding	: 0,
                 border_w: 0,
             });	
-        
         });
-function vote(vote_btn) {
 
+function vote(vote_btn) {
 var img_id = vote_btn.value;
 var xhttp = new XMLHttpRequest();
 //console.log(img_id);
@@ -147,6 +209,7 @@ var xhttp = new XMLHttpRequest();
         var temp = $("#vote_count"+img_id);
         temp.text((parseInt(temp.text())+1).toString());
     }
+
   };
   xhttp.open("get", "/addvote/"+img_id, true);
   xhttp.send();
@@ -162,9 +225,39 @@ var xhttp = new XMLHttpRequest();
   };
   xhttp.open("get", "/removevote/"+img_id, true);
   xhttp.send();
-  }
-  
-  
+  }  
 }
+
+  function voteImg(btn){
+      var voteCount = $(btn).attr("data-lcl-txt").trim();
+      var inner = $(btn).html().trim();
+      var id = $(btn).attr("data-id").trim();
+       var xhttp = new XMLHttpRequest();
+       if(inner=='<i class="far fa-heart"></i>&nbsp;'+voteCount){
+           
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //vote_btn.removeClass('btn-secondary');
+        $(btn).attr("data-lcl-txt",(parseInt(voteCount)+1).toString());
+        $(btn).html('<i class="fas fa-heart"></i>&nbsp;'+(parseInt(voteCount)+1).toString());
+    }
+
+  };
+  xhttp.open("get", "/addvote/"+id, true);
+  xhttp.send();
+  }else{
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        //vote_btn.removeClass('btn-secondary');
+        $(btn).attr("data-lcl-txt",(parseInt(voteCount)-1).toString());
+        $(btn).html('<i class="far fa-heart"></i>&nbsp;'+(parseInt(voteCount)-1).toString());
+    }
+
+  };
+  xhttp.open("get", "/removevote/"+id, true);
+  xhttp.send();
+  }
+
+  }
 </script>
 @stop
