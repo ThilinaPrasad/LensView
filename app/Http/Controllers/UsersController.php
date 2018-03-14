@@ -99,7 +99,7 @@ class UsersController extends Controller
             $user->address = $request->input('address');
             $user->telephone = $request->input('telephone');
             $user->save();
-            return redirect()->route('users.show',['user'=>$user->id]);
+            return redirect()->route('users.show',['user'=>$user->id])->with('success',"User profile data updated successfully!");
         }else{
             return redirect()->route('users.edit',['user'=>$user->id])->withErrors(['password'=>'Password mismatched ! Add new data again']);
         }
@@ -145,7 +145,7 @@ class UsersController extends Controller
 
         $user->profile_pic = FilesController::upload($request,'upload_img','profile_pics','default_user_image.jpg');
         $user->save();
-        return redirect()->route('users.show',['id'=>$user->id]);
+        return redirect()->route('users.show',['id'=>$user->id])->with('success',"User Profile picture changed Successfully!");
     }
 
     public function changepassview(){
@@ -162,7 +162,7 @@ class UsersController extends Controller
         if(Auth::attempt(array('id'=>$user->id,'password'=>$oldpass))){
             $user->password = bcrypt($request->input('password'));
             $user->save();
-            return redirect()->route('users.show',['user'=>$user->id]);
+            return redirect()->route('users.show',['user'=>$user->id])->with('success',"User Password changed Successfully!");
         }else{
             return redirect()->route('changepass')->withErrors(['old-password'=>'User password mismatched. Please try again !']);
         }

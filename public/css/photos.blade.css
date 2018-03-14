@@ -116,13 +116,13 @@
 .gal-container .modal-dialog {
     width: 55%;
     margin: 50 auto;
+
+}
+.gal-container .modal-content{
+    height:250px;
 }
 }
-@media (max-width: 768px) {
-    .gal-container .modal-content{
-        height:250px;
-    }
-}
+
 /* Footer Style */
 
 

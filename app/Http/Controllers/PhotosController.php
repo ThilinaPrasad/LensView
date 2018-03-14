@@ -75,9 +75,9 @@ class PhotosController extends Controller
         ]);
 
         if($photo){
-            return redirect('contests/'.$request->input("contest_id"))->with('success',"Post Successfully Created!");
+            return redirect('contests/'.$request->input("contest_id"))->with('success',"Photograph Uploaded Successfully!");
             }else{
-                return view('photos.upload')->with('error',"Error Happend Creating Post! Please Try Again!");
+                return view('photos.upload')->with('error',"Error Happend uploading photograph! Please Try Again!");
             }
 
     }
@@ -87,7 +87,7 @@ class PhotosController extends Controller
         $user = User::find($contest->user_id);
         //$images = Image::all()->where('contest_id',$id);
         $votes = VotesController::show();
-        $images = DB::select("SELECT * FROM images LEFT JOIN votes_count ON images.id = votes_count.image_id WHERE images.contest_id = '".$id."'");
+        $images = DB::select("SELECT * FROM images LEFT JOIN votes_count ON images.id = votes_count.image_id  WHERE images.contest_id = '".$id."'");
         return view('photos.vote')->with(['contest'=>$contest,'images'=>$images,'user'=>$user,'votes'=>$votes]);
     }
 
