@@ -36,7 +36,7 @@ class ContestsController extends Controller
     }
     public function vote(){
         $today = Carbon::today();
-      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at > '".$today."' ORDER BY sub_end_at desc");
+      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at >= '".$today."' ORDER BY sub_end_at desc");
         return view('contests.voteAvailable')->with(['contests'=>$contests]);
     }
 
