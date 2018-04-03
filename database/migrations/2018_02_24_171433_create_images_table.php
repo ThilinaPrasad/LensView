@@ -24,6 +24,8 @@ class CreateImagesTable extends Migration
             $table->string('downloadable',5)->nullable();
             $table->timestamps();
             
+            
+
             $table->foreign('category_id')
             ->references('id')->on('categories')
             ->onUpdate('cascade');

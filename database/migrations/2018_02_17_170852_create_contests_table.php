@@ -27,6 +27,9 @@ class CreateContestsTable extends Migration
             $table->longText('prize_description');
             $table->mediumText('prize_image');
             $table->timestamps();
+
+            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         DB::statement( "CREATE VIEW  submission_contests AS SELECT * FROM contests  WHERE sub_start_at <= CURDATE() and sub_end_at >= CURDATE() ORDER By sub_start_at" );

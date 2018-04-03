@@ -51,7 +51,6 @@ $(document).ready(function() {
             $('body').scrollLock('disable');
           });
           
-
   //Protected images 
     $("img").on("contextmenu",function(e){
         $('#protected_alert').css({
