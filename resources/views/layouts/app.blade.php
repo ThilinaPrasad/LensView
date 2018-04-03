@@ -16,7 +16,7 @@
     @include('fonts.fonts')
 </head>
 <body>
-    <div class="alert alert-danger" id="protected_alert"><i class="fas fa-exclamation-circle fa-lg"></i>&nbsp;&nbsp;Content Protected!</div>
+    <div class="alert alert-danger" id="protected_alert"><i class="fas fa-exclamation-circle fa-lg"></i>&nbsp;&nbsp;Content Protected by LensView!</div>
     <div id="app">
     @include('inc.navbar')
     @yield('content')
@@ -27,8 +27,9 @@
     <!-- Smooth Scrolling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-scrollLock.js') }}"></script>
     @yield('scripts')
     @include('inc.messages')
 </body>

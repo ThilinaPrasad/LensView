@@ -139,7 +139,7 @@ class UsersController extends Controller
         $user = User::find($id);
 
         //delete old file
-        if($user->profile_pic != 'default_cover.jpg'){
+        if($user->profile_pic != 'default_user_image.jpg'){
             Storage::delete('public/profile_pics/'.$user->profile_pic);
             }
 

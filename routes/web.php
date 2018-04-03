@@ -16,24 +16,20 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/test', function () {
-    return view('photos.vote');
-});
-
 Route::get('/unautherised', function () {
     return view('unautherised');
 });
 
-Route::get('/photos', function () {
-    return view('photos.photos');
-});
 
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('contests','ContestsController');
 
+//contests & photographs Functions
+Route::get('/photos', function () {
+    return view('photos.photos');
+});
 Route::get('/votes/contests', 'ContestsController@vote');
 Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');

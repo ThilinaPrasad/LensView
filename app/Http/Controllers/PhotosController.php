@@ -110,7 +110,10 @@ class PhotosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $image = Image::find($id);
+        $img_category = Category::find($image->category_id);
+        $categories = Category::all();
+        return view('photos.edit')->with(['image'=>$image,'img_category'=>$img_category,'categories'=>$categories]);
     }
 
     /**
@@ -122,7 +125,23 @@ class PhotosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $photograph = Image::find($id);
+
+        $this->validate($request,[
+            'title'=>'required',
+            'description' => 'required',
+        ]);
+
+        $photograph->title = $request->input('title');
+        $photograph->description = $request->input('description');
+        $photograph->category_id = $request->input('category');
+            $photograph->downloadable = $request->input('downloadable');
+            //$photograph->save();
+            if($photograph->save()){
+                return redirect()->route('dashboard')->with('success',"Photograph data Successfully Updated!");
+                }else{
+                    return redirect()->route('dashboard')->with('error',"Error Happend Updating Photograph data! Please Try Again!");
+                }
     }
 
     /**
@@ -133,6 +152,10 @@ class PhotosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photograph = Image::find($id);
+        if($photograph->delete()){
+            return redirect()->route('dashboard')->with('success','Photograph deleted sucessfully;');
+        }
+        return back()->with('error','Error happened while Photograph deleting ! Please try again.');
     }
 }
