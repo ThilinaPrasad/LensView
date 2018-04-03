@@ -19,6 +19,7 @@ class CreateVotesTable extends Migration
             $table->integer('image_id')->unsigned();
             $table->timestamps();
 
+            
             $table->foreign('voter_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
