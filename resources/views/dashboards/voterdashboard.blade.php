@@ -28,7 +28,7 @@
                             <i class="{{ (in_array($image->img_id,$votes))? 'fas fa-heart' : 'far fa-heart' }}"></i>&nbsp;{{ ($image->vote_count == null)? 0:$image->vote_count  }}
                                                </strong>
                            <div class="col-md-6 text-right m-text-center">
-                           <a href="/storage/contest_images/{{ $image->image }}" title="Download this Image" download="" class="share-btn"><i class="fas fa-download"></i></a>
+                           <a href="/storage/contest_images/{{ $image->image }}" title="Download this Image" download="" class="share-btn" {{ $image->downloadable!='on'? 'hidden' : ''}}><i class="fas fa-download"></i></a>
                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::asset('/storage/contest_images/'.$image->image) }}" target="_blank" class="share-btn" title="Share on Facebook"><i class="fab fa-facebook-square"></i></a>
                 <a href="https://twitter.com/intent/tweet?text={{ $image->title.'image from www.lensview.com' }}&amp;url={{ URL::asset("/storage/contest_images/".$image->image) }}" target="_blank" class="share-btn" title="Share on Twitter"><i class="fab fa-twitter-square"></i></a>
                 <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ URL::asset("/storage/contest_images/".$image->image) }}" target="_blank" class="share-btn" title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>  

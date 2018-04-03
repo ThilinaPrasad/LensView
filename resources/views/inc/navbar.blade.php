@@ -25,6 +25,11 @@
                 @if(Auth::user()->role_id == 3)
                 <li class="@yield('createcontests') navigation"><a class="nav-link text-center" href="{{ route('contests.create') }}">Create Contest</a></li>
                 @endif
+                <!--Notification Panel-->
+                @if(Auth::check())
+                @include('inc.notification')
+                @endif
+                <!--Notification Panel-->
                 <li class="nav-item dropdown user-dropdown">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="/storage/profile_pics/{{ Auth::user()->profile_pic }}" class="navbar-thumb rounded-circle">  <span class="caret"></span>

@@ -27,17 +27,19 @@ class ContestsController extends Controller
      */
     public function index()
     {
-        $today = Carbon::now();
+       // $today = Carbon::now();
       // $contests = Contest::where('sub_start_at','<',$day)->orderBy('created_at','desc')->get();
-      $contests = DB::select("Select * FROM contests where sub_start_at < '".$today."' and sub_end_at > '".$today."' ORDER By sub_start_at");
+      //$contests = DB::select("Select * FROM contests where sub_start_at < '".$today."' and sub_end_at > '".$today."' ORDER By sub_start_at");
+      $contests = DB::select("Select * FROM submission_contests");
       //dd($day);
       //dd(count($contests));
         return view('contests.index')->with('contests',$contests);
     }
     public function vote(){
-        $today = Carbon::today();
-      $contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at >= '".$today."' ORDER BY sub_end_at desc");
-        return view('contests.voteAvailable')->with(['contests'=>$contests]);
+       // $today = Carbon::today();
+      //$contests = DB::select("Select * FROM contests where sub_end_at < '".$today."' and closed_at >= '".$today."' ORDER BY sub_end_at desc");
+      $contests = DB::select("Select * FROM voting_contests");  
+      return view('contests.voteAvailable')->with(['contests'=>$contests]);
     }
 
     /**
@@ -237,7 +239,7 @@ class ContestsController extends Controller
         $gold->save();
         $bronze->save();
 
-        if($contest /*&& $platinum && $gold && $bronze*/){
+        if($contest && $platinum && $gold && $bronze){
             return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Updated!");
             }else{
                 return view('contests.create')->with('error',"Error Happend Updating Contest! Please Try Again!");

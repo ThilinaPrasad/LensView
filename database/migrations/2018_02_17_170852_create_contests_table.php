@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class CreateContestsTable extends Migration
 {
     /**
@@ -28,6 +29,8 @@ class CreateContestsTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+        DB::statement( "CREATE VIEW  submission_contests AS SELECT * FROM contests  WHERE sub_start_at <= CURDATE() and sub_end_at >= CURDATE() ORDER By sub_start_at" );
+        DB::statement( "CREATE VIEW  voting_contests AS SELECT * FROM contests  WHERE sub_end_at < CURDATE() and closed_at >= CURDATE() ORDER BY sub_end_at desc" );
     }
 
     /**

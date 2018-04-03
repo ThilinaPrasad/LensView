@@ -10237,3 +10237,74 @@ a.text-dark:focus {
   margin: auto;
 }
 
+.notifications::after {
+  display: none;
+}
+
+.notification-head {
+  font-size: 15px;
+}
+
+.read-all {
+  opacity: 0.8;
+}
+
+.read-all:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.notification-dropdown {
+  width: 35vw;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.notification-section {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+.notification-section::webkit-scrollbar {
+  background: gray;
+}
+
+.notification {
+  border-top: solid rgba(139, 139, 139, 0.3) 1px;
+  border-bottom: solid rgba(139, 139, 139, 0.3) 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.notification:hover {
+  background-color: rgba(139, 139, 139, 0.1);
+  cursor: pointer;
+}
+
+.notification-icon-1 {
+  width: 50px;
+  height: 50px;
+}
+
+.notification-text {
+  overflow: hidden;
+}
+
+.read {
+  opacity: 0.8;
+}
+
+.read:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .notification-dropdown {
+    width: 90vw;
+  }
+
+  .row {
+    margin: 0;
+  }
+}
+
