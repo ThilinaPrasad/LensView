@@ -4,6 +4,7 @@ namespace Laravel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Http\Controllers\FilesController;
+use Laravel\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Laravel\Models\Contest;
@@ -125,12 +126,12 @@ class ContestsController extends Controller
         ]);
 
         if($contest && $platinum && $gold && $bronze){
+            NotificationsController::send(Auth::user()->id,0,"crated new photohraphy contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
+            NotificationsController::send(0,Auth::user()->id,"has successfully created your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
         return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
         }else{
             return view('contests.create')->with('error',"Error Happend Creating Contest! Please Try Again!");
         }
-
-        
     }
 
     /**

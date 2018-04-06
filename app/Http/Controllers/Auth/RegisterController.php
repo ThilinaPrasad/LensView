@@ -8,6 +8,7 @@ use Laravel\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Laravel\Http\Controllers\FilesController;
+use Laravel\Http\Controllers\NotificationsController;
 use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
@@ -83,8 +84,7 @@ class RegisterController extends Controller
             ]);
         }
 
-
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'address' => $data['address'],
@@ -93,5 +93,9 @@ class RegisterController extends Controller
             'profile_pic' => 'default_user_image.jpg',
             'password' => bcrypt($data['password']),
         ]);
+
+        NotificationsController::send(0,$user->id,"has successfully created your user account",null,'photographer');
+
+        return $user;
     }
 }

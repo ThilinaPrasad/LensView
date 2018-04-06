@@ -55,3 +55,6 @@ Route::put('/updatepassword',
                  'as' => 'changepass.updatepassword'));
 Auth::routes();
 
+//Notification handelling
+Route::get('/read/{id?}', 'NotificationsController@read');
+Route::get('/readall', 'NotificationsController@readAll');

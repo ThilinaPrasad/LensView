@@ -10286,7 +10286,22 @@ a.text-dark:focus {
 }
 
 .notification-text {
-  overflow: hidden;
+  white-space: normal;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.notification-text a {
+  color: black !important;
+  font-weight: 800 !important;
+}
+
+.notification-text a:hover {
+  color: black !important;
+  text-decoration: none;
+  opacity: 0.7;
 }
 
 .read {
