@@ -44,5 +44,7 @@ class CreateContestsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contests');
+        DB::statement( 'DROP VIEW submission_contests' );
+        DB::statement( 'DROP VIEW voting_contests' );
     }
 }

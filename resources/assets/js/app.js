@@ -73,5 +73,3 @@ $(document).ready(function() {
 $("#footer_top_btn").click(function () {
     TweenLite.to(window, 1, { scrollTo: 0 });
 });
-
-

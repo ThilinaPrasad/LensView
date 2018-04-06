@@ -167,9 +167,25 @@
   height:50px;
 }
 .notification-text{
-  overflow: hidden;
+  white-space:normal;
+  word-wrap: break-word!important;
+  overflow-wrap: break-word!important;
+  font-size: 12px;
+  font-weight: 500;
+  //border:1px solid black;
 }
 
+.notification-text a{
+  color:black !important;
+  font-weight:800 !important;
+}
+
+.notification-text a:hover{
+  //font-weight:600 !important;
+  color:black !important;
+  text-decoration: none;
+  opacity: 0.7;
+}
 .read{
   opacity: 0.8;
 }

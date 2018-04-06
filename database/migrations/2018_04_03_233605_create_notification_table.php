@@ -15,18 +15,20 @@ class CreateNotificationTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('sender_id')->unsigned();
+            $table->string('type')->default("public");
+            $table->integer('receiver_id')->unsigned();
             $table->mediumText('messege');
-            $table->mediumText('img_link_1')->nullable();
-            $table->mediumText('img_link_2')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->mediumText('img_link')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->index(['status']);
             
-            $table->foreign('user_id')
+            $table->foreign('sender_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
+            
         });
     }
 

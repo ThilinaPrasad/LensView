@@ -41,5 +41,6 @@ class CreateVotesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('votes');
+        DB::statement( 'DROP VIEW votes_count' );
     }
 }
