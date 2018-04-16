@@ -24,13 +24,13 @@ class NotificationsController extends Controller
         
         if(Auth::check()){
             if(Auth::user()->role_id == 1){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where status = 0 AND (type='voter' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at < users.created_at AND status = 0 AND (type='voter' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
             else if(Auth::user()->role_id == 2){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where status = 0 AND (type='photographer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > users.created_at AND status = 0 AND (type='photographer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
             else if(Auth::user()->role_id == 3){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id WHERE status = 0 AND (type='organizer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id WHERE notifications.created_at < users.created_at AND status = 0 AND (type='organizer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
         }
         

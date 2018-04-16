@@ -69,20 +69,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if(count(Role::all())==0){
-            Role::create([
-                'id'=>'1',
-                'name' =>'Voter'
-            ]);
-            Role::create([
-                'id'=>'2',
-                'name' =>'Photographer'
-            ]);
-            Role::create([
-                'id'=>'3',
-                'name' =>'Contest Organizer'
-            ]);
-        }
 
         $user = User::create([
             'name' => $data['name'],
@@ -94,7 +80,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        NotificationsController::send(0,$user->id,"has successfully created your user account",null,'photographer');
+        NotificationsController::send(1,$user->id,"has successfully created your user account",null,'photographer');
 
         return $user;
     }

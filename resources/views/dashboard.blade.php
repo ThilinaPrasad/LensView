@@ -126,6 +126,87 @@ function voteAnalyze(image){
 </script>
 
 <!-- scripts for photographers dashboard -->
+<!-- scripts for organizers dashboard -->
+@elseif(Auth::check() && Auth::user()->role_id== '3')
+<script src="{{ asset('js/vote_img/lc_lightbox.lite.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/vote_img/alloy_finger.min.js') }}" type="text/javascript"></script>.
+<script>
+    //Image view light box
+     $(document).ready(function(e) {
+           
+           // live handler
+           lc_lightbox('.elem', {
+               wrap_class: 'lcl_fade_oc',
+               gallery : true,	
+               thumb_attr: 'data-lcl-thumb', 
+               skin: 'minimal',
+               radius: 0,
+               padding	: 0,
+               border_w: 0,
+           });	
+       });
+</script>
+<script>
+     //Delete contests
+        function deleteContest(contest){
+            var id = $(contest).attr('data-id');
+            var title = $(contest).attr('data-title');
+            console.log(id);
+            $.confirm({
+                            theme: 'modern',
+                            icon: 'far fa-trash-alt',
+                            title: 'Delete Contest!',
+                            content: 'Do you want to delete '+title+' contest ?',
+                            autoClose: 'cancel|10000',
+                            closeIcon: true,
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                text: 'Delete',
+                                btnClass: 'btn-red',
+                                action : function () {
+                                    event.preventDefault();
+                                    $('#delete-contest-'+id).submit();
+                                }
+                            },
+                                cancel: function () {
+                                    
+                                }
+                                
+                            }
+                        });
+
+                        
+}
+//Delete Category
+function deleteCategory(cat){
+            var id = $(cat).attr('data-id');
+            $('#delete-cat-'+id).submit();
+            $('#row-'+id).css('display','none');
+}
+    </script>
+
+<!-- scrolling control with winner image modal -->
+    <script>
+    $('.modal-content').mouseenter(function(){
+    $('body').scrollLock('enable');
+    $('.modal-content').scrollLock('disable');
+    $('.modal-content').on( 'mousewheel', function (e) { 
+            var e0 = e.originalEvent;
+            var delta = e0.wheelDelta || -e0.detail;
+            this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+            $('body').scrollLock('enable');
+          });
+  });
+          $('.modal-content').mouseleave(function(){
+            $('body').scrollLock('disable');
+          });
+
+    </script>
+    <!-- scripts for organizers dashboard -->
 @endif 
 @stop 
 @section('styles') 
@@ -337,6 +418,8 @@ function voteAnalyze(image){
 <!-- styles for photographers dashboard -->
 <!-- styles for Organizers dashboard -->
 @elseif(Auth::check() && Auth::user()->role_id == '3')
+<link rel="stylesheet" href="{{ asset('css/vote_img/lc_lightbox.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/vote_img/minimal.css') }}" /> 
 <style>
         .jumbotron {
             background-color: white;
@@ -370,6 +453,145 @@ function voteAnalyze(image){
         text-decoration: none;
         color:black;
         opacity: 0.5;
+    }
+
+       .contest{
+        height:500px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contest-data{
+        padding-top:200px;
+    }
+
+
+
+.contest-data:hover{
+    background: rgba(0,0,0,0.3);
+    opacity: 1;
+}
+
+.contest-description{
+    max-height:250px;
+    overflow-y: scroll;
+}
+
+    .contest-status{
+        font-size: 20px;
+    }
+
+
+    .winner-btn{
+        background-color: rgba(255,215,0,0.4);
+        border-color: rgba(255,215,0,0.4);
+    }
+
+    .winner-btn:hover{
+        background-color: rgba(255,215,0,0.6);
+        border-color: rgba(255,215,0,0.6);
+    }
+
+    .add-category{
+        border:1px solid rgba(0,0,0,0.2);
+        border-radius: 20px;
+        margin:25px 0;
+        padding:65px 50px 75px 50px;
+    }
+
+.available{
+          margin-top:20px;
+        padding:5px;
+        min-height:80vh;
+}
+
+    .head{
+        margin-bottom: 20px;
+    }
+
+    .modal-header{
+        color:black;
+        margin:-10px 30px 30px 30px;
+        
+    }
+
+.modal-content{
+min-height: 80vh;
+}
+
+.modal{
+    overflow-y: scroll;
+}
+
+    .modal-container{
+        margin:15px; 
+        border: 6px double rgba(0,0,0,0.2);
+        border-radius: 20px;
+        padding:20px;
+        min-height: 80vh;
+    }
+
+    .image-container{
+
+    }
+
+    .below-section{
+        width: 100%;
+        border:1px solid rgba(0,0,0,0.2);
+    background-color: white;
+    margin-top:-8px;
+    margin-left:0.5px;
+    border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+
+
+.figure-img{
+     border-top-right-radius: 10px;
+border-top-left-radius: 10px;
+}
+
+
+
+.winner-select-btn{
+    transition: transform 0.5s ease;
+}
+
+.winner-select-btn:hover{
+    opacity: 1;
+    cursor: pointer;
+    transform: scale(1.15);
+}
+
+    @media (max-width: 768px) {
+        .contest{
+            height: auto;
+        }
+
+    .contest-data{
+        padding-top: 0;
+        
+    }
+    .contest-inner{
+        transform: scale(0.6);
+    }
+.contest-description{
+    max-height:75px;
+    overflow-y: scroll;
+}
+
+.available{
+        min-height:auto;
+        padding:0;
+}
+
+.add-category{
+        padding:20px 5px 20px 5px;
+    }
+.cat-submit{
+    margin-top: 10px;
+}
     }
 </style>    
 <!-- styles for Organizers dashboard -->

@@ -4,6 +4,7 @@ namespace Laravel\Http\Controllers;
 use Laravel\Models\Category;
 use Laravel\Models\Image;
 use Illuminate\Http\Request;
+use Laravel\Http\Controllers\NotificationsController;
 use Laravel\Models\Contest;
 use Laravel\User;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,11 @@ class PhotosController extends Controller
             'downloadable'=>$request->input('downloadable'),
         ]);
 
+        $contest = Contest::find($request->input('contest_id'));
+
         if($photo){
+            NotificationsController::send(1,Auth::user()->id,"successfully uploaded your photograph on <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contest_images/".$photo->image,'private');
+            NotificationsController::send(Auth::user()->id,$contest->user_id,"uploaded a photograph on your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contest_images/".$photo->image,'private');
             return redirect('contests/'.$request->input("contest_id"))->with('success',"Photograph Uploaded Successfully!");
             }else{
                 return view('photos.upload')->with('error',"Error Happend uploading photograph! Please Try Again!");

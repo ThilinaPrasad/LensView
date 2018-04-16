@@ -126,8 +126,8 @@ class ContestsController extends Controller
         ]);
 
         if($contest && $platinum && $gold && $bronze){
-            NotificationsController::send(Auth::user()->id,0,"crated new photohraphy contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
-            NotificationsController::send(0,Auth::user()->id,"has successfully created your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
+            NotificationsController::send(Auth::user()->id,1,"crated new photohraphy contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
+            NotificationsController::send(1,Auth::user()->id,"has successfully created your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'organizer');
         return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
         }else{
             return view('contests.create')->with('error',"Error Happend Creating Contest! Please Try Again!");
@@ -241,6 +241,7 @@ class ContestsController extends Controller
         $bronze->save();
 
         if($contest && $platinum && $gold && $bronze){
+            NotificationsController::send(1,Auth::user()->id,"has successfully updated your contest information on <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'organizer');
             return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Updated!");
             }else{
                 return view('contests.create')->with('error',"Error Happend Updating Contest! Please Try Again!");
@@ -255,9 +256,12 @@ class ContestsController extends Controller
      */
     public function destroy($id)
     {
+        //dd("called");
         $contest = Contest::find($id);
+        $title = $contest->title;
         if($contest->delete()){
-            return redirect()->route('contests.index')->with('success','Contest deleted sucessfully;');
+            NotificationsController::send(1,Auth::user()->id,"has successfully deleted your contest <b>".$title."</b> with your request",null,'organizer');
+            return redirect()->route('contests.index')->with('success',$title.' contest deleted sucessfully;');
         }
         return back()-withInput()->with('error','Error happened while contest deleting ! Please try again.');
     }

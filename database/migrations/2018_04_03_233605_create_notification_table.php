@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Laravel\User;
 
 class CreateNotificationTable extends Migration
 {
@@ -29,6 +30,8 @@ class CreateNotificationTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade');
             
+            
+
         });
     }
 

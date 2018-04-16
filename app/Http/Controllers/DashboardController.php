@@ -5,6 +5,7 @@ namespace Laravel\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Http\Controllers\VotesController;
+use Laravel\Models\Category;
 use DB;
 use Carbon\Carbon;
 class DashboardController extends Controller
@@ -24,7 +25,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tab='vote')
     {
         $today = Carbon::today();
         //dd($today);
@@ -40,9 +41,18 @@ class DashboardController extends Controller
             //Joined Contests section
             $submission_contests = DB::select("SELECT * FROM submission_contests WHERE submission_contests.id IN (SELECT DISTINCT contest_id FROM images where user_id='".Auth::user()->id."')");
             $voting_contests = DB::select("SELECT * FROM voting_contests WHERE voting_contests.id IN (SELECT DISTINCT contest_id FROM images where user_id='".Auth::user()->id."')");
-            return view('dashboard')->with(['submission_images'=>$submission_images,'voting_images'=>$voting_images,'sub_contests'=>$submission_contests,'vot_contests'=>$voting_contests]);
+            return view('dashboard')->with(['submission_images'=>$submission_images,'voting_images'=>$voting_images,'sub_contests'=>$submission_contests,'vot_contests'=>$voting_contests,'tab'=>$tab]);
         }elseif(Auth::user()->role_id=='3'){
-            return view('dashboard');
+            $submission_contests = DB::select("SELECT * FROM submission_contests WHERE user_id='".Auth::user()->id."' ORDER BY created_at");
+            $voting_contests = DB::select("SELECT * FROM voting_contests WHERE user_id='".Auth::user()->id."' ORDER BY created_at");
+            $upcoming_contests = DB::select("SELECT * FROM upcoming_contests WHERE user_id='".Auth::user()->id."' ORDER BY created_at");
+            $closed_contests = DB::select("SELECT * FROM closed_contests WHERE user_id='".Auth::user()->id."' ORDER BY created_at");
+            $categories = Category::orderBy('created_at','desc')->paginate(10);
+
+            $winner_votes = VotesController::show();
+            $winner_img = DB::select("SELECT *,images.id AS img_id,images.title AS img_title,images.user_id AS img_user FROM images LEFT JOIN votes_count ON images.id = votes_count.image_id LEFT JOIN closed_contests ON images.contest_id= closed_contests.id");
+           // dd($winner_img);
+            return view('dashboard')->with(['sub_contests'=>$submission_contests,'vot_contests'=>$voting_contests,'up_contests'=>$upcoming_contests,'closed_contests'=>$closed_contests,'categories'=>$categories,'winner_imgs'=>$winner_img,'tab'=>$tab]);
         }
     }
 

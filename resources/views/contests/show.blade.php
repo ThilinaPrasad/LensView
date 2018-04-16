@@ -53,7 +53,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                     <!--Circular Progress-->
                     <h1 class="card-title display-3">{{ $contest->title }}</h1>
@@ -71,6 +70,7 @@
                         </form>
                     @endif
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -117,7 +117,7 @@
     <div class="d-flex flex-row flex-wrap">
         @foreach($photos as $photo)
    <picture>
-   <img src="/storage/contest_images/{{ $photo->image }}" alt="placeholder image"  class="img-fluid" title="Uploaded by {{$photo->name}}">
+   <img src="/storage/contest_images/{{ $photo->image }}" alt="placeholder image"  class="img-fluid" data-toggle="tooltip" data-placement="top" title="Uploaded by {{$photo->name}}">
   </picture>
       @endforeach
      

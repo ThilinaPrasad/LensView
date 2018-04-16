@@ -39,7 +39,7 @@
                         <div class="dropdown-item ">
                             <div class="row"><img src="/storage/profile_pics/{{ Auth::user()->profile_pic }}" class="navbar-thumb-drop rounded-circle mx-auto d-block"></div>
                             <div class="row ">
-                                <lable class="mx-auto d-block">{{ Auth::user()->name }}</lable>
+                                <label class="mx-auto d-block">{{ Auth::user()->name }}</label>
                             </div>
                         <small class="row "><a href="/users/{{ Auth::user()->id }}" class="mx-auto d-block">View Profile</a></small>
                         </div>
