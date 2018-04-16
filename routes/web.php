@@ -23,7 +23,7 @@ Route::get('/unautherised', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard/{tab?}', 'DashboardController@index')->name('dashboard');
 Route::resource('contests','ContestsController');
 
 //contests & photographs Functions
@@ -58,3 +58,6 @@ Auth::routes();
 //Notification handelling
 Route::get('/read/{id?}', 'NotificationsController@read');
 Route::get('/readall', 'NotificationsController@readAll');
+
+//Categories functions
+Route::resource('categories','CategoriesController');

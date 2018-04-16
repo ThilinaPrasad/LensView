@@ -13827,12 +13827,13 @@ $(document).ready(function () {
     //Notification panel scrolling & page scroll stop
     $('.notification-section').mouseenter(function () {
         $('body').scrollLock('enable');
-    });
-    $('.notification-section').on('mousewheel', function (e) {
-        var e0 = e.originalEvent;
-        var delta = e0.wheelDelta || -e0.detail;
-        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-        $('body').scrollLock('enable');
+        $('.notification-section').scrollLock('disable');
+        $('.notification-section').on('mousewheel', function (e) {
+            var e0 = e.originalEvent;
+            var delta = e0.wheelDelta || -e0.detail;
+            this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+            $('body').scrollLock('enable');
+        });
     });
     $('.notification-section').mouseleave(function () {
         $('body').scrollLock('disable');

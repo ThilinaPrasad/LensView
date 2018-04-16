@@ -3,19 +3,19 @@
     <hr>
     <ul class="nav nav-pills text-center font_02 lead">
         <li class="nav-item tab-item col-md-4">
-            <a class="nav-link  tab-link active" data-toggle="pill" href="#submissionimages">My Submitted Images</a>
+            <a class="nav-link  tab-link {{ ($tab=='submit')? 'active':''}}" data-toggle="pill" href="#submissionimages">My Submitted Images <span class="badge badge-pill badge-light">{{count($submission_images)}}</span></a>
         </li>
         <li class="nav-item tab-item col-md-4">
-            <a class="nav-link tab-link" data-toggle="pill" href="#voteimages">My Voting Images</a>
+            <a class="nav-link tab-link {{ ($tab=='vote')? 'active':''}}" data-toggle="pill" href="#voteimages">My Voting Images  <span class="badge badge-pill badge-light">{{count($voting_images)}}</span></a>
         </li>
         <li class="nav-item tab-item col-md-4">
-            <a class="nav-link tab-link" data-toggle="pill" href="#contests">Joined Contests</a>
+            <a class="nav-link tab-link {{ ($tab=='contest')? 'active':''}}" data-toggle="pill" href="#contests">Joined Contests <span class="badge badge-pill badge-light">{{count($sub_contests)+count($vot_contests)}}</span></a>
         </li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
         <!-- Submission Images section -->
-        <div class="tab-pane active container" id="submissionimages">
+        <div class="tab-pane {{ ($tab=='submit')? 'active':''}} container" id="submissionimages">
                 @if(count($submission_images)!=0)
                 @foreach($submission_images as $image)
             <div class="py-3">
@@ -32,11 +32,11 @@
                                 <span class="badge badge-pill badge-secondary">&nbsp;{{ $image->category }}&nbsp;</span>
                                 </div>
                                 <div class="text-center">
-                                    <lable name="contest">Contest : </lable><a href="/contests/{{ $image->contest_id }}" class="card-text a" title="Goto contest">{{ $image->title }}</a><br>
-                                    <lable name="submitted">Submitted date : </lable>
-                                    <lable class="card-text" name="submitted">{{ date_format(date_create($image->img_submittedDate),'d-M-Y') }}</lable><br>
-                                    <lable name="available">Voting available in : </lable>
-                                    <lable class="card-text" name="available">{{ date_format(date_create($image->sub_end_at),'d-M-Y') }}</lable>
+                                    <label name="contest">Contest : </label><a href="/contests/{{ $image->contest_id }}" class="card-text a" title="Goto contest">{{ $image->title }}</a><br>
+                                    <label name="submitted">Submitted date : </label>
+                                    <label class="card-text" name="submitted">{{ date_format(date_create($image->img_submittedDate),'d-M-Y') }}</label><br>
+                                    <label name="availabel">Voting available in : </label>
+                                    <label class="card-text" name="available">{{ date_format(date_create($image->sub_end_at),'d-M-Y') }}</label>
                                 </div>
                                 <div align="center" class="mt-2 mb-3">
                                     <a href="/photographs/{{ $image->img_id }}/edit" class="btn btn-success btn-sm mx-1"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
@@ -59,8 +59,8 @@
             <div class="py-3">
                     <div class="card mx-auto d-block">
             <div style="padding-bottom:25vh;padding-top:25vh;">
-                    <img src="{{ asset('img/static/animation_4.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
-                        <h6 align="center" class="font_01">No Available Images</h6>
+                    <img src="{{ asset('img/static/animation_10.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
+                        <h6 align="center" class="font_01">No Submitted Images</h6>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         </div>
         <!-- Submission Images section -->
         <!-- Voting Images section -->
-        <div class="tab-pane container" id="voteimages">
+        <div class="tab-pane {{ ($tab=='vote')? 'active':''}} container" id="voteimages">
                 @if(count($voting_images)!=0)
                 @foreach($voting_images as $image)
             <div class="py-3">
@@ -85,11 +85,11 @@
                                         <span class="badge badge-pill badge-secondary">&nbsp;{{ $image->category }}&nbsp;</span>
                                         </div>
                                 <div class="text-center">
-                                    <lable name="contest">Contest : </lable><a href="/votes/photographs/{{ $image->contest_id }}" class="card-text a" title="Goto contest">{{ $image->title }}</a><br>
-                                    <lable name="submitted">Submitted date : </lable>
-                                    <lable class="card-text" name="submitted">{{ date_format(date_create($image->img_submittedDate),'d-M-Y') }}</lable><br>
-                                    <lable name="closed">Voting closed date : </lable>
-                                    <lable class="card-text" name="closed">{{ date_format(date_create($image->closed_at),'d-M-Y') }}</lable>
+                                    <label name="contest">Contest : </label><a href="/votes/photographs/{{ $image->contest_id }}" class="card-text a" title="Goto contest">{{ $image->title }}</a><br>
+                                    <label name="submitted">Submitted date : </label>
+                                    <label class="card-text" name="submitted">{{ date_format(date_create($image->img_submittedDate),'d-M-Y') }}</label><br>
+                                    <label name="closed">Voting closed date : </label>
+                                    <label class="card-text" name="closed">{{ date_format(date_create($image->closed_at),'d-M-Y') }}</label>
                                 </div>
                                 <div align="center" class="mt-2 mb-3">
                                 <button class="btn btn-info btn-sm mx-1" data-toggle="modal" data-target="#graph" data-image-id="{{ $image->img_id }}" data-image-title="{{ $image->img_title }}" onclick="voteAnalyze(this);"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;View voting analytycs</button>
@@ -135,8 +135,8 @@
             <div class="py-3">
                     <div class="card mx-auto d-block">
             <div style="padding-bottom:25vh;padding-top:25vh;">
-                    <img src="{{ asset('img/static/animation_4.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
-                        <h6 align="center" class="font_01">No Available Images for Voting</h6>
+                    <img src="{{ asset('img/static/animation_11.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
+                        <h6 align="center" class="font_01">No Voting Images</h6>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
         </div>
          <!-- Voting Images section -->
          <!-- Contest section -->
-        <div class="tab-pane container" id="contests">
+        <div class="tab-pane container {{ ($tab=='contest')? 'active':''}}" id="contests">
             @if(count($sub_contests)!= 0 || count($vot_contests)!= 0)
             @foreach($sub_contests as $contest)
             <div class="card bg-light text-center contest">
@@ -174,7 +174,7 @@
               <div class="py-3">
                     <div class="card mx-auto d-block">
             <div style="padding-bottom:25vh;padding-top:25vh;">
-                    <img src="{{ asset('img/static/animation_4.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
+                    <img src="{{ asset('img/static/animation_12.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
                         <h6 align="center" class="font_01">No Joined Contests</h6>
                     </div>
                 </div>

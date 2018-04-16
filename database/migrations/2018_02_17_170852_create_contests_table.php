@@ -34,6 +34,9 @@ class CreateContestsTable extends Migration
         });
         DB::statement( "CREATE VIEW  submission_contests AS SELECT * FROM contests  WHERE sub_start_at <= CURDATE() and sub_end_at >= CURDATE() ORDER By sub_start_at" );
         DB::statement( "CREATE VIEW  voting_contests AS SELECT * FROM contests  WHERE sub_end_at < CURDATE() and closed_at >= CURDATE() ORDER BY sub_end_at desc" );
+        DB::statement( "CREATE VIEW  upcoming_contests AS SELECT * FROM contests WHERE sub_start_at > CURDATE()" );
+        DB::statement( "CREATE VIEW  closed_contests AS SELECT * FROM contests WHERE closed_at < CURDATE()" );
+
     }
 
     /**
@@ -45,6 +48,8 @@ class CreateContestsTable extends Migration
     {
         Schema::dropIfExists('contests');
         DB::statement( 'DROP VIEW submission_contests' );
+        DB::statement( 'DROP VIEW closed_contests' );
+        DB::statement( 'DROP VIEW upcoming_contests' );
         DB::statement( 'DROP VIEW voting_contests' );
     }
 }

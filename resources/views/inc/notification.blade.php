@@ -15,12 +15,12 @@
             <!--Notification-->
         <div class="dropdown-item notification" id="{{ "not".$notification->not_id }}">
                 <div class="row">
-                <a href="/users/{{ $notification->sender_id }}" class="col-md-2" title="{{  $notification->sender_id!=0 ? 'View '.$notification->name."'s profile" : "" }}">
+                <a href="/users/{{ $notification->sender_id }}" class="col-md-2" title="{{  $notification->sender_id!=1 ? 'View '.$notification->name."'s profile" : "" }}">
                     <img src="/storage/profile_pics/{{ $notification->profile_pic }}" class="rounded-circle notification-icon-1">
                     </a>
                     <div class="col-md-7 notification-text">
-                    <a {{  $notification->sender_id!=0 ? 'href="/users/"'.$notification->sender_id : "" }} title="{{  $notification->sender_id!=0 ? 'View '.$notification->name."'s profile" : "" }}">{{ $notification->name }}</a>&nbsp;{!! $notification->messege !!}
-                    <br><span class="text-muted"><i class="far fa-clock"></i> {{ $notification->sent_date }}</span>
+                    <a {{  $notification->sender_id!=1 ? 'href="/users/"'.$notification->sender_id : "" }} title="{{  $notification->sender_id!=1 ? 'View '.$notification->name."'s profile" : "" }}">{{ $notification->name }}</a>&nbsp;{!! $notification->messege !!}
+                    <br><span class="text-muted"><i class="far fa-clock"></i> {{ date_format(date_create($notification->sent_date),'d-M-Y  G:i A') }}</span>
                 </div>
                     <div class="col-md-2">
                         @if($notification->img_link!=null)
