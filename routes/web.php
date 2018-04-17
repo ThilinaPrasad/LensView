@@ -61,3 +61,6 @@ Route::get('/readall', 'NotificationsController@readAll');
 
 //Categories functions
 Route::resource('categories','CategoriesController');
+
+//Winner Controller
+Route::get('/winnerselect/{contest?}/{img?}/{winner?}', 'WinnersController@select');
