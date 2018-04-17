@@ -151,7 +151,7 @@ function voteAnalyze(image){
         function deleteContest(contest){
             var id = $(contest).attr('data-id');
             var title = $(contest).attr('data-title');
-            console.log(id);
+            //console.log(id);
             $.confirm({
                             theme: 'modern',
                             icon: 'far fa-trash-alt',
@@ -204,6 +204,83 @@ function deleteCategory(cat){
           $('.modal-content').mouseleave(function(){
             $('body').scrollLock('disable');
           });
+
+
+//select the contest winner function
+    function selectWinner(image){
+        var title = $(image).attr('data-title');
+        var img = $(image).attr('data-img');
+        var contest = $(image).attr('data-contest');
+        var user = $(image).attr('data-user');
+        $.confirm({
+                            theme: 'modern',
+                            icon: 'fas fa-trophy',
+                            title: 'Confirm Winner Select',
+                            content: 'Do you want to select <b>'+title+'</b> image as the winner ?',
+                            autoClose: 'cancel|10000',
+                            closeIcon: true,
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'green',
+                            typeAnimated: true,
+                            buttons: {
+                                Confirm: {
+                                text: 'Confirm',
+                                btnClass: 'btn-green',
+                                action : function () {
+                                    
+                                    $.get("/winnerselect/"+contest+"/"+img+"/"+user, function(data, status){
+                                       if(status=='success' && data==''){
+                                        $.alert({
+                                                theme: 'modern',
+                                                icon: 'fas fa-trophy',
+                                                title: 'Success !',
+                                                content: title+" image selected as the winner successfully!",
+                                                autoClose: 'ok|3000',
+                                                type: 'green',
+                                                        typeAnimated: true,
+                                            });
+                                            //change the winner select images btn css
+                                            $(image).fadeOut();
+                                            $('.winner-btn-'+contest).fadeOut();
+                                            $('.winner-btn-'+contest).attr('src',"{{ asset('img/static/participated-icon.png') }}");
+                                            $('.winner-btn-'+contest).attr('src',"{{ asset('img/static/participated-icon.png') }}");
+                                            $('.winner-btn-'+contest).attr('data-original-title',"Participated to the contest");
+                                            $('.winner-btn-'+contest).attr('onClick',"");
+                                            $(image).attr('src',"{{ asset('img/static/winner-throphy.png') }}");
+                                            $(image).fadeIn();
+                                            $('.winner-btn-'+contest).fadeIn();
+                                            //contest winner select btn css
+                                            $('#winner-contest-btn-'+contest).html('<i class="fas fa-trophy"></i>&nbsp;&nbsp;View Winner');
+                                            $('#winner-contest-btn-'+contest).removeClass('winner-btn');
+                                            //delete button Enable
+                                            $("#winner-select-delete-"+contest).html('<button class="btn btn-danger btn-sm" data-id="'+contest+'" data-title="'+title+'" onclick="deleteContest(this);"  data-toggle="tooltip" data-placement="top" title="Delete this contest">Delete Contest</button>');
+                                       $(image).attr('data-original-title',"Winner of the contest");
+                                       }else if(status =="success" && data == "selected"){
+                                        $.alert({
+                                                theme: 'modern',
+                                                icon: 'fas fa-trophy',
+                                                title: 'Warning !',
+                                                content: "This contest already selected a winner!",
+                                                autoClose: 'ok|3000',
+                                                type: 'red',
+                                                        typeAnimated: true,
+                                            });
+                                            
+                                       }
+                                       
+
+                                    });
+                                    
+                                }
+                            },
+                                cancel:{
+                                    text:"Cancel"
+                                }
+                                
+                            }
+                        });
+    }
 
     </script>
     <!-- scripts for organizers dashboard -->

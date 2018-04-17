@@ -43,6 +43,22 @@ class ContestsController extends Controller
       return view('contests.voteAvailable')->with(['contests'=>$contests]);
     }
 
+    //sow all winner selected contests 
+    public function winnerContests(){
+        $win_contests = DB::select("Select * FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id");  
+        return view('contests.winnercontests')->with('winning_contests',$win_contests);
+    }
+
+    //show winner with contest data
+    public function showWinner($id){
+        
+        $contest = DB::select("Select *,winners.created_at AS winner_selected_date FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id WHERE closed_contests.id='".$id."'")[0];  
+        $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id WHERE images.contest_id = "'.$id.'"'));
+        $sponsors = Sponsor::all()->where('contest_id',$id);
+        $owner = User::where('id',$contest->user_id)->get()->first();
+        $winner = User::where('id',$contest->winner_id)->get()->first();
+        return view('contests.showwinner')->with(['contest'=>$contest,'sponsors'=>$sponsors,'owner'=>$owner,'photos'=>$photographs,'winner'=>$winner]);;
+    }
     /**
      * Show the form for creating a new resource.
      *

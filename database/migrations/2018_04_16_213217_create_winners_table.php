@@ -13,10 +13,12 @@ class CreateWinnersTable extends Migration
      */
     public function up()
     {
+       
         Schema::create('winners', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('winner_id')->unsigned();
             $table->integer('contest_id')->unsigned();
+            $table->integer('img_id')->unsigned();
+            $table->integer('winner_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('winner_id')
@@ -24,6 +26,11 @@ class CreateWinnersTable extends Migration
             ->onDelete('cascade');
 
             $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
+
+            $table->foreign('img_id')
+            ->references('id')->on('images')
+            ->onDelete('cascade');
+
         });
     }
 

@@ -35,6 +35,10 @@ Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');
 Route::get('votes/photographs/{id?}', 'PhotosController@showVoting');
 
+//winner
+Route::get('/winners/contests', 'ContestsController@winnerContests');
+Route::get('/winner/{id?}', 'ContestsController@showWinner');
+
 //Vote Functions
 Route::get('/addvote/{id?}', 'VotesController@addVote');
 Route::get('/removevote/{id?}', 'VotesController@removeVote');
@@ -61,3 +65,6 @@ Route::get('/readall', 'NotificationsController@readAll');
 
 //Categories functions
 Route::resource('categories','CategoriesController');
+
+//Winner Controller
+Route::get('/winnerselect/{contest?}/{img?}/{winner?}', 'WinnersController@select');

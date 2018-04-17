@@ -4,9 +4,9 @@
         <ul class="navbar-nav mr-auto">
             <li><a class="nav-link text-center" href="#">Policy</a></li>
             <li><a class="nav-link text-center" href="#">Terms</a></li>
-            <li><a class="nav-link text-center" href="#">Others</a></li>
+            <li><a class="nav-link text-center" href="#">About</a></li>
         </ul>
-        <div class="navbar-brand mx-auto  hover_effect" id="footer_top_btn" title="Goto Top">
+        <div class="navbar-brand hover_effect" id="footer_top_btn" title="Goto Top">
             <font size="6">
                 <i class="fas fa-chevron-circle-up"></i>
             </font>
@@ -16,7 +16,7 @@
             <li><a class="nav-link text-center" href="#"><i class="fab fa-twitter"></i></a></li>
             <li><a class="nav-link text-center" href="#"><i class="fab fa-facebook-f"></i></a></li>
             <li><a class="nav-link text-center" href="#"><i class="fab fa-instagram"></i><a></li>
-                        <li><a class="nav-link text-center" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            <li><a class="nav-link text-center" href="#"><i class="fab fa-google-plus-g"></i></a></li>
         </ul>
     </div>
 </nav>

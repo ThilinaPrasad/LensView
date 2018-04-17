@@ -30,7 +30,9 @@ class CreateNotificationTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade');
             
-            
+            $table->foreign('receiver_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
 
         });
     }

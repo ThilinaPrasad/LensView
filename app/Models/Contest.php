@@ -22,4 +22,8 @@ class Contest extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function winner(){
+        return $this->Hasone('App\Models\Winner');
+    }
 }

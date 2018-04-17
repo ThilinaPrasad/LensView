@@ -13,7 +13,7 @@
                 <li class="@yield('contests') navigation"><a class="nav-link text-center" href="/contests">Photo Contests</a></li>
                 <li class="@yield('photos') navigation"><a class="nav-link text-center" href="/photos">Photos</a></li>
                 <li class=" @yield('vote') navigation"><a class="nav-link text-center" href="/votes/contests">Vote</a></li>
-                <li class="@yield('about') navigation"><a class="nav-link text-center" href="#">About Us</a></li>
+                <li class=" @yield('winners') navigation"><a class="nav-link text-center" href="/winners/contests">Winners</a></li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
