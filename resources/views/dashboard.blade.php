@@ -253,6 +253,8 @@ function deleteCategory(cat){
                                             //contest winner select btn css
                                             $('#winner-contest-btn-'+contest).html('<i class="fas fa-trophy"></i>&nbsp;&nbsp;View Winner');
                                             $('#winner-contest-btn-'+contest).removeClass('winner-btn');
+                                            //delete button Enable
+                                            $("#winner-select-delete-"+contest).html('<button class="btn btn-danger btn-sm" data-id="'+contest+'" data-title="'+title+'" onclick="deleteContest(this);"  data-toggle="tooltip" data-placement="top" title="Delete this contest">Delete Contest</button>');
                                        $(image).attr('data-original-title',"Winner of the contest");
                                        }else if(status =="success" && data == "selected"){
                                         $.alert({

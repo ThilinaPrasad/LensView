@@ -29,7 +29,7 @@ class CreateWinnersTable extends Migration
 
             $table->foreign('img_id')
             ->references('id')->on('images')
-            ->onUpdate('cascade');
+            ->onDelete('cascade');
 
         });
     }

@@ -75,7 +75,7 @@
     @endforeach @else
     <div style="height:100vh;padding-top:25vh;">
         <img src="{{ asset('img/static/animation_4.gif') }}" class="rounded-circle mx-auto d-block" style="margin:10px;opacity:0.8;width:100px;height:100px;">
-        <h1 align="center" class="font_01">No Available Contests</h1>
+        <h5 align="center" class="font_01">No contest images for vote</h5>
     </div>
     @endif
 </div>

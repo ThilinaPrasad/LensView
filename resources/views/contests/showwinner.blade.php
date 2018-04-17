@@ -1,9 +1,9 @@
 @extends('layouts.app') 
-@section('title') Photo Contests 
+@section('title') Winner Contest
 @stop 
 @section('styles')
 <link href="{{ asset('css/contests.blade.css') }}" rel="stylesheet">
-<link href="{{ asset('css/cricular.progress.css') }}" rel="stylesheet"> 
+
 <style>
     
 .d-flex picture {
@@ -16,11 +16,42 @@
     overflow-y: scroll;
 }
 
-@media (min-width: 992px) { 
+@media (max-width: 992px) { 
   .w-lg-50 {width:50%!important;}
+
+  .overlay-gif{
+      transform: scale(0.5);
+  }
+  .prize{
+      margin-top: -20px;
+      margin-bottom: -50px;
+  }
 }
 
+.winner-section{
+    
+    background:url('{{ asset('img/static/winner-back.gif') }}');
+    padding:0;
+    padding-top:20px;
+    margin:32px 16px;
+    
+}
 
+.winner-img{
+    margin-top: 15px;
+   border: 4px dashed rgba(255,215,0,0.8);
+}
+
+.winner_name:hover{
+    text-decoration: none;
+    color:black;
+    opacity: 0.7;
+}
+
+.gold{
+    color: rgb(255,215,0);
+    text-shadow: gray 2px 2px 2px;
+}
 
 </style>
 @stop 
@@ -31,44 +62,10 @@
         <div class="card card-inverse">
             <img class="card-img img-fluid" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
             <div class="card-img-overlay  text-center">
-                <!--Circular Progress-->
-                <div class="show-overlay">
-                    <div class="col-sm-1 mx-auto d-block">
-                        <div class="progress" data-percentage="{{ $days_presentage }}">
-                            <span class="progress-left">
-                                        <span class="progress-bar"></span>
-                            </span>
-                            <span class="progress-right">
-                                        <span class="progress-bar"></span>
-                            </span>
-                            <div class="progress-value">
-                                <div>
-                                    {{$days_left}}<br>
-                                    <span>
-                                    @if($days_left!=1)
-                                    {{ "days" }}
-                                    @else
-                                    {{ "day" }}
-                                    @endif left</span>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                    <!--Circular Progress-->
                     <h1 class="card-title display-3">{{ $contest->title }}</h1>
-                    <h3 class="prize">Try With Your Creativity & Win
+                    <h3 class="prize">Winner Price
                         <p> <strong class="h1">{{ $contest->prize }} </strong></h3>
-                            @if(Auth::check() && ((Auth::user()->role_id == '2') || (Auth::user()->id == $contest->user_id)))
-                    <a href="/photographs/upload/{{$contest->id}}" class="btn btn-light font_03"><i class="fas fa-upload"></i>&nbsp;&nbsp;Submit Photographs</a>                    
-                    @endif
-                    @if(Auth::check() && (Auth::user()->id == $contest->user_id))
-                    <a href="/contests/{{ $contest->id }}/edit" class="btn btn-light font_3"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>    
-                    <a href="#" class="btn btn-light font_3 delete-btn" id="deleteButton"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</a>               
-                    <form method="post" action="{{ route('contests.destroy',[$contest->id]) }}" id="delete-contest" style="display:none;">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="delete ">
-                        </form>
-                    @endif
+                            <img src="{{ asset('img/static/animation_9.gif') }}" class="rounded-circle mx-auto d-block overlay-gif" style="margin:10px;opacity:0.6;width:150px;height:150px;">
                 </div>
             </div>
             </div>
@@ -82,13 +79,20 @@
     <div class="container">
         <p class="h1 font_01">About {{ $contest->title }} Contest</p>
         <p class="lead">{{ $contest->description }}</p>
-        <p class="badge badge-pill badge-info">Submission available in {{ $contest->sub_start_at }}&nbsp; to &nbsp;{{ $contest->sub_end_at }}</p>
+        <p class="badge badge-pill badge-info">Winner Selected date : {{ $contest->winner_selected_date }}</p>
     </div>
 </div>
 <!--about section-->
+<!--winner section-->
+<div class="jumbotron text-center prize-section winner-section">
+    <p class="font_01 h1 prize-head gold"><i class="fas fa-chess-queen"></i> Winner <i class="fas fa-chess-queen"></i></p>
+<a href="/users/{{ $winner->id }}" class="font_03 h3 winner_name" data-toggle="tooltip" data-placement="right" title="View profile">{{ $winner->name }}</a>
+    <a href="/users/{{ $winner->id }}" class="prize-img" data-toggle="tooltip" data-placement="bottom" title="View profile"><img src="/storage/profile_pics/{{ $winner->profile_pic }}"  class="hover-effect-2 mx-auto d-block img-fluid prize_img rounded-circle winner-img"></a>
+</div>
+<!--winner section-->
 <!--prizes section-->
 <div class="jumbotron text-center prize-section">
-    <p class="font_01 h1 prize-head"><i class="fas fa-chess-queen"></i> Win Amazing Prize <i class="fas fa-chess-queen"></i></p>
+    <p class="font_01 h1 prize-head"><i class="fas fa-chess-queen"></i> Winner Prize <i class="fas fa-chess-queen"></i></p>
     <p class="font_03 h3">{{ $contest->prize }}</p>
     <img src="/storage/contests_prizes/{{ $contest->prize_image }}" class="hover-effect-2 mx-auto d-block img-fluid prize_img rounded-circle">
     <p class="col-md-6 offset-md-3" style="margin-top:20px;">{{ $contest->prize_description }}</p>
@@ -112,7 +116,7 @@
 <!--Currently uploaded Images-->
 @if(count($photos)!=0)
 <div class="jumbotron text-center">
-        <p class="font_01 h1 prize-head"><i class="fas fa-images"></i> Uploaded Photographs <i class="fas fa-images"></i></p>
+        <p class="font_01 h1 prize-head"><i class="fas fa-images"></i> Submitted Photographs <i class="fas fa-images"></i></p>
 <div class="container show-img">
     <div class="d-flex flex-row flex-wrap">
         @foreach($photos as $photo)

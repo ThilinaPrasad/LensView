@@ -33,7 +33,7 @@
                         <button href="#" class="btn btn-info btn-lg" onclick="window.location.href='/contests/{{ $contest->id }}'"><i class="far fa-images"></i>&nbsp;&nbsp;View</button>
                         <button href="#" class="btn btn-success btn-lg" onclick="window.location.href='/contests/{{ $contest->id }}/edit'"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</button>
                         <button href="#" class="btn btn-danger btn-lg" data-id="{{ $contest->id }}" data-title="{{ $contest->title }}" onclick="deleteContest(this);"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</button>
-                        <form method="post" action="{{ route('contests.destroy',[$contest->id]) }}" id="{{ " delete-contest- ".$contest->id }}" style="display:none;">
+                        <form method="post" action="{{ route('contests.destroy',[$contest->id]) }}" id="{{ "delete-contest-".$contest->id }}" style="display:none;">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="delete ">
                         </form>
@@ -65,7 +65,7 @@
                         <button href="#" class="btn btn-info btn-lg" onclick="window.location.href='/contests/{{ $contest->id }}'"><i class="far fa-images"></i>&nbsp;&nbsp;View</button>
                         <button href="#" class="btn btn-success btn-lg" onclick="window.location.href='/contests/{{ $contest->id }}/edit'"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</button>
                         <button href="#" class="btn btn-danger btn-lg" data-id="{{ $contest->id }}" data-title="{{ $contest->title }}" onclick="deleteContest(this);"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</button>
-                        <form method="post" action="{{ route('contests.destroy',$contest->id) }}" id="{{ " delete-contest- ".$contest->id }}" style="display:none;">
+                        <form method="post" action="{{ route('contests.destroy',$contest->id) }}" id="{{ "delete-contest-".$contest->id }}" style="display:none;">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="delete ">
                         </form>
@@ -218,6 +218,22 @@
 
                                 <!--Image section-->
                             </div>
+                            
+                            <div class="mx-auto d-block text-center">
+                                    <div class="btn-group text-center" role="group">
+                                        
+                                            <form method="post" action="{{ route('contests.destroy',$contest->contest_id) }}" id="{{ "delete-contest-".$contest->contest_id }}" style="display:none;">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete ">
+                                                </form>
+                                            <div id="{{ 'winner-select-delete-'.$contest->contest_id }}">
+                                        @if($contest->winner_id != null)
+                                    <button class="btn btn-danger btn-sm" data-id="{{ $contest->contest_id }}" data-title="{{ $contest->title }}" onclick="deleteContest(this);"  data-toggle="tooltip" data-placement="top" title="Delete this contest">Delete Contest</button>
+                            @endif    
+                                                </div>    
+                            <a href="/votes/photographs/{{ $contest->contest_id }}" class="btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Goto contest page">Goto Voting Page</a>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
