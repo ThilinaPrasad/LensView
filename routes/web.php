@@ -30,6 +30,7 @@ Route::resource('contests','ContestsController');
 Route::get('/photos', function () {
     return view('photos.photos');
 });
+
 Route::get('/votes/contests', 'ContestsController@vote');
 Route::resource('photographs','PhotosController');
 Route::get('photographs/upload/{contest_id?}', 'PhotosController@create');
@@ -38,6 +39,9 @@ Route::get('votes/photographs/{id?}', 'PhotosController@showVoting');
 //winner
 Route::get('/winners/contests', 'ContestsController@winnerContests');
 Route::get('/winner/{id?}', 'ContestsController@showWinner');
+
+//Review route
+Route::post('/review', 'ContestsController@saveReview');
 
 //Vote Functions
 Route::get('/addvote/{id?}', 'VotesController@addVote');

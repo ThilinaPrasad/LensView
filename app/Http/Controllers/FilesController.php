@@ -8,14 +8,15 @@ class FilesController extends Controller
 {
 
     //Method related to compress the image
-    public static function compressImg($localPath,$fileName){
+    public static function compressImg($localPath,$fileName,$width,$height){
         $filepath = public_path($localPath.$fileName);
         try {
         
             \Tinify\setKey("_QoFixJ_0B400BqpeIGA5KvystXOwL68");
         
             $source = \Tinify\fromFile($filepath);
-        
+
+            
             $source->toFile($filepath);
         
         } catch(\Tinify\AccountException $e) {
@@ -67,7 +68,7 @@ class FilesController extends Controller
             $path = $request->file($name)->storeAs('public/'.$folderName,$fileNametoStore);
 
             //TinyPNG Compress Image
-            //FilesController::compressImg('storage/'.$folderName.'/',$fileNametoStore);
+            FilesController::compressImg('storage/'.$folderName.'/',$fileNametoStore);
 
         }else{
             $fileNametoStore = $defaultName;

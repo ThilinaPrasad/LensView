@@ -16,18 +16,6 @@
     overflow-y: scroll;
 }
 
-@media (max-width: 992px) { 
-  .w-lg-50 {width:50%!important;}
-
-  .overlay-gif{
-      transform: scale(0.5);
-  }
-  .prize{
-      margin-top: -20px;
-      margin-bottom: -50px;
-  }
-}
-
 .winner-section{
     
     background:url('{{ asset('img/static/winner-back.gif') }}');
@@ -52,6 +40,60 @@
     color: rgb(255,215,0);
     text-shadow: gray 2px 2px 2px;
 }
+
+.winner_img{
+    width:50vw;
+    border: 4px dashed rgba(255,215,0,0.7);
+    border-radius: 50px;
+    transition:transform 0.5s ease ;
+    cursor: pointer;
+}
+
+.winner_img:hover{
+    transform: scale(1.1);
+}
+
+.winner_img_head{
+    margin-top:30px;
+    margin-bottom: 20px;
+}
+
+#review_box,.review-show{
+    border-radius: 80px;
+    padding: 20px 50px;
+    margin-top: 20px;
+    border: 2px double rgba(255,215,0,0.3);
+}
+
+.review-show{
+    background-color: rgb(255,255,255);
+    font-size: 18px;
+
+}
+
+#reviewSubmit{
+    margin-top:10px;
+    border-radius:20px;
+}
+
+
+
+@media (max-width: 992px) { 
+  .w-lg-50 {width:50%!important;}
+
+  .overlay-gif{
+      transform: scale(0.5);
+  }
+  .prize{
+      margin-top: -20px;
+      margin-bottom: -50px;
+  }
+  .winner_img{
+      width:80vw;
+      border-radius: 15px;
+  }
+}
+
 
 </style>
 @stop 
@@ -88,8 +130,28 @@
     <p class="font_01 h1 prize-head gold"><i class="fas fa-chess-queen"></i> Winner <i class="fas fa-chess-queen"></i></p>
 <a href="/users/{{ $winner->id }}" class="font_03 h3 winner_name" data-toggle="tooltip" data-placement="right" title="View profile">{{ $winner->name }}</a>
     <a href="/users/{{ $winner->id }}" class="prize-img" data-toggle="tooltip" data-placement="bottom" title="View profile"><img src="/storage/profile_pics/{{ $winner->profile_pic }}"  class="hover-effect-2 mx-auto d-block img-fluid prize_img rounded-circle winner-img"></a>
+    <h2 class="font_01 winner_img_head gold" align="center"><i class="far fa-image"></i>&nbsp;&nbsp;Winner Image&nbsp;&nbsp;<i class="far fa-image"></i></h2>
+    <img src="/storage/contest_images/{{ $winner_img }}" data-toggle="tooltip" data-placement="bottom" title="Winner Image" class="winner_img">
+    @if(Auth::check()&& Auth::user()->id == $winner->id)
+    <!--Review section-->
+<div class="form-group col-md-6 mx-auto d-block review-section">
+        @if(count($review)==0))
+    <textarea class="form-control" title="Enter your idea here"  rows="2" id="review_box" placeholder="{{ $winner->name }} leave your idea about LensView here..."></textarea>
+<button id="reviewSubmit" class="btn btn-success" title="Send your idea" data-user="{{ $winner->id }}" data-contest="{{ $contest->winner_contest }}" data-image="{{ $contest->winner_img  }}" onclick="review(this);"><i class="far fa-star"></i>&nbsp;&nbsp;Send</button>
+@else
+
+<div class="review-show font_03">
+        <h5 class="font_01">Your review on this contest</h5>
+    <i class="fas fa-quote-left"></i><br>{{ $review[0]->comment }}<br><i class="fas fa-quote-right"></i>
+</div>
+@endif  
+</div>
+<!--Review section-->
+
+@endif
 </div>
 <!--winner section-->
+
 <!--prizes section-->
 <div class="jumbotron text-center prize-section">
     <p class="font_01 h1 prize-head"><i class="fas fa-chess-queen"></i> Winner Prize <i class="fas fa-chess-queen"></i></p>
@@ -124,7 +186,6 @@
    <img src="/storage/contest_images/{{ $photo->image }}" alt="placeholder image"  class="img-fluid" data-toggle="tooltip" data-placement="top" title="Uploaded by {{$photo->name}}">
   </picture>
       @endforeach
-     
     </div>
 </div>
 </div>
@@ -172,6 +233,54 @@
                         }
                     });
     });
+
 });
+
+function review(btn){
+        var user_id = $(btn).attr('data-user');
+        var contest_id = $(btn).attr('data-contest');
+        var image_id = $(btn).attr('data-image');
+        var review = $('#review_box').val();
+      
+   if(review!=''){
+        $.post("/review",
+    {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        user: user_id,
+        contest: contest_id,
+        image : image_id,
+        comment : review
+    },
+    function(data, status){
+        if(status="success"){
+            $.alert({
+    theme: 'modern',
+    icon: 'far fa-check-circle',
+    title: 'Success !',
+    content: "Your review successfully added! ",
+    autoClose: 'ok|3000',
+    type: 'green',
+            typeAnimated: true,
+});
+
+$('.review-section').fadeOut(2000);
+
+$('.review-section').html('<div class="review-show font_03"><h5 class="font_01">Your review on this contest</h5><i class="fas fa-quote-left"></i><br>'+review+'<br><i class="fas fa-quote-right"></i></div>');
+$('.review-section').fadeIn(2000);
+
+        }
+    });
+   }else{
+    $.alert({
+    theme: 'modern',
+    icon: 'far fa-times-circle',
+    title: 'Alert !',
+    content: "Please enter your review before submit !",
+    autoClose: 'ok|3000',
+    type: 'red',
+            typeAnimated: true,
+});
+   }
+    }
 </script>
 @stop

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Laravel\Models\Contest;
 use Laravel\Models\Image;
+use Laravel\Models\Review;
 use Laravel\User;
 use Laravel\Models\Sponsor;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,7 @@ class ContestsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index','show','vote']]);
+        $this->middleware('auth',['except'=>['index','show','vote','winnerContests','showWinner']]);
         
     }
     /**
@@ -52,12 +53,25 @@ class ContestsController extends Controller
     //show winner with contest data
     public function showWinner($id){
         
-        $contest = DB::select("Select *,winners.created_at AS winner_selected_date FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id WHERE closed_contests.id='".$id."'")[0];  
+        $contest = DB::select("Select *,winners.created_at AS winner_selected_date,winners.img_id as winner_img,winners.contest_id as winner_contest FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id WHERE closed_contests.id='".$id."'")[0];  
         $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id WHERE images.contest_id = "'.$id.'"'));
         $sponsors = Sponsor::all()->where('contest_id',$id);
         $owner = User::where('id',$contest->user_id)->get()->first();
         $winner = User::where('id',$contest->winner_id)->get()->first();
-        return view('contests.showwinner')->with(['contest'=>$contest,'sponsors'=>$sponsors,'owner'=>$owner,'photos'=>$photographs,'winner'=>$winner]);;
+        $winner_img = Image::find($contest->img_id)->image;
+        $review = Review::all()->where('contest_id',$contest->contest_id);
+        return view('contests.showwinner')->with(['contest'=>$contest,'sponsors'=>$sponsors,'owner'=>$owner,'photos'=>$photographs,'winner'=>$winner,'winner_img'=>$winner_img,'review'=>$review]);
+    }
+
+    //add review
+    public function saveReview(Request $request){
+      
+        Review::create([
+            'reviewer_id' => $request->input('user'),
+            'contest_id' => $request->input('contest'),
+            'img_id' => $request->input('image'),
+            'comment' => $request->input('comment')
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -95,7 +109,7 @@ class ContestsController extends Controller
             'sub_start_at'=> 'required|date|after:'.$sub_s,
             'sub_end_at'=> 'required|date|after:'.$sub_e,
             'closed_at'=> 'required|date|after:'.$closed,
-            'cover_img' => 'required|image|max:2999|dimensions:width=1920,height=1080',         ///Section 1 finished
+            'cover_img' => 'required|image|max:2999|dimensions:min_width=1920,min_height=1080',         ///Section 1 finished
             'winner' => 'required',
             'winner_info' => 'required',
             'winner_img' => 'required|image|max:1999|dimensions:ratio=1', ///Section 2 finished
