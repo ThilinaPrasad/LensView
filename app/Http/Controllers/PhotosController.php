@@ -58,7 +58,7 @@ class PhotosController extends Controller
         $this->validate($request,[
             'title'=>'required',
             'description' => 'required',
-            'upload_img' => 'required|image|max:2999|dimensions:width=1920,height=1080',         ///Section 1 finished
+            'upload_img' => 'required|image|max:5120',         ///Section 1 finished 
             'category' => 'required',
             //'downloadable' => 'nullable',
         ]);

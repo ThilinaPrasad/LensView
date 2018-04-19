@@ -109,16 +109,16 @@ class ContestsController extends Controller
             'sub_start_at'=> 'required|date|after:'.$sub_s,
             'sub_end_at'=> 'required|date|after:'.$sub_e,
             'closed_at'=> 'required|date|after:'.$closed,
-            'cover_img' => 'required|image|max:4999',         ///Section 1 finished |dimensions:min_width=1920,min_height=1080
+            'cover_img' => 'required|image|max:5120',         ///Section 1 finished |dimensions:min_width=1920,min_height=1080
             'winner' => 'required',
             'winner_info' => 'required',
-            'winner_img' => 'required|image|max:1999', ///Section 2 finished |dimensions:ratio=1
+            'winner_img' => 'required|image|max:2048', ///Section 2 finished |dimensions:ratio=1
             'p_name' => 'required',
-            'p_logo' => 'required|image|max:1999', //|dimensions:ratio=1
+            'p_logo' => 'required|image|max:2048', //|dimensions:ratio=1
             'g_name' => 'required',
-            'g_logo' => 'required|image|max:1999', //|dimensions:ratio=1
+            'g_logo' => 'required|image|max:2048', //|dimensions:ratio=1
             'b_name' => 'required',
-            'b_logo' => 'required|image|max:1999', //|dimensions:ratio=1
+            'b_logo' => 'required|image|max:2048', //|dimensions:ratio=1
         ]);
 
         $contest = new Contest;
@@ -234,16 +234,16 @@ class ContestsController extends Controller
             'sub_start_at'=> 'required|date|after:'.$sub_s,
             'sub_end_at'=> 'required|date|after:'.$sub_e,
             'closed_at'=> 'required|date|after:'.$closed,
-            'cover_img' => 'image|max:4999|',         ///Section 1 finished dimensions:width=1920,height=1080
+            'cover_img' => 'image|max:5120',         ///Section 1 finished dimensions:width=1920,height=1080
             'winner' => 'required',
             'winner_info' => 'required',
-            'winner_img' => 'image|max:1999', ///Section 2 finished //|dimensions:ratio=1
+            'winner_img' => 'image|max:2048', ///Section 2 finished //|dimensions:ratio=1
             'p_name' => 'required',
-            'p_logo' => 'image|max:1999', //|dimensions:ratio=1
+            'p_logo' => 'image|max:2048', //|dimensions:ratio=1
             'g_name' => 'required',
-            'g_logo' => 'image|max:1999', //|dimensions:ratio=1
+            'g_logo' => 'image|max:2048', //|dimensions:ratio=1
             'b_name' => 'required',
-            'b_logo' => 'image|max:1999', //|dimensions:ratio=1
+            'b_logo' => 'image|max:2048', //|dimensions:ratio=1
         ]);
 
         $contest->title = $request->input('title');
