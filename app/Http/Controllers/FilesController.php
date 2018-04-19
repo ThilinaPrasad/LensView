@@ -3,7 +3,8 @@
 namespace Laravel\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use Image;
 class FilesController extends Controller
 {
 
@@ -52,7 +53,7 @@ class FilesController extends Controller
     }
 
 //File Uploading Function    
-    public static function upload($request,$name,$folderName,$defaultName){
+    public static function upload($request,$name,$folderName,$defaultName,$width,$height){
         //file handelling
        
         if($request->hasFile($name)){
@@ -65,10 +66,16 @@ class FilesController extends Controller
             //get extension
             $extension = $request->file($name)->getClientOriginalExtension();
             $fileNametoStore = sha1($filename).'_'.time().'.'.$extension; 
-            $path = $request->file($name)->storeAs('public/'.$folderName,$fileNametoStore);
+
+            //Resize the image
+            $resized = Image::make($request->file($name)->getRealPath())->resize($width,$height); 
+
+            Storage::put('public/'.$folderName.'/'.$fileNametoStore, (string) $resized->encode()); //Strre the resized file into strage folder
+            //$path = $request->file($name)->storeAs('public/'.$folderName,$fileNametoStore);
+
 
             //TinyPNG Compress Image
-            FilesController::compressImg('storage/'.$folderName.'/',$fileNametoStore);
+            //FilesController::compressImg('storage/'.$folderName.'/',$fileNametoStore);
 
         }else{
             $fileNametoStore = $defaultName;

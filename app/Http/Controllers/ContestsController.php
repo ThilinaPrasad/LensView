@@ -109,50 +109,50 @@ class ContestsController extends Controller
             'sub_start_at'=> 'required|date|after:'.$sub_s,
             'sub_end_at'=> 'required|date|after:'.$sub_e,
             'closed_at'=> 'required|date|after:'.$closed,
-            'cover_img' => 'required|image|max:2999|dimensions:min_width=1920,min_height=1080',         ///Section 1 finished
+            'cover_img' => 'required|image|max:4999',         ///Section 1 finished |dimensions:min_width=1920,min_height=1080
             'winner' => 'required',
             'winner_info' => 'required',
-            'winner_img' => 'required|image|max:1999|dimensions:ratio=1', ///Section 2 finished
+            'winner_img' => 'required|image|max:1999', ///Section 2 finished |dimensions:ratio=1
             'p_name' => 'required',
-            'p_logo' => 'required|image|max:1999|dimensions:ratio=1',
+            'p_logo' => 'required|image|max:1999', //|dimensions:ratio=1
             'g_name' => 'required',
-            'g_logo' => 'required|image|max:1999|dimensions:ratio=1',
+            'g_logo' => 'required|image|max:1999', //|dimensions:ratio=1
             'b_name' => 'required',
-            'b_logo' => 'required|image|max:1999|dimensions:ratio=1',
+            'b_logo' => 'required|image|max:1999', //|dimensions:ratio=1
         ]);
 
         $contest = new Contest;
         $contest->user_id = Auth::user()->id;
         $contest->title = $request->input('title');
         $contest->description = $request->input('description');
-        $contest->cover_img = FilesController::upload($request,'cover_img','contests_covers','default_cover.jpg');
+        $contest->cover_img = FilesController::upload($request,'cover_img','contests_covers','default_cover.jpg',1920,1080);
         $contest->sub_start_at = $request->input('sub_start_at');
         $contest->sub_end_at = $request->input('sub_end_at');
         $contest->closed_at = $request->input('closed_at');
         $contest->prize = $request->input('winner');
         $contest->prize_description = $request->input('winner_info');
-        $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes','default_prize.jpg');
+        $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes','default_prize.jpg',500,500);
         $contest->save();
 
         $platinum = Sponsor::create([
             'contest_id'=>$contest->id,
             'type'=>'platinum',
             'name'=>$request->input('p_name'),
-            'logo'=>FilesController::upload($request,'p_logo','contests_sponsors','default_sponsor.jpg')
+            'logo'=>FilesController::upload($request,'p_logo','contests_sponsors','default_sponsor.jpg',500,500)
         ]);
 
         $gold = Sponsor::create([
             'contest_id'=>$contest->id,
             'type'=>'gold',
             'name'=>$request->input('g_name'),
-            'logo'=>FilesController::upload($request,'g_logo','contests_sponsors','default_sponsor.jpg')
+            'logo'=>FilesController::upload($request,'g_logo','contests_sponsors','default_sponsor.jpg',500,500)
         ]);
 
         $bronze = Sponsor::create([
             'contest_id'=>$contest->id,
             'type'=>'bronze',
             'name'=>$request->input('b_name'),
-            'logo'=>FilesController::upload($request,'b_logo','contests_sponsors','default_sponsor.jpg')
+            'logo'=>FilesController::upload($request,'b_logo','contests_sponsors','default_sponsor.jpg',500,500)
         ]);
 
         if($contest && $platinum && $gold && $bronze){
@@ -234,36 +234,36 @@ class ContestsController extends Controller
             'sub_start_at'=> 'required|date|after:'.$sub_s,
             'sub_end_at'=> 'required|date|after:'.$sub_e,
             'closed_at'=> 'required|date|after:'.$closed,
-            'cover_img' => 'image|max:2999|dimensions:width=1920,height=1080',         ///Section 1 finished
+            'cover_img' => 'image|max:4999|',         ///Section 1 finished dimensions:width=1920,height=1080
             'winner' => 'required',
             'winner_info' => 'required',
-            'winner_img' => 'image|max:1999|dimensions:ratio=1', ///Section 2 finished
+            'winner_img' => 'image|max:1999', ///Section 2 finished //|dimensions:ratio=1
             'p_name' => 'required',
-            'p_logo' => 'image|max:1999|dimensions:ratio=1',
+            'p_logo' => 'image|max:1999', //|dimensions:ratio=1
             'g_name' => 'required',
-            'g_logo' => 'image|max:1999|dimensions:ratio=1',
+            'g_logo' => 'image|max:1999', //|dimensions:ratio=1
             'b_name' => 'required',
-            'b_logo' => 'image|max:1999|dimensions:ratio=1',
+            'b_logo' => 'image|max:1999', //|dimensions:ratio=1
         ]);
 
         $contest->title = $request->input('title');
         $contest->description = $request->input('description');
-        $contest->cover_img = FilesController::upload($request,'cover_img','contests_covers',$contest->cover_img);
+        $contest->cover_img = FilesController::upload($request,'cover_img','contests_covers',$contest->cover_img,1920,1080);
         $contest->sub_start_at = $request->input('sub_start_at');
         $contest->sub_end_at = $request->input('sub_end_at');
         $contest->closed_at = $request->input('closed_at');
         $contest->prize = $request->input('winner');
         $contest->prize_description = $request->input('winner_info');
-        $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes',$contest->prize_image);
+        $contest->prize_image = FilesController::upload($request,'winner_img','contests_prizes',$contest->prize_image,500,500);
         
         $platinum->name = $request->input('p_name');
-        $platinum->logo = FilesController::upload($request,'p_logo','contests_sponsors',$platinum->logo);
+        $platinum->logo = FilesController::upload($request,'p_logo','contests_sponsors',$platinum->logo,500,500);
 
         $gold->name = $request->input('g_name');
         $gold->logo = FilesController::upload($request,'g_logo','contests_sponsors',$platinum->logo);
 
         $bronze->name = $request->input('b_name');
-        $bronze->logo = FilesController::upload($request,'b_logo','contests_sponsors',$platinum->logo);
+        $bronze->logo = FilesController::upload($request,'b_logo','contests_sponsors',$platinum->logo,500,500);
 
         $contest->save();
         $platinum->save();

@@ -80,7 +80,8 @@
                                     <span class="invalid-feedback">
                                                         <strong>{{ $errors->first('cover_img') }}</strong>
                                                     </span> @else
-                                    <pre class="small">(*image diamensions 1920x1080)</pre> @endif
+                                    <pre class="small">(image 1920x1080 is better)</pre> @endif
+                                    
                                 </div>
                             </div>
 
@@ -134,7 +135,7 @@
                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('winner_img') }}</strong>
                                                 </span> @else
-                                <pre class="small">(*image aspect ratio must be 1:1)</pre> @endif
+                                <pre class="small">(aspect ratio 1:1 is better)</pre> @endif
                             </div>
                         </div>
                         
@@ -180,7 +181,7 @@
                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('p_logo') }}</strong>
                                                 </span> @else
-                                <pre class="small">(*image aspect ratio must be 1:1)</pre> @endif
+                                <pre class="small">(aspect ratio 1:1 is better)</pre> @endif
                             </div>
                         </div>
                         
@@ -211,7 +212,7 @@
                                  <span class="invalid-feedback">
                                                      <strong>{{ $errors->first('g_logo') }}</strong>
                                                  </span> @else
-                                 <pre class="small">(*image aspect ratio must be 1:1)</pre> @endif
+                                 <pre class="small">(aspect ratio 1:1 is better)</pre> @endif
                              </div>
                          </div>
 
@@ -242,7 +243,7 @@
                                  <span class="invalid-feedback">
                                                      <strong>{{ $errors->first('b_logo') }}</strong>
                                                  </span> @else
-                                 <pre class="small">(*image aspect ratio must be 1:1)</pre> @endif
+                                 <pre class="small">(aspect ratio 1:1 is better)</pre> @endif
                              </div>
                          </div>
 

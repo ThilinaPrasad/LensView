@@ -70,7 +70,7 @@ class PhotosController extends Controller
             'contest_id'=>$request->input('contest_id'),
             'title'=>$request->input('title'),
             'description'=>$request->input('description'),
-            'image'=>FilesController::upload($request,'upload_img','contest_images','upload_image.jpg'),
+            'image'=>FilesController::upload($request,'upload_img','contest_images','upload_image.jpg',1920,1080),
             'category_id'=>$request->input('category'),
             'downloadable'=>$request->input('downloadable'),
         ]);

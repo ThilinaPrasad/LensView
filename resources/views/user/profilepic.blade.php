@@ -74,7 +74,7 @@
                                                     @else
                                                     <br>
                                                     <span class="text-muted">
-                                                            (*Image must be in 1:1 ratio)
+                                                        (aspect ratio 1:1 is better)
                                                         </span>
                                                     @endif
                                                     </span>

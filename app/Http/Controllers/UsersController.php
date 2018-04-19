@@ -132,7 +132,7 @@ class UsersController extends Controller
     public function picupdate(Request $request)
     {
         $this->validate($request,[
-            'upload_img' => 'required|image|max:1999|dimensions:ratio=1'
+            'upload_img' => 'required|image|max:1999|' //dimensions:ratio=1
         ]);
 
         $id = $request->input('id');
@@ -143,7 +143,7 @@ class UsersController extends Controller
             Storage::delete('public/profile_pics/'.$user->profile_pic);
             }
 
-        $user->profile_pic = FilesController::upload($request,'upload_img','profile_pics','default_user_image.jpg');
+        $user->profile_pic = FilesController::upload($request,'upload_img','profile_pics','default_user_image.jpg',250,250);
         $user->save();
         return redirect()->route('users.show',['id'=>$user->id])->with('success',"User Profile picture changed Successfully!");
     }
