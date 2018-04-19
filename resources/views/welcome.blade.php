@@ -82,17 +82,17 @@
     <div class="row text-center count_up">
       <div class="col-sm-4  font_02">
         <i class="fas fa-users counter_icon"></i>
-        <div class="counter" data-count="150">0</div>
+      <div class="counter" data-count="{{ $user_count }}">0</div>
         <h2 class="counter_name">Users</h2>
       </div>
       <div class="col-sm-4  font_02">
         <i class="fas fa-trophy counter_icon"></i>
-        <div class="counter" data-count="1500">0</div>
+      <div class="counter" data-count="{{ $contest_count }}">0</div>
         <h2 class="counter_name">Contests</h2>
       </div>
       <div class="col-sm-4 font_02">
         <i class="far fa-image counter_icon"></i>
-        <div class="counter" data-count="3500">0</div>
+      <div class="counter" data-count="{{ $image_count }}">0</div>
         <h2 class="counter_name">Photographs</h2>
       </div>
     </div>
@@ -112,7 +112,9 @@
       <img src="{{ asset('img/static/Prizes_icons.png') }}" class="mx-auto d-block img-fluid win_icon">
     </div>
   </div>
+  @if(count($reviews)!=0)
   @include('inc.testimonial')
+  @endif
 </div>
 <!-- Section 6 end-->
 

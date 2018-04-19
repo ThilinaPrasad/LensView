@@ -68,7 +68,7 @@
 .review-show{
     background-color: rgb(255,255,255);
     font-size: 18px;
-
+    word-wrap: break-word; 
 }
 
 #reviewSubmit{

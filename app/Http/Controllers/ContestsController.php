@@ -53,13 +53,15 @@ class ContestsController extends Controller
     //show winner with contest data
     public function showWinner($id){
         
-        $contest = DB::select("Select *,winners.created_at AS winner_selected_date,winners.img_id as winner_img,winners.contest_id as winner_contest FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id WHERE closed_contests.id='".$id."'")[0];  
+        $contest = DB::select("Select *,winners.created_at AS winner_selected_date,winners.img_id as winner_img,winners.contest_id as winner_contest FROM winners LEFT JOIN closed_contests on winners.contest_id = closed_contests.id WHERE closed_contests.id='".$id."'")[0]; 
         $photographs = array_reverse(DB::select('SELECT * FROM images INNER JOIN users ON images.user_id = users.id WHERE images.contest_id = "'.$id.'"'));
         $sponsors = Sponsor::all()->where('contest_id',$id);
         $owner = User::where('id',$contest->user_id)->get()->first();
         $winner = User::where('id',$contest->winner_id)->get()->first();
         $winner_img = Image::find($contest->img_id)->image;
-        $review = Review::all()->where('contest_id',$contest->contest_id);
+        
+        $review = DB::select("SELECT * FROM reviews WHERE contest_id='".$contest->contest_id."'");
+       // dd($review);
         return view('contests.showwinner')->with(['contest'=>$contest,'sponsors'=>$sponsors,'owner'=>$owner,'photos'=>$photographs,'winner'=>$winner,'winner_img'=>$winner_img,'review'=>$review]);
     }
 
