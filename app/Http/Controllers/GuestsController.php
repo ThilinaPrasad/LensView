@@ -3,11 +3,12 @@
 namespace Laravel\Http\Controllers;
 use Laravel\Models\Image;
 use Laravel\Models\Contest;
+use Laravel\Models\Category;
 use Laravel\User;
 use Laravel\Models\Review;
 use Illuminate\Http\Request;
 use DB;
-class WelcomeController extends Controller
+class GuestsController extends Controller
 {
     
     
@@ -29,5 +30,12 @@ class WelcomeController extends Controller
         $reviews = DB::select('SELECT * FROM reviews LEFT JOIN users ON reviews.reviewer_id = users.id');
 
         return view('welcome')->with(['images'=>$images,'user_count'=>$user_count,'contest_count'=>$contest_count,'image_count'=>$image_count,'reviews'=>$reviews]);
+    }
+
+    public function photos(){
+        $categories = Category::all();
+        $images = DB::select('SELECT *,images.created_at as img_uploaded,images.id as img_id FROM images LEFT JOIN users ON images.user_id = users.id WHERE (images.contest_id IN (SELECT contest_id FROM winners)) OR images.contest_id IS NULL ORDER BY images.created_at desc');
+        //dd($images);
+        return view('photos.photos')->with(['categories'=>$categories,'images'=>$images]);
     }
 }

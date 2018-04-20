@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', "WelcomeController@index");
+Route::get('/', "GuestsController@index");
 
 
 Route::get('/unautherised', function () {
@@ -25,9 +25,7 @@ Route::get('/dashboard/{tab?}', 'DashboardController@index')->name('dashboard');
 Route::resource('contests','ContestsController');
 
 //contests & photographs Functions
-Route::get('/photos', function () {
-    return view('photos.photos');
-});
+Route::get('/photos','GuestsController@photos' );
 
 Route::get('/votes/contests', 'ContestsController@vote');
 Route::resource('photographs','PhotosController');
