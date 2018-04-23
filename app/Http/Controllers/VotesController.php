@@ -29,5 +29,10 @@ class VotesController extends Controller
         return $returnArray;
     }
 
+    public function loadGraph(Request $request){
+        $votes_data = DB::select("SELECT CAST(votes.created_at AS DATE) as vote_date,count(*) as vote_count FROM votes WHERE votes.image_id = ".$request->input('img_id')." GROUP BY CAST(votes.created_at AS DATE)");
+        return $votes_data;
+    }
+
     
 }

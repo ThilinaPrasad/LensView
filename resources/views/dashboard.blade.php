@@ -54,22 +54,37 @@ function voteAnalyze(image){
     //chage graph analyze title
     var title = $(image).attr("data-image-title").trim();
     var id = $(image).attr("data-image-id").trim();
-    $('#graph_title').text($('#graph_title').text()+" "+title);
-
+    $('#graph_title').text("Voting Analytics on "+title+" contest");
     //*****************************
     //add analyze function here
     //*****************************
+    $.post("/graph",
+    {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        img_id: id
+    },
+    function(data, status){
+        if(status="success"){
+            var dates = [];
+            var counts = [];
+            var current_count = 0;
+           for(var i = 0;i<data.length;i++){
+               dates.push((data[i]).vote_date);
+               counts.push((data[i]).vote_count);
+               current_count+=(data[i]).vote_count;
+           }
+           
+           $("#current_vote_count").text('Current vote count : '+String(current_count));
 
-}
+   /////load graph
 
-//graph drawing function
-  var ctx = document.getElementById("votingChart");
+var ctx = document.getElementById("votingChart");
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Saturday", "Saturday"],
+      labels: dates,
       datasets: [{
-        data: [10, 3, 15, 4, 2, 8, 12],
+        data: counts,
         lineTension: 0,
         backgroundColor: 'transparent',
         borderColor: '#007bff',
@@ -90,6 +105,31 @@ function voteAnalyze(image){
       }
     }
   });
+
+  ///Load Graph
+
+
+        }else{
+            $.alert({
+    theme: 'modern',
+    icon: 'fas fa-exclamation-circle',
+    title: 'Error !',
+    content: "Sorry error happned while data fetching! ",
+    autoClose: 'ok|3000',
+    type: 'red',
+            typeAnimated: true,
+});
+        }
+    });
+
+
+
+ 
+
+}
+
+//graph drawing function
+  
 </script>
 <!-- voting graph -->
 

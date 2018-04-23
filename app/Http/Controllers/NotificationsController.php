@@ -10,7 +10,7 @@ class NotificationsController extends Controller
 
     static $notifications = null;
     public static function send($sender,$receiver,$message,$img,$type='public'){
-        $photo = Notification::create([
+        Notification::create([
             'sender_id'=>$sender,
             'type'=>$type,
             'receiver_id'=> $receiver,
@@ -18,7 +18,10 @@ class NotificationsController extends Controller
             'img_link'=>$img,
            // 'status'=>0,                   // 0==Not read 1==read
         ]);
+
+       
     }
+
 
     public static function show(){
         

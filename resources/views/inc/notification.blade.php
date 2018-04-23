@@ -28,7 +28,7 @@
                     @endif
                     </div>
                     <div class="col-md-1 pt-3">
-                        @if($notification->type!='public')
+                        @if($notification->type !='public')
                     <span class="read"  data-toggle="tooltip" data-placement="top" title="Mark as read" data-id="{{ $notification->not_id }}" onclick="read(this);"><i class="far fa-dot-circle"></i></span>
                 @endif    
                 </div>

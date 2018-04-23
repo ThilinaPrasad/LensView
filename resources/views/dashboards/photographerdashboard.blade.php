@@ -105,32 +105,33 @@
                                          </div> 
                                 </div>
                                 
-                                <!--Graph Section-->
-                                <div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="graph_title">Voting Analytics on</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!--Vote Analysis Graph-->
-                                                <canvas class="my-4" id="votingChart" width="900" height="380"></canvas>
-                                                <h5 align="center" class="font_02 vote-tot">Total vote count : 1520<h5>
-                                            </div>
-                                   
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Graph Section-->
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             @endforeach
+            <!--Graph Section-->
+            <div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="graph_title">Voting Analytics on</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                        </div>
+                        <div class="modal-body">
+                            <!--Vote Analysis Graph-->
+                            <canvas class="my-4" id="votingChart" width="900" height="380"></canvas>
+                        <h5 align="center" class="font_02 vote-tot" id="current_vote_count">Current vote count : 0<h5>
+                        </div>
+               
+                    </div>
+                </div>
+            </div>
+            <!--Graph Section-->
             @else
             <div class="py-3">
                     <div class="card mx-auto d-block">

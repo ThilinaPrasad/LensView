@@ -42,6 +42,7 @@ Route::post('/review', 'ContestsController@saveReview');
 //Vote Functions
 Route::get('/addvote/{id?}', 'VotesController@addVote');
 Route::get('/removevote/{id?}', 'VotesController@removeVote');
+Route::post('/graph', 'VotesController@loadGraph');
 
 //User functions
 Route::resource('users','UsersController');
