@@ -160,7 +160,8 @@ class ContestsController extends Controller
         if($contest && $platinum && $gold && $bronze){
             NotificationsController::send(Auth::user()->id,1,"crated new photohraphy contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
             NotificationsController::send(1,Auth::user()->id,"has successfully created your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'organizer');
-        return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
+            NotificationsController::sendMail(Auth::user()->id,'LensView Photography Contest created successfully','Your new contest <a href="/contests/'.$contest->id.' title="View contest">'.$photo->title.'</a> created on LensView successful.','contest');
+            return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
         }else{
             return view('contests.create')->with('error',"Error Happend Creating Contest! Please Try Again!");
         }

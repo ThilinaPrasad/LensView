@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        NotificationsController::send(1,$user->id,"has successfully created your user account",null,'photographer');
+        NotificationsController::send(1,$user->id,"has successfully created your user account!",null,'photographer');
         return $user;
     }
 }
