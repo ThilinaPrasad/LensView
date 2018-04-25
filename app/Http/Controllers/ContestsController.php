@@ -160,7 +160,7 @@ class ContestsController extends Controller
         if($contest && $platinum && $gold && $bronze){
             NotificationsController::send(Auth::user()->id,1,"crated new photohraphy contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'photographer');
             NotificationsController::send(1,Auth::user()->id,"has successfully created your contest <a href='/contests/".$contest->id."' title='View contest'>".$contest->title."</a>","/storage/contests_covers/".$contest->cover_img,'organizer');
-            NotificationsController::sendMail(Auth::user()->id,'LensView Photography Contest created successfully','Your new contest <a href="/contests/'.$contest->id.' title="View contest">'.$photo->title.'</a> created on LensView successful.','contest');
+            NotificationsController::sendMail(Auth::user()->id,'Photography contest created on LensView',$contest,'contest-create');
             return redirect()->route('contests.show',['contest'=>$contest])->with('success',"Contest Successfully Created!");
         }else{
             return view('contests.create')->with('error',"Error Happend Creating Contest! Please Try Again!");
@@ -294,6 +294,7 @@ class ContestsController extends Controller
         $title = $contest->title;
         if($contest->delete()){
             NotificationsController::send(1,Auth::user()->id,"has successfully deleted your contest <b>".$title."</b> with your request",null,'organizer');
+            NotificationsController::sendMail(Auth::user()->id,'LensView Photography contest Deleted',$contest,'contest-delete');
             return redirect()->route('contests.index')->with('success',$title.' contest deleted sucessfully;');
         }
         return back()-withInput()->with('error','Error happened while contest deleting ! Please try again.');

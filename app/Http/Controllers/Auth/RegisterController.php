@@ -81,6 +81,7 @@ class RegisterController extends Controller
         ]);
 
         NotificationsController::send(1,$user->id,"has successfully created your user account!",null,'photographer');
+        NotificationsController::sendMail($user->id,"Welcome to LensView!",null,'welcome');
         return $user;
     }
 }

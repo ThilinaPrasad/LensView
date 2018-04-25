@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Http\Controllers\NotificationsController;
 use Validator;
 
 class UsersController extends Controller
@@ -116,6 +117,7 @@ class UsersController extends Controller
         $password = trim($password);
         $user = User::find($id);
         if(Auth::attempt(array('id'=>$id,'password'=>$password))){
+            NotificationsController::sendMail($user->id,"LensView Removed Your Account!",null,'deleteuser');
             $user->delete();
             return "success";
         }else{

@@ -23,7 +23,7 @@ class NotificationsController extends Controller
         ]);
     }
 
-    public static function sendMail($receiver,$subject,$msg,$type='default'){
+    public static function sendMail($receiver,$subject,$other,$type='default'){
 
         $user = User::find($receiver);
 
@@ -31,11 +31,30 @@ class NotificationsController extends Controller
             'name'=> $user->name,
             'email' => $user->email,
             'subject'=>$subject,
-            'msg'=>$msg
         ];
-        Mail::send('email.mail',['name'=>$user->name,'msg'=>$msg,'type'=>$type],function($msg) use ($data){
+
+        $view = null;
+        switch($type){
+            case 'welcome':
+            $view = 'email.welcome';
+            break;
+            case 'deleteuser':
+            $view = 'email.deleteuser';
+            break;
+            case 'contest-create':
+            $view = 'email.contestcreate';
+            break;
+            case 'contest-delete':
+            $view = 'email.contestdelete';
+            break;
+            case 'contest-winner':
+            $view = 'email.contestwinner';
+            break;
+        }
+
+        Mail::send($view,['name'=>$user->name,'other'=>$other],function($msg) use ($data){
             $msg->to($data['email'],$data['name']);
-            $msg->from('lensview.noreply@gmail.com','LensView@noreply');
+            $msg->from('lensview.info@gmail.com','LensView@info');
             $msg->subject($data['subject']);
         });
     }
