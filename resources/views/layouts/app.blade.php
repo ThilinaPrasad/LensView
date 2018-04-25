@@ -19,7 +19,8 @@
 
 <body>
     <div class="alert alert-danger" id="protected_alert"><i class="fas fa-exclamation-circle fa-lg"></i>&nbsp;&nbsp;Content Protected by LensView!</div>
-    <div id="app">
+    <div  style="background: url({{ asset('img/static/loading.gif') }}) center no-repeat #fff;" id="pageLoad"></div>
+    <div id="app" style="display:none;z-index: 0;">
     @include('inc.navbar') @yield('content')
     @include('inc.footer')
     </div>

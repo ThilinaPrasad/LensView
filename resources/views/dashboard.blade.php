@@ -268,9 +268,11 @@ function deleteCategory(cat){
                                 text: 'Confirm',
                                 btnClass: 'btn-green',
                                 action : function () {
-                                    
+                                    $('#pageLoad').css('opacity','0.6');
+                                $('#pageLoad').fadeIn();
                                     $.get("/winnerselect/"+contest+"/"+img+"/"+user, function(data, status){
                                        if(status=='success' && data==''){
+                                        $('#pageLoad').fadeOut();
                                         $.alert({
                                                 theme: 'modern',
                                                 icon: 'fas fa-trophy',

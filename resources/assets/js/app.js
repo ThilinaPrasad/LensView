@@ -23,8 +23,15 @@ const app = new Vue({
     el: '#app'
 });
 
+//page loading animation part 1
+$(window).on('load', function() {
+    $("#pageLoad").fadeOut('fast');
+});
 
 $(document).ready(function() {
+    //page loading animation part 2
+    $("#app").fadeIn('fast');
+
     //popover enable
     $('[data-toggle="tooltip"]').tooltip();
 

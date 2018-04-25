@@ -79,13 +79,15 @@
                             text: 'Delete',
                             btnClass: 'btn-red',
                             action : function () {
-                           
+                                $('#pageLoad').css('opacity','0.6');
+                                $('#pageLoad').fadeIn();
                                 var user_id = $('#user_id').text().trim();
                 
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {
                                         if(this.responseText=='success'){
+                                            $('#pageLoad').fadeOut();
                                             $.alert({
                                     theme: 'modern',
                                     icon: 'far fa-check-circle',
@@ -97,7 +99,6 @@
                                     type: 'green',
                                     onClose: function () {
                                         $(location).attr('href','/');
-        
                                     }
                                 });
                                 
