@@ -1,17 +1,30 @@
 @extends('layouts.app')
-
+@section('title')
+Reset Password
+@stop
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="row">
+                <div class="col-md-6 left-sec">
+                        <div class="left-container">
+                                <img src="{{ asset('img/static/animation_3.gif') }}" class="animation">
+                                <div class="text-center">
+                                    <h1 class="font_01 left_text">LensView</h1>
+                                    <h4 class="font_02 left_text">Use Your Camera As A Weapon</h4>
+                                </div>
+                            </div>
+                </div>
+                <div class="col-md-6">
+
+    
             <div class="card card-default">
-                <div class="card-header">Reset Password</div>
+                <h2 class="header font_01" align="center">Reset Password</h2>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">
                         @csrf
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -64,8 +77,48 @@
                     </form>
                 </div>
             </div>
+                </div>
         </div>
-    </div>
 </div>
 @stop
+@section('styles')
+<style>
+    body {
+        background:url('{{ asset("img/static/login_back.png") }}') no-repeat center center fixed;
+    }
+    .card {
+        border: none;
+        border-radius: 0;
+        margin-right: -22.1%;
+        padding: 40% 0 4% 0;
+        opacity: 0.8;
+        height:100vh;
+    }
 
+    .left-container {
+        margin-top: 30%;
+    }
+    .animation {
+        border-radius: 30%;
+        opacity: 0.8;
+        transform: rotate(-20deg);
+        box-shadow: 5px 10px 8px #000;
+    }
+    .left_text {
+        color: white;
+        text-shadow: 4px 4px 4px #000000;
+        z-index: 500;
+    }
+    @media only screen and (max-width: 768px) {
+        .left-sec {
+            display: none;
+        }
+        .card {
+            margin-right: auto;
+        }
+        .header {
+            margin-top: 5%;
+        }
+    }
+</style>
+@stop

@@ -50,6 +50,9 @@ class NotificationsController extends Controller
             case 'contest-winner':
             $view = 'email.contestwinner';
             break;
+            case 'pass-resetted':
+            $view = 'email.passresetted';
+            break;
         }
 
         Mail::send($view,['name'=>$user->name,'other'=>$other],function($msg) use ($data){

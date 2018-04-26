@@ -87,7 +87,7 @@
                 <tr>
                     <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
                         <a href="http://litmus.com" target="_blank">
-                            <img alt="Logo" src="mailLogo.png" width="80" height="80" style="display: block; width: 300px; max-width: 300px; min-width: 300px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                            <img alt="Logo" src="http://www.uomleos.org/wp-content/uploads/2018/04/mailLogo.png" width="80" height="80" style="display: block; width: 300px; max-width: 300px; min-width: 300px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
                         </a>
                     </td>
                 </tr>
@@ -109,8 +109,8 @@
             <![endif]-->
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
                 <tr>
-                    <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;background-image:url('winner-back.gif');">
-                      <img alt="Logo" src="winner-throphy.png"style="margin-bottom:20px;display: block; width: 150px; max-width: 150px; min-width: 150px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                    <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;background-image:url('http://www.uomleos.org/wp-content/uploads/2018/04/winner-back.gif');">
+                      <img alt="Logo" src="http://www.uomleos.org/wp-content/uploads/2018/04/winner-throphy.png"style="margin-bottom:20px;display: block; width: 150px; max-width: 150px; min-width: 150px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
                       <h1 style="font-size: 40px; font-weight: 400; margin: 0;">CONGRATULATION</h1>
                     </td>
                 </tr>

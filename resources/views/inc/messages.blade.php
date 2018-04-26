@@ -25,3 +25,18 @@
 });
 </script>
 @endif
+
+
+@if(session('welcome'))
+<script>
+    $.alert({
+    theme: 'modern',
+    columnClass: 'col-md-6 col-md-offset-4',
+    icon: 'far fa-smile',
+    title: 'Welcome to LensView',
+    content: "{{ session('welcome') }}",
+    type: 'orange',
+            typeAnimated: true,
+});
+</script>
+@endif 

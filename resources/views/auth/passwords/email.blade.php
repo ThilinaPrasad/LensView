@@ -18,12 +18,7 @@ Forgot Password
             <div class="card card-default">
                 <div class="card-body">
                         <h2 class="font_01 mb-4 header" align="center">Forgot Password</h2>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+                   
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
@@ -50,9 +45,17 @@ Forgot Password
                         </div>
                     </form>
                 <br>
+                
                     <div class="col-md-6  offset-md-4">
                     <a href="/login">Goto Login</a>
                     </div>
+                    @if (session('status'))
+                <div class="offset-md-4 col-md-8 text-center">
+                    <div class="alert alert-success mx-auto d-block ">
+                        {{ session('status') }}
+                    </div>
+                </div>
+                @endif
                 </div>
             </div>
         </div>

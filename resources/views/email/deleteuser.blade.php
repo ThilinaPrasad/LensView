@@ -86,7 +86,7 @@
                 <tr>
                     <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
                         <a href="http://litmus.com" target="_blank">
-                          <img alt="Logo" src="mailLogo.png" width="80" height="80" style="display: block; width: 300px; max-width: 300px; min-width: 300px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                          <img alt="Logo" src="http://www.uomleos.org/wp-content/uploads/2018/04/mailLogo.png" width="80" height="80" style="display: block; width: 300px; max-width: 300px; min-width: 300px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
                         </a>
                     </td>
                 </tr>

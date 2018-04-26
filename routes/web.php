@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/test', function () {
+    return view('auth.passwords.reset');
+});
+
 Route::get('/', "GuestsController@index");
 
 
