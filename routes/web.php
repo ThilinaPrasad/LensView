@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/sendmail','NotificationsController@sendMail' );
-
 
 Route::get('/', "GuestsController@index");
 
@@ -71,3 +69,6 @@ Route::resource('categories','CategoriesController');
 
 //Winner Controller
 Route::get('/winnerselect/{contest?}/{img?}/{winner?}', 'WinnersController@select');
+
+//Notification center
+Route::get('/notificationcenter','NotificationsController@showAll');

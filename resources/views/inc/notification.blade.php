@@ -19,7 +19,7 @@
                     <img src="/storage/profile_pics/{{ $notification->profile_pic }}" class="rounded-circle notification-icon-1">
                     </a>
                     <div class="col-md-7 notification-text">
-                    <a {{  $notification->sender_id!=1 ? 'href="/users/"'.$notification->sender_id : "" }} title="{{  $notification->sender_id!=1 ? 'View '.$notification->name."'s profile" : "" }}">{{ $notification->name }}</a>&nbsp;{!! $notification->messege !!}
+                    <a {{  $notification->sender_id!=1 ? 'href=/users/'.$notification->sender_id : "" }} title="{{  $notification->sender_id!=1 ? 'View '.$notification->name."'s profile" : "" }}">{{ $notification->name }}</a>&nbsp;{!! $notification->messege !!}
                     <br><span class="text-muted"><i class="far fa-clock"></i> {{ date_format(date_create($notification->sent_date),'d-M-Y  G:i A') }}</span>
                 </div>
                     <div class="col-md-2">
@@ -45,7 +45,9 @@
                 </div>
                 </div>
             @endif
-           
+            <div class="mx-auto d-block text-center">
+                    <a href="/notificationcenter" style="font-size:12px;vertical-align:bottom;" data-toggle="tooltip" data-placement="top" title="View all">View all notifications</a>
+                    </div>
         </div>
     </div>
 </li>

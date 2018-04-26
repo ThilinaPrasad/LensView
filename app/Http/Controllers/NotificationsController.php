@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Mail;
 use Laravel\User;
-
+use Carbon\Carbon;
 class NotificationsController extends Controller
 {
 
@@ -59,21 +59,52 @@ class NotificationsController extends Controller
         });
     }
 
-
+    //load  notifications panel
     public static function show(){
+        
+
+        //Automatically delete notification older than 30 days
+        $del_date = Carbon::today()->subDays(30);
+        DB::table('notifications')->where('created_at', '<', $del_date)->delete();
+
+        //update public notifications status after 5 days
+        $status_update_date = Carbon::today()->subDays(5);
+        DB::table('notifications')
+        ->where('created_at', '<', $status_update_date)
+        ->where('type', 'public')
+        ->update(['status' => 1]);
+
         static $notifications = null;
         if(Auth::check()){
             if(Auth::user()->role_id == 1){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > users.created_at AND status = 0 AND (type='voter' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > '".Auth::user()->created_at."' AND status = 0 AND (type='voter' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
             else if(Auth::user()->role_id == 2){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > users.created_at AND status = 0 AND (type='photographer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > '".Auth::user()->created_at."' AND status = 0 AND (type='photographer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
             else if(Auth::user()->role_id == 3){
-                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id WHERE notifications.created_at > users.created_at AND status = 0 AND (type='organizer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id WHERE notifications.created_at > '".Auth::user()->created_at."' AND status = 0 AND (type='organizer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
             }
         }
         return $notifications;
+    }
+
+    //load all notifications to notification center 
+    public function showAll(){
+        static $notifications = null;
+        if(Auth::check()){
+            if(Auth::user()->role_id == 1){
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > '".Auth::user()->created_at."' AND (type='voter' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+            }
+            else if(Auth::user()->role_id == 2){
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id where notifications.created_at > '".Auth::user()->created_at."' AND (type='photographer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+            }
+            else if(Auth::user()->role_id == 3){
+                $notifications = DB::select("SELECT *,notifications.created_at as sent_date,notifications.id as not_id FROM notifications LEFT JOIN users ON notifications.sender_id = users.id WHERE notifications.created_at > '".Auth::user()->created_at."' AND (type='organizer' OR type='public' OR receiver_id='".Auth::user()->id."') ORDER BY notifications.created_at desc");
+            }
+        }
+        //dd($notifications);
+        return view('dashboards.notificationcenter')->with('notifications',$notifications);
     }
 
     public static function readAll(){
