@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Image;
 class FilesController extends Controller
 {
-
     //Method related to compress the image
     public static function compressImg($localPath,$fileName,$width,$height){
         $filepath = public_path($localPath.$fileName);

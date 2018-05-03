@@ -48,7 +48,7 @@
                                                                         @else
                                                                         <br>
                                                                         <span class="text-muted">
-                                                                                (*Image diamensions 1920x1080)
+                                                                                (*Image diamensions 1920x1080 will better)
                                                                             </span>
                                                                         @endif
                                 </span>
