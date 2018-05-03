@@ -135,7 +135,7 @@ var ctx = document.getElementById("votingChart");
 
 <!-- Delete Image section -->
 <script>
-    $('#deleteButton').click(function(){
+    function deleteImg(id){
         $.confirm({
                         theme: 'modern',
                         icon: 'far fa-trash-alt',
@@ -153,7 +153,7 @@ var ctx = document.getElementById("votingChart");
                             btnClass: 'btn-red',
                             action : function () {
                                 event.preventDefault();
-                                $('#delete-image').submit();
+                                $('#delete-image-'+id).submit();
                             }
                         },
                             cancel: function () {
@@ -162,7 +162,7 @@ var ctx = document.getElementById("votingChart");
                             
                         }
                     });
-    });
+    }
 </script>
 
 <!-- scripts for photographers dashboard -->

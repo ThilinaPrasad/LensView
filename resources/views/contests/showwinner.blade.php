@@ -162,7 +162,7 @@
 <!--prizes section-->
 <!--Partners Section-->
 <div class="jumbotron marketing text-center show-partner">
-    <p class="h1 font_01"><i class="fas fa-handshake"></i> Partnesr with us <i class="fas fa-handshake"></i></p>
+    <p class="h1 font_01"><i class="fas fa-handshake"></i> Partners with us <i class="fas fa-handshake"></i></p>
     <div class="row">
         @foreach($sponsors as $sponsor)
         <div class="col-lg-4">

@@ -116,9 +116,13 @@ class PhotosController extends Controller
     public function edit($id)
     {
         $image = Image::find($id);
+        if(Auth::user()->id == $image->user_id){
         $img_category = Category::find($image->category_id);
         $categories = Category::all();
         return view('photos.edit')->with(['image'=>$image,'img_category'=>$img_category,'categories'=>$categories]);
+        }else{
+            return view('unautherized');
+        }
     }
 
     /**

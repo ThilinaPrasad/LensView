@@ -208,7 +208,7 @@ class ContestsController extends Controller
         if(Auth::user()->id == $contest->user_id){
             return view('contests.edit')->with(['contest'=>$contest,'sponsors'=>$sponsors]);
             }else{
-                return "<h1 align='center'>Unautherized Action!<h1>";
+                return view('unautherized');
                 //Consider about this warning messages
             }
     }

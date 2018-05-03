@@ -18,8 +18,8 @@ Route::get('/test', function () {
 Route::get('/', "GuestsController@index");
 
 
-Route::get('/unautherised', function () {
-    return view('unautherised');
+Route::get('/unautherized', function () {
+    return view('unautherized');
 });
 
 

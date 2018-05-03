@@ -40,10 +40,10 @@
                                 </div>
                                 <div align="center" class="mt-2 mb-3">
                                     <a href="/photographs/{{ $image->img_id }}/edit" class="btn btn-success btn-sm mx-1"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
-                                    <button class="btn btn-danger btn-sm mx-1" id="deleteButton"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</button>
+                                    <button class="btn btn-danger btn-sm mx-1" onclick="deleteImg({{ $image->img_id }});"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</button>
                                 </div>
                                 <!--Photograph delete form-->
-                                <form method="post" action="{{ route('photographs.destroy',[$image->img_id]) }}" id="delete-image" style="display:none;">
+                            <form method="post" action="{{ route('photographs.destroy',[$image->img_id]) }}" id="{{ 'delete-image-'.$image->img_id }}" style="display:none;">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="delete ">
                                     </form>
@@ -113,7 +113,7 @@
             </div>
             @endforeach
             <!--Graph Section-->
-            <div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -149,7 +149,7 @@
             @if(count($sub_contests)!= 0 || count($vot_contests)!= 0)
             @foreach($sub_contests as $contest)
             <div class="card bg-light text-center contest">
-                <img class="card-img" src="/storage/contest_images/854695a9fd5f47b88a0400f7d38af46bd3623b6c_1522407146.jpg" alt="Card image">
+            <img class="card-img" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
                 <a href="/contests/{{ $contest->id }}" class="card-img-overlay text-white contest-data">
                     <div class="contest-inner">
                     <h2 class="card-title font_02">{{ $contest->title }}</h2>
@@ -161,7 +161,7 @@
               @endforeach
               @foreach($vot_contests as $contest)
               <div class="card bg-light text-center contest">
-                    <img class="card-img" src="/storage/contest_images/854695a9fd5f47b88a0400f7d38af46bd3623b6c_1522407146.jpg" alt="Card image">
+                    <img class="card-img" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
               <a href="/votes/photographs/{{ $contest->id }}" class="card-img-overlay text-white contest-data">
                         <div class="contest-inner">
                         <h2 class="card-title font_02">{{ $contest->title }}</h2>
