@@ -13,8 +13,9 @@
         padding-bottom: 30px;
     }
 
-    .profile-content{
+    .profile-content,.profile-view{
         min-height: 96vh;
+        height:auto;
     }
 
 .container{
@@ -79,6 +80,7 @@
                     <div class="col-md-2">
                             @if($notification->img_link!=null)
                     <img src="{{ $notification->img_link }}" class="notification-icon-1">
+                    
                 @endif    
                 </div>
                

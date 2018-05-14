@@ -1,5 +1,5 @@
 <div class="jumbotron mx-auto d-block">
-    <h2 class="font_01 head" align="center">Photographer's Dashboard</h2>
+    <h2 class="font_01 head" align="center">Photographer Dashboard</h2>
     <hr>
     <ul class="nav nav-pills text-center font_02 lead">
         <li class="nav-item tab-item col-md-4">

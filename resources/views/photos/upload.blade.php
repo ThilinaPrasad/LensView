@@ -39,7 +39,9 @@
                             <div class="input-group col-md-6">
                                 <span class="input-group-btn">
                                                 <span class="btn btn-default btn-file">
-                                                    <img id='img-upload' src="/storage/contest_images/{{ $errors->has('description') ? 'upload_image_warn.jpg' : 'upload_image.jpg' }}"/><input type="file" id="imgInp" name="upload_img" title="Select Image" accept="image/*" class="form-control">
+                                                    <img id='img-upload' src="/storage/contest_images/{{ $errors->has('description') ? 'upload_image_warn.jpg' : 'upload_image.jpg' }}"/>
+                                                    <input type="file" id="imgInp" name="upload_img" title="Select Image" accept="image/*" class="form-control img-input" />
+                                                </span>
                                                     @if ($errors->has('upload_img'))
                                                     <br>
                                                         <span class="text-danger">
@@ -48,13 +50,13 @@
                                                                         @else
                                                                         <br>
                                                                         <span class="text-muted">
-                                                                                (*Image diamensions 1920x1080 will better)
+                                                                                (*1920x1080 will better)
                                                                             </span>
                                                                         @endif
                                 </span>
-                                </span>
                             </div>
-                        </div>
+                            </div>
+                        
                         <!-- Downloadable toggle switch -->
                         <div class="form-group row mb-0">
                             <label for="downloadable" class="col-md-4 col-form-label text-md-right" value="{{ old('downloadable') }}">Downloadable</label>
@@ -69,7 +71,7 @@
                         </div>
                         <br>
                         <!-- category dropdown -->
-                        <div class="form-group row">
+                        <div class="form-group row cat-row">
                             <label for="category" class="col-md-4 col-form-label text-md-right">Image Category</label>
                             <div class="col-md-6">
                                 <select id='category' class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="{{ old('category') }}">
@@ -82,6 +84,7 @@
                     </span> @endif
                             </div>
                         </div>
+                    
                         <!-- Submit button -->
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -139,6 +142,14 @@
         }
         .header {
             margin-top: 5%;
+        }
+        .btn-file, .img-input{
+            width:250px;
+            max-width:250px;
+        }
+
+        .cat-row{
+            margin-bottom: 10px;
         }
     }
 </style>

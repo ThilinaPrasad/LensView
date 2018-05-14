@@ -1,5 +1,5 @@
 @extends('layouts.app') 
-@section('title') Photo Contests 
+@section('title') User Profile 
 @stop 
 @section('styles')
 <link href="{{ asset('css/user.css') }}" rel="stylesheet">

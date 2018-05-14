@@ -67,15 +67,15 @@
                             <div class="col-md-8">
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="role1" name="role" class="custom-control-input" value="1" checked>
-                                    <label class="custom-control-label align-bottom" for="role1">Voter</label>
+                                    <label class="custom-control-label align-bottom role1" for="role1">Voter</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="role2" name="role" class="custom-control-input" value="2">
-                                    <label class="custom-control-label" for="role2">Photographer</label>
+                                    <label class="custom-control-label role2" for="role2">Photographer</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="role3" name="role" class="custom-control-input" value="3">
-                                    <label class="custom-control-label" for="role3">Contest Organizer</label>
+                                    <label class="custom-control-label role3" for="role3">Contest Organizer</label>
                                 </div>
                                 @if ($errors->has('role'))
                                 <span class="invalid-feedback">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="custom-control custom-checkbox form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-4 checker">
                                 <input type="checkbox" class="custom-control-input {{ $errors->has('condition') ? ' is-invalid' : '' }}" id="customControlInline"
                                     name='condition' {{ old( 'condition') ? 'checked' : '' }}>
                                 <label class="custom-control-label ml-2" for="customControlInline">I agree with <a href="#">terms</a> & conditions of the <a href="/">LensView</a>.</label>
@@ -115,7 +115,7 @@
                        
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success" name='submit'>
                                     Register
                                 </button>
                             </div>
