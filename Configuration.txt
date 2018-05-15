@@ -1,0 +1,5 @@
+In vendor/laravel/framework/foundation/RegisterUsers.php file you hv to add below code to the register method retuen value
+
+->with('welcome',"Hello ".$user->name.", We're excited to have you get started here.");
+
+//Welcome msg

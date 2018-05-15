@@ -25,22 +25,22 @@
 <div class="carousel-item {{ count($images)==0 ? 'active':'' }}">
     <img src="{{ asset('img/1.jpg') }}">
     <div class="carousel-caption">
-      <h1 class="font_01">Los Angeles</h1>
-      <p class="font_02">We had such a great time in LA!</p>
+      <h1 class="font_01">Mountain View</h1>
+      <p class="font_02">A best view from a lens</p>
     </div>
   </div>
   <div class="carousel-item">
     <img src="{{ asset('img/2.jpg') }}">
     <div class="carousel-caption">
-      <h1 class="font_01">Chicago</h1>
-      <p class="font_02">Thank you, Chicago!</p>
+      <h1 class="font_01">Dark Hills</h1>
+      <p class="font_02">World's darken beauty</p>
     </div>
   </div>
   <div class="carousel-item">
     <img src="{{ asset('img/3.jpg') }}">
     <div class="carousel-caption">
-      <h1 class="font_01">New York</h1>
-      <p class="font_02">We love the Big Apple!</p>
+      <h1 class="font_01">Moon Light</h1>
+      <p class="font_02">Light that generate beauty in nature</p>
     </div>
   </div>
 </div>

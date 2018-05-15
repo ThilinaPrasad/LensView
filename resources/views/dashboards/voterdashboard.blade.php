@@ -18,13 +18,13 @@
          <!--user data section -->
           <!--post content section -->
         <div class="post-cont">
-            <p class="post-title">{{ $image->img_title }}<br></p>
-            <p class="post-contest"><a href="contests/{{ $image->contest_id }}" title="View contest">{{ $image->title }}</a></p>
-            <p class="post-desc">{{ $image->img_description }}</p>
+            <p class="post-title">Image Title : {{ $image->img_title }}<br></p>
+            <p class="post-contest">Contest : <a href="contests/{{ $image->contest_id }}" title="View contest">{{ $image->title }}</a></p>
+            <p class="post-desc">Image Description : {{ $image->img_description }}</p>
             <figure class="figure">      
             <img src="/storage/contest_images/{{ $image->image }}" class="post-img mx-auto d-block">
             <figcaption class="figure-caption below-section row" style="font-size:20px;">      
-                    <strong id="vote-btn-2" class="vote-btn-2 text-left col-md-6 m-text-center" title="Add vote" data-id="{{ $image->img_id }}" data-lcl-txt="{{ ($image->vote_count == null)? 0:$image->vote_count  }}" onClick="voteImg(this);">
+                    <strong id="{{ "vote-btn-".$image->img_id }}" class="vote-btn-2 text-left col-md-6 m-text-center" title="Add vote" data-id="{{ $image->img_id }}" data-lcl-txt="{{ ($image->vote_count == null)? 0:$image->vote_count  }}" onClick="voteImg(this);">
                             <i class="{{ (in_array($image->img_id,$votes))? 'fas fa-heart' : 'far fa-heart' }}"></i>&nbsp;{{ ($image->vote_count == null)? 0:$image->vote_count  }}
                                                </strong>
                            <div class="col-md-6 text-right m-text-center">

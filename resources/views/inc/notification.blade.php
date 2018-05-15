@@ -1,4 +1,4 @@
-<?php $notifications = \Laravel\Http\Controllers\NotificationsController::show() ?>
+<?php $notifications = \Laravel\Http\Controllers\NotificationsController::show(); ?>
 <li class="nav-item dropdown user-dropdown">
     <a class="nav-link dropdown-toggle text-center notifications" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false" title="View my notifications">

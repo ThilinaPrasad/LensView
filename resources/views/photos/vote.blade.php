@@ -149,7 +149,7 @@ a:hover{
                         <img src="/storage/contest_images/{{ $image->image }}" class="figure-img img-fluid">
                             </a>
                             <figcaption class="figure-caption below-section row" style="font-size:20px;">      
-                                <strong id="vote-btn-2" class="vote-btn-2 text-left col-md-6 m-text-center" title="Add vote" data-id="{{ $image->id }}" data-lcl-txt="{{ ($image->vote_count == null)? 0:$image->vote_count  }}" onClick="voteImg(this);">
+                                <strong id="{{ 'vote-btn-'.$image->id }}" class="vote-btn-2 text-left col-md-6 m-text-center" title="Add vote" data-id="{{ $image->id }}" data-lcl-txt="{{ ($image->vote_count == null)? 0:$image->vote_count  }}" onClick="voteImg(this);">
                                         <i class="{{ (in_array($image->id,$votes))? 'fas fa-heart' : 'far fa-heart' }}"></i>&nbsp;{{ ($image->vote_count == null)? '0': $image->vote_count  }}
                                     </strong>
                                        <div class="col-md-6 text-right m-text-center">
