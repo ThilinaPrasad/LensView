@@ -25,7 +25,7 @@
 
             @if(count($up_contests)!= 0) @foreach($up_contests as $contest)
             <div class="card bg-light text-center contest">
-                <img class="card-img" src="/storage/contest_images/854695a9fd5f47b88a0400f7d38af46bd3623b6c_1522407146.jpg" alt="Card image">
+                <img class="card-img" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
                 <div class="card-img-overlay text-white contest-data">
                     <div class="contest-inner">
                         <h2 class="card-title font_02">{{ $contest->title }}</h2>
@@ -88,7 +88,7 @@
         <div class="tab-pane container {{ ($tab=='vote')? 'active':''}}" id="voting">
             @if(count($vot_contests)!= 0) @foreach($vot_contests as $contest)
             <div class="card bg-light text-center contest">
-                <img class="card-img" src="/storage/contest_images/854695a9fd5f47b88a0400f7d38af46bd3623b6c_1522407146.jpg" alt="Card image">
+                <img class="card-img" src="/storage/contests_covers/{{ $contest->cover_img }}" alt="Card image">
                 <div class="card-img-overlay text-white contest-data">
                     <div class="contest-inner">
                         <h2 class="card-title font_02">{{ $contest->title }}</h2>
