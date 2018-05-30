@@ -160,7 +160,7 @@
                                 <div class="mx-auto d-block">
                                     <div class="row" style="margin-left: 0;margin-right: 0;">
                                         <figure class="figure col-md-6 offset-md-3 row mb-4">
-                                            <a class="elem" href="/storage/contest_images/{{ $contest_imgs[0]->image }}" title="{{ $contest_imgs[0]->img_title }}" data-lcl-txt="
+                                            <a class="elem" href="/storage/contest_images/{{ $contest_imgs[0]->image  }}" title="{{ $contest_imgs[0]->img_title }}" data-lcl-txt="
                                                     <div class='row badge badge-pill badge-info'><i class='fas fa-heart'></i>&nbsp;&nbsp<strong id='vote_count{{ $contest_imgs[0]->img_id }}'>{{ ($contest_imgs[0]->vote_count == null)? 0:$contest_imgs[0]->vote_count  }}</strong></div><div class='row'><a href='/storage/contest_images/{{ $contest_imgs[0]->image }}' class='btn btn-success' download='' {{ $contest_imgs[0]->downloadable!='on'? 'hidden' : ''}}><i class='fas fa-download'></i>&nbsp;&nbsp;Download</a></div>
                                                 " data-lcl-author='<a href="/users/{{ $contest_imgs[0]->img_user }}" title="View profile">{{ Laravel\User::find($contest_imgs[0]->img_user)->name }}</a>'
                                                 data-lcl-thumb="/storage/contest_images/{{ $contest_imgs[0]->image }}">
